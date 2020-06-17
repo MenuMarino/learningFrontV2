@@ -1,0 +1,113 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Cursos</h3>
+        </div>
+        <div class="card-body">
+          <div class="row icon-examples">
+            <div class="col-lg-3 col-md-6">
+              <button
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                ngbTooltip="{{
+                  copy === 'air-baloon' ? 'Copied' : 'Copy to clipboard'
+                }}"
+                class="btn-icon-clipboard"
+                ngxClipboard
+                [cbContent]="'air-baloon'"
+                (cbOnSuccess)="copy = 'air-baloon'"
+              >
+                <div>
+                  <i class="ni ni-books"></i>
+                  <span>Matemática</span>
+                </div>
+              </button>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <button
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                ngbTooltip="{{
+                  copy === 'button-power' ? 'Copied' : 'Copy to clipboard'
+                }}"
+                class="btn-icon-clipboard"
+                ngxClipboard
+                [cbContent]="'button-power'"
+                (cbOnSuccess)="copy = 'button-power'"
+              >
+                <div>
+                  <i class="ni ni-books"></i>
+                  <span>Física</span>
+                </div>
+              </button>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <button
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                ngbTooltip="{{
+                  copy === 'calendar-grid-58' ? 'Copied' : 'Copy to clipboard'
+                }}"
+                class="btn-icon-clipboard"
+                ngxClipboard
+                [cbContent]="'calendar-grid-58'"
+                (cbOnSuccess)="copy = 'calendar-grid-58'"
+              >
+                <div>
+                  <i class="ni ni-books"></i>
+                  <span>Química</span>
+                </div>
+              </button>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <button
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                ngbTooltip="{{
+                  copy === 'calendar-grid-58' ? 'Copied' : 'Copy to clipboard'
+                }}"
+                class="btn-icon-clipboard"
+                ngxClipboard
+                [cbContent]="'calendar-grid-58'"
+                (cbOnSuccess)="copy = 'calendar-grid-58'"
+              >
+                <div>
+                  <i class="ni ni-books"></i>
+                  <span>Lenguaje</span>
+                </div>
+              </button>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <button
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                ngbTooltip="{{
+                  copy === 'calendar-grid-58' ? 'Copied' : 'Copy to clipboard'
+                }}"
+                class="btn-icon-clipboard"
+                ngxClipboard
+                [cbContent]="'calendar-grid-58'"
+                (cbOnSuccess)="copy = 'calendar-grid-58'"
+              >
+                <div>
+                  <i class="ni ni-books"></i>
+                  <span>Biología</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
