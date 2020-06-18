@@ -7,6 +7,9 @@ import { RegisterServices } from "src/app/core/services/register";
 import { UserProfileComponent } from "../user-profile/user-profile.component";
 import { StorageService } from "src/app/core/services/storage-service";
 import Swal from 'sweetalert2';
+import CryptoJS from 'crypto-js';
+
+
 
 @Component({
   selector: "app-register",
@@ -57,6 +60,7 @@ export class RegisterComponent implements OnInit {
     if(this.isTeacher){
       this.registerObj.type = "Teacher";
     }
+    this.registerObj.password=CryptoJS.SHA256(this.registerObj.password ).toString(CryptoJS.enc.Hex);
     this.registerServices
       .sendRegisterData(
         this.registerObj.name,

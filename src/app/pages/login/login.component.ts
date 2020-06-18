@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from "@angular/router";
 import { StorageService } from "src/app/core/services/storage-service";
 import Swal from 'sweetalert2';
-
+import CryptoJS from 'crypto-js';
 
 @Component({
   selector: "app-login",
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   logIn(loginForm: NgForm) {
     console.log(this.loginObj);
+    this.loginObj.password=CryptoJS.SHA256(this.loginObj.password ).toString(CryptoJS.enc.Hex);
     this.loginService
     .logIn(
       this.loginObj.username,
