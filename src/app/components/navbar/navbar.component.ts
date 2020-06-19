@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   public location: Location;
   public is_logged: boolean;
   public identity: any;
+  public username: String;
   constructor(
     location: Location,
     private element: ElementRef,
@@ -28,13 +29,13 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     if(this.storageService.getIdentityLocalStorage()){
       this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
-    }
-    if(this.storageService.getIdentityLocalStorage()){
-      this.is_logged=true; 
-    }else{
+      this.is_logged=true;
+      this.username = this.identity.username; 
+    } else {
       this.is_logged=false;
     }
 
