@@ -56,9 +56,9 @@ export class RegisterComponent implements OnInit {
   }
 
   regClick(registerForm: NgForm) {
-    this.registerObj.type = "Student";
+    this.registerObj.type = "STUDENT";
     if(this.isTeacher){
-      this.registerObj.type = "Teacher";
+      this.registerObj.type = "TEACHER";
     }
     this.registerObj.password=CryptoJS.SHA256(this.registerObj.password ).toString(CryptoJS.enc.Hex);
     this.registerServices
