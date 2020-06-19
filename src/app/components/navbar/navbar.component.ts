@@ -14,6 +14,8 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
+  public is_logged: boolean;
+  public identity: any;
   constructor(
     location: Location,
     private element: ElementRef,
@@ -23,8 +25,19 @@ export class NavbarComponent implements OnInit {
     this.location = location;
   }
 
+
+
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
+    if(this.storageService.getIdentityLocalStorage()){
+      this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
+    }
+    if(this.storageService.getIdentityLocalStorage()){
+      this.is_logged=true; 
+    }else{
+      this.is_logged=false;
+    }
+
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());

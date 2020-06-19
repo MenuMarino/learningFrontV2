@@ -10,7 +10,6 @@ import Swal from 'sweetalert2';
 import CryptoJS from 'crypto-js';
 
 
-
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",

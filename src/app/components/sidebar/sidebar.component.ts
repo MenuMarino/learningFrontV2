@@ -40,14 +40,14 @@ export const aux: RouteInfo[] = [
     icon: "ni-tv-2 text-primary",
     class: "",
   },
-  { path: "/courses", title: "Cursos", icon: "ni-planet text-blue", class: "" },
+  //{ path: "/courses", title: "Cursos", icon: "ni-planet text-blue", class: "" },
   // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
-  {
+  /*{
     path: "/user-profile",
     title: "Perfil",
     icon: "ni-single-02 text-yellow",
     class: "",
-  },
+  },*/
   // { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
   { path: "/login", title: "Login", icon: "ni-key-25 text-info", class: "" },
   {
@@ -56,6 +56,23 @@ export const aux: RouteInfo[] = [
     icon: "ni-circle-08 text-pink",
     class: "",
   },
+];
+
+export const ifTWAITING: RouteInfo[] = [
+  {
+    path: "/dashboard",
+    title: "Learning Peru",
+    icon: "ni-tv-2 text-primary",
+    class: "",
+  },
+  { path: "/courses", title: "Cursos", icon: "ni-planet text-blue", class: "" },
+  {
+    path: "/user-profile",
+    title: "Perfil",
+    icon: "ni-single-02 text-yellow",
+    class: "",
+  },
+  { path: '/tables', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
 ];
 
 export const ifTeacher: RouteInfo[] = [
@@ -73,7 +90,11 @@ export const ifTeacher: RouteInfo[] = [
     class: "",
   },
   { path: '/tables', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
+  { path: '/upload', title: 'Upload',  icon:'ni ni-cloud-upload-96 text-red', class: '' }
+  
 ];
+
+
 
 @Component({
   selector: "app-sidebar",
@@ -104,16 +125,24 @@ export class SidebarComponent implements OnInit {
       });
 
     } else{
-      if(this.identity.role == "Teacher"){
-        this.menuItems = ifTeacher.filter((menuItem) => menuItem);
+      if(this.identity.role == "TWAITING"){
+        this.menuItems = ifTWAITING.filter((menuItem) => menuItem);
         this.router.events.subscribe((event) => {
           this.isCollapsed = true;
         });
       } else {
+        if(this.identity.role == "TEACHER"){
+          this.menuItems = ifTeacher.filter((menuItem) => menuItem);
+          this.router.events.subscribe((event) => {
+            this.isCollapsed = true;
+          });
+        }else{ 
         this.menuItems = ROUTES.filter((menuItem) => menuItem);
         this.router.events.subscribe((event) => {
           this.isCollapsed = true;
         });
+
+        } 
       }
     }
   }
