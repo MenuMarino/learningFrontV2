@@ -13,6 +13,8 @@ import { UserProfileComponent } from "../../pages/user-profile/user-profile.comp
 import { TablesComponent } from "../../pages/tables/tables.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 //import { UploadComponent} from "../../pages/upload/upload.component";
+//import {} from "../../pages/materials/materials.component";
+//import {AdminComponent} from "../../pages/admin/admin.component";
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({

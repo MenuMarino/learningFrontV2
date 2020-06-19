@@ -13,6 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { UploadComponent } from './pages/upload/upload.component';
+import { MaterialsComponent } from './pages/materials/materials.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { UploadComponent } from './pages/upload/upload.component';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    UploadComponent
+    UploadComponent,
+    MaterialsComponent,
+    AdminComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

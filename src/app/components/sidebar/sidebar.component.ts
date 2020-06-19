@@ -58,7 +58,7 @@ export const aux: RouteInfo[] = [
   },
 ];
 
-export const ifTWAITING: RouteInfo[] = [
+export const ifTWaiting: RouteInfo[] = [
   {
     path: "/dashboard",
     title: "Learning Peru",
@@ -90,11 +90,48 @@ export const ifTeacher: RouteInfo[] = [
     class: "",
   },
   { path: '/tables', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
-  { path: '/upload', title: 'Upload',  icon:'ni ni-cloud-upload-96 text-red', class: '' }
-  
+  { path: '/upload', title: 'Upload',  icon:'ni ni-cloud-upload-96 text-red', class: '' },
+  { path: '/materials', title:'Material', icon:'ni ni-archive-2 text-red',class:''},
 ];
 
+export const ifCurator : RouteInfo[] = [
+  {
+    path: "/dashboard",
+    title: "Learning Peru",
+    icon: "ni-tv-2 text-primary",
+    class: "",
+  },
+  { path: "/courses", title: "Cursos", icon: "ni-planet text-blue", class: "" },
+  {
+    path: "/user-profile",
+    title: "Perfil",
+    icon: "ni-single-02 text-yellow",
+    class: "",
+  },
+  { path: '/tables', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
+  { path: '/upload', title: 'Upload',  icon:'ni ni-cloud-upload-96 text-red', class: '' },
+  { path: '/materials', title:'Material', icon:'ni ni-archive-2 text-red',class:''},
+];
 
+export const ifAdmin : RouteInfo[] = [
+  {
+    path: "/dashboard",
+    title: "Learning Peru",
+    icon: "ni-tv-2 text-primary",
+    class: "",
+  },
+  { path: "/courses", title: "Cursos", icon: "ni-planet text-blue", class: "" },
+  {
+    path: "/user-profile",
+    title: "Perfil",
+    icon: "ni-single-02 text-yellow",
+    class: "",
+  },
+  { path: '/tables', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
+  { path: '/upload', title: 'Upload',  icon:'ni ni-cloud-upload-96 text-red', class: '' },
+  { path: '/materials', title:'My material', icon:'ni ni-archive-2 text-red',class:''},
+  { path: '/admin', title:'Admin', icon:'ni ni-settings', class:''},
+];
 
 @Component({
   selector: "app-sidebar",
@@ -126,7 +163,7 @@ export class SidebarComponent implements OnInit {
 
     } else{
       if(this.identity.role == "TWAITING"){
-        this.menuItems = ifTWAITING.filter((menuItem) => menuItem);
+        this.menuItems = ifTWaiting.filter((menuItem) => menuItem);
         this.router.events.subscribe((event) => {
           this.isCollapsed = true;
         });
@@ -136,12 +173,25 @@ export class SidebarComponent implements OnInit {
           this.router.events.subscribe((event) => {
             this.isCollapsed = true;
           });
-        }else{ 
-        this.menuItems = ROUTES.filter((menuItem) => menuItem);
-        this.router.events.subscribe((event) => {
-          this.isCollapsed = true;
-        });
-
+        }else{
+          if(this.identity.role == "CURATOR"){
+            this.menuItems = ifCurator.filter((menuItem) => menuItem);
+            this.router.events.subscribe((event) => {
+              this.isCollapsed = true;
+            });
+          }else{ 
+            if(this.identity.role == "ADMIN"){
+              this.menuItems = ifAdmin.filter((menuItem) => menuItem);
+              this.router.events.subscribe((event) => {
+                this.isCollapsed = true;
+              });
+            }else{
+            this.menuItems = ROUTES.filter((menuItem) => menuItem);
+            this.router.events.subscribe((event) => {
+              this.isCollapsed = true;
+          });
+          }
+        }
         } 
       }
     }
