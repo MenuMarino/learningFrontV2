@@ -2,5 +2,5 @@
 
 ### Como ejecutarlo
 1. npm install crypto-js
-2. ng install
+2. npm install
 3. ng serve
