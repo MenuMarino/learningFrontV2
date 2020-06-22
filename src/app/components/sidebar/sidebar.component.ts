@@ -72,7 +72,7 @@ export const ifTWaiting: RouteInfo[] = [
     icon: "ni-single-02 text-yellow",
     class: "",
   },
-  { path: '/tables', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
+  { path: '/upgrade', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
 ];
 
 export const ifTeacher: RouteInfo[] = [
@@ -89,7 +89,7 @@ export const ifTeacher: RouteInfo[] = [
     icon: "ni-single-02 text-yellow",
     class: "",
   },
-  { path: '/tables', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
+  { path: '/upgrade', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
   { path: '/upload', title: 'Upload',  icon:'ni ni-cloud-upload-96 text-red', class: '' },
   { path: '/materials', title:'Material', icon:'ni ni-archive-2 text-red',class:''},
 ];
@@ -108,7 +108,7 @@ export const ifCurator : RouteInfo[] = [
     icon: "ni-single-02 text-yellow",
     class: "",
   },
-  { path: '/tables', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
+  { path: '/upgrade', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
   { path: '/upload', title: 'Upload',  icon:'ni ni-cloud-upload-96 text-red', class: '' },
   { path: '/materials', title:'Material', icon:'ni ni-archive-2 text-red',class:''},
 ];
@@ -127,7 +127,7 @@ export const ifAdmin : RouteInfo[] = [
     icon: "ni-single-02 text-yellow",
     class: "",
   },
-  { path: '/tables', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
+  { path: '/upgrade', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
   { path: '/upload', title: 'Upload',  icon:'ni ni-cloud-upload-96 text-red', class: '' },
   { path: '/materials', title:'My material', icon:'ni ni-archive-2 text-red',class:''},
   { path: '/admin', title:'Admin', icon:'ni ni-settings', class:''},
