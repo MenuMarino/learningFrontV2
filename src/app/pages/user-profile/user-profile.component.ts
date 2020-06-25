@@ -13,7 +13,7 @@ export class UserProfileComponent implements OnInit {
   public birth: string;
   public email: string;
   public lastname: string;
-  public name: string;
+  public nombre: string;
   public role: string;
   public username: string;
   public url_cover: string; 
@@ -31,7 +31,8 @@ export class UserProfileComponent implements OnInit {
     this.birth = this.identity.birth;
     this.email = this.identity.email;
     this.lastname = this.identity.lastname;
-    this.name = this.identity.name;
+    console.log("THIS IS THE IDENTITY: ", this.identity.name);
+    this.nombre = this.identity.name;
     this.role = this.identity.role;
     this.username = this.identity.username;
     this.current_styles = {
