@@ -30,12 +30,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
 
   logIn(loginForm: NgForm) {
-    this.loginObj.password=CryptoJS.SHA256(this.loginObj.password ).toString(CryptoJS.enc.Hex);
+    var password=CryptoJS.SHA256(this.loginObj.password ).toString(CryptoJS.enc.Hex);
     console.log(this.loginObj);
+    console.log(this.loginObj.password);    
     this.loginService
     .logIn(
       this.loginObj.username,
-      this.loginObj.password
+      password
       )
     .subscribe(
       response => {

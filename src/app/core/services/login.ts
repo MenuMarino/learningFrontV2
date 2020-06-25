@@ -15,7 +15,7 @@ export class LoginService {
       password,
     };
 
-    return this.http.post(this.commonService.baseUrl + "/Auth/login", data);
+    return this.http.post(this.commonService.baseUrl + "/Login", data);
   }
 }
 
