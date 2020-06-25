@@ -29,28 +29,40 @@
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-username">Nombre de usuario</label>
-                    <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="{{username}}">
+                    <label class="form-control-label" for="input-first-name">Username</label>
+                    <input type="text" class="form-control form-control-alternative" placeholder="{{ username }}" [(ngModel)]="registerObj.username" name="username" #name="ngModel" required>
+                    <br>
+                    <button type="button" (click)="updateUserName()" class="btn btn-primary">Actualizar</button>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-email">Correo electrónico</label>
-                    <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="{{email}}">
+                    <label class="form-control-label" for="input-last-name">Correo electrónico</label>
+                    <input type="text" class="form-control form-control-alternative" placeholder="{{ email }}" [(ngModel)]="registerObj.email" name="email" #name="ngModel" required>
+                    <br>
+                    <button type="button" (click)="updateEmail()" class="btn btn-primary">Actualizar</button>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-first-name">Nombre</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="{{ name }}">
+                    <label class="form-control-label">Nombre</label>
+                    <p>{{ name }}</p>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-last-name">Apellido</label>
-                    <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="{{lastname}}">
+                    <label class="form-control-label">Apellido</label>
+                    <p>{{lastname}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Birth</label>
+                    <p>{{birth}}</p>
                   </div>
                 </div>
               </div>
