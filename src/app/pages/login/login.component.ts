@@ -4,6 +4,7 @@ import { LoginService } from "src/app/core/services/login";
 import { NgForm } from '@angular/forms';
 import { Router } from "@angular/router";
 import { StorageService } from "src/app/core/services/storage-service";
+import * as moment from "moment";
 import Swal from 'sweetalert2';
 import CryptoJS from 'crypto-js';
 
@@ -30,9 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
 
   logIn(loginForm: NgForm) {
-    var password=CryptoJS.SHA256(this.loginObj.password ).toString(CryptoJS.enc.Hex);
-    console.log(this.loginObj);
-    console.log(this.loginObj.password);    
+    var password=CryptoJS.SHA256(this.loginObj.password ).toString(CryptoJS.enc.Hex);   
     this.loginService
     .logIn(
       this.loginObj.username,
@@ -49,12 +48,16 @@ export class LoginComponent implements OnInit, OnDestroy {
           loginForm.resetForm();
           return;
         } else {
+          console.log(response);
           Swal.fire({
             icon: 'success',
             title: '¡Éxito!',
             showConfirmButton: false,
             timer: 1500
           })
+          
+          
+
           const identity = {
             name: response.name,
             lastname: response.lastname,
@@ -62,8 +65,10 @@ export class LoginComponent implements OnInit, OnDestroy {
             username: response.username,
             grade: response.grade,
             age: response.age,
-            role: response.type
+            role: response.type,
+            birth: moment(response.birth).format('DD/MM/YYYY')
           }
+          console.log("THIS IS THE DATE OF BIRTH");
           this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
           this.router.navigateByUrl("/courses");
         }          

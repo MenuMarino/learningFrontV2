@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage-service';
+import { RegisterObj } from 'src/app/core/models/registerObj';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,6 +18,7 @@ export class UserProfileComponent implements OnInit {
   public username: string;
   public url_cover: string; 
   public current_styles: any;
+  public registerObj: RegisterObj
 
   
   constructor(
@@ -24,8 +26,8 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.registerObj = new RegisterObj();
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
-    console.log(this.identity);
     this.birth = this.identity.birth;
     this.email = this.identity.email;
     this.lastname = this.identity.lastname;
@@ -38,9 +40,6 @@ export class UserProfileComponent implements OnInit {
       'background-size': 'cover',
       'background-position': 'center top',
     }
-
-
-    
   }
 
   getUrl(){
@@ -51,6 +50,16 @@ export class UserProfileComponent implements OnInit {
         return 'url(/assets/img/theme/student_cover.jpg)';
       
     }
+  }
+
+  updateUserName(){
+    console.log("USERNAME: ",this.registerObj.username);
+
+
+  }
+
+  updateEmail(){
+
   }
 
 
