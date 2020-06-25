@@ -59,8 +59,7 @@ export class RegisterComponent implements OnInit {
     if(this.isTeacher){
       this.registerObj.type = "TEACHER";
     }
-    //this.registerObj.password=CryptoJS.SHA256(this.registerObj.password ).toString(CryptoJS.enc.Hex);
-    var password = CryptoJS.SHA256(this.registerObj.password ).toString(CryptoJS.enc.Hex);
+    this.registerObj.password=CryptoJS.SHA256(this.registerObj.password ).toString(CryptoJS.enc.Hex);
     this.registerServices
       .sendRegisterData(
         this.registerObj.name,
@@ -70,8 +69,7 @@ export class RegisterComponent implements OnInit {
         this.registerObj.username,
         this.registerObj.birth,
         this.registerObj.country,
-        //this.registerObj.password,
-        password,
+        this.registerObj.password,
         this.registerObj.grade,
         this.registerObj.type
       )

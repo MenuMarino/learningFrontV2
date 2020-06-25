@@ -33,15 +33,14 @@ export class UserProfileComponent implements OnInit {
     this.role = this.identity.role;
     this.username = this.identity.username;
     this.current_styles = {
-      'min-height': '600px',
+      'min-height': '500px',
       'background-image': this.getUrl(),
       'background-size': 'cover',
       'background-position': 'center top',
     }
 
-
-    
   }
+
 
   getUrl(){
     switch (this.role) {
