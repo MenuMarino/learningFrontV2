@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
       this.username = this.identity.username; 
     } else {
       this.is_logged=false;
+      this.router.navigateByUrl("/dashboard");
     }
 
   }
@@ -57,7 +58,6 @@ export class NavbarComponent implements OnInit {
   logOut(){
     this.storageService.removeIdentityLocalStorage();
     location.reload();
-    this.router.navigateByUrl("/dashboard");
   }
 
 }

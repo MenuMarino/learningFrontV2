@@ -52,13 +52,18 @@ export class UserProfileComponent implements OnInit {
   getUrl(){
     switch (this.role) {
       case 'TEACHER':
+      case 'CWAITING':
         return 'url(/assets/img/theme/professor_cover.jpg)';
       case 'STUDENT':
+      case 'TWAITING':
         return 'url(/assets/img/theme/student_cover.jpg)';
-      
+      case 'CURATOR':
+        return 'url(/assets/img/theme/curator_cover.png)';
+      case 'ADMIN':
+        return 'url(/assets/img/theme/admin_cover.jpg)';
     }
   }
-
+  
   updateUserName(){
     //   console.log("The username: ", this.registerObj.username);
     if(this.registerObj.username == this.identity.username){

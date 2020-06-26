@@ -1,1 +1,63 @@
-<p>materials works!</p>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Materiales</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Tema</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Curado por</th>
+                <th scope="col">Visitas</th>
+                <th scope="col">Learning points</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor = "let material of materiales">
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
+                      <img alt="{{material.name}}" src="../assets/img/theme/bootstrap.jpg">
+                    </a>
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">{{material.name}}</span>
+                    </div>
+                  </div>
+                </th>
+                
+                <td>
+                  <span class="badge badge-dot mr-4">
+                    <i class="bg-success"></i> {{material.status}}
+                  </span>
+                </td>
+                <td>
+                    {{material.curated_by}}
+                  </td>
+                <td>
+                    {{material.views}}
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <span class="mr-2">{{material.learning_points}}</span>
+                    <div>
+                      <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </td>        
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
