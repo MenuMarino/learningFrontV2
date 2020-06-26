@@ -106,6 +106,42 @@
                 />
               </div>
             </div>
+            <div *ngIf="isTeacher" class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-building"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Institución"
+                  [(ngModel)]="registerObj.institucion"
+                  name="institución"
+                  #name="ngModel"
+                  type="institución"
+                  required
+                />
+              </div>
+            </div>
+            <div *ngIf="isTeacher" class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-paper-diploma"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Especialidad"
+                  [(ngModel)]="registerObj.especialidad"
+                  name="especialidad"
+                  #name="ngModel"
+                  type="especialidad"
+                  required
+                />
+              </div>
+            </div>
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">

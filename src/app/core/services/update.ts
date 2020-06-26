@@ -9,11 +9,19 @@ import { Observable } from "rxjs";
 export class UpdateService {
     constructor(private http: HttpClient, private commonService: CommonService) {}
 
-    updateUsername(username: string): Observable<any>{
-        return this.http.put(this.commonService.baseUrl + "/updateUsername",  username);
+    updateUsername(id: string, username: string): Observable<any>{
+        const data = {
+            id,
+            username
+        }
+        return this.http.put(this.commonService.baseUrl + "/user",  data);
     }
 
-    updateEmail(email: string): Observable<any>{
-        return this.http.put(this.commonService.baseUrl + "/updateEmail", email);
+    updateEmail(id: string, email: string): Observable<any>{
+        const data = {
+            id, 
+            email
+        }
+        return this.http.put(this.commonService.baseUrl + "/user", data);
     }
 }

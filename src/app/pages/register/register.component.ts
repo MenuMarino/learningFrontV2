@@ -71,7 +71,9 @@ export class RegisterComponent implements OnInit {
         this.registerObj.country,
         this.registerObj.password,
         this.registerObj.grade,
-        this.registerObj.type
+        this.registerObj.type,
+        this.registerObj.institucion,
+        this.registerObj.especialidad
       )
       .subscribe(
         (response) => {
@@ -93,17 +95,23 @@ export class RegisterComponent implements OnInit {
           })
 
           const identity = {
+            id: response.id,
             name: this.registerObj.name,
             lastname: this.registerObj.lastname,
             email: this.registerObj.email,
             username: this.registerObj.username,
             role: this.registerObj.type,
             grade: this.registerObj.grade,
-            birth: this.registerObj.birth
+            birth: this.registerObj.birth,
+            institucion: this.registerObj.institucion,
+            especialidad: this.registerObj.especialidad
           }
 
           if(this.isTeacher){
             delete identity.grade;
+          } else {
+            delete identity.especialidad;
+            delete identity.institucion;
           }
 
           console.log(identity);

@@ -29,18 +29,18 @@
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-first-name">Username</label>
-                    <input type="text" class="form-control form-control-alternative" placeholder="{{ username }}" [(ngModel)]="registerObj.username" name="username" #name="ngModel" required>
+                    <label class="form-control-label" for="input-email">Correo electrónico</label>
+                    <input type="text" class="form-control form-control-alternative" placeholder="{{ email }}" [(ngModel)]="registerObj.email" name="email" #name="ngModel" required>
                     <br>
-                    <button type="button" (click)="updateUserName()" class="btn btn-primary">Actualizar</button>
+                    <button type="button" (click)="updateEmail()" class="btn btn-primary">Actualizar</button>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-last-name">Correo electrónico</label>
-                    <input type="text" class="form-control form-control-alternative" placeholder="{{ email }}" [(ngModel)]="registerObj.email" name="email" #name="ngModel" required>
+                    <label class="form-control-label" for="input-username">Username</label>
+                    <input type="text" class="form-control form-control-alternative" placeholder="{{ username }}" [(ngModel)]="registerObj.username" name="username" #name="ngModel" required>
                     <br>
-                    <button type="button" (click)="updateEmail()" class="btn btn-primary">Actualizar</button>
+                    <button type="button" (click)="updateUserName()" class="btn btn-primary">Actualizar</button>
                   </div>
                 </div>
               </div>

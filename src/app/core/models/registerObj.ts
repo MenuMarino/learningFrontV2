@@ -9,5 +9,7 @@ export class RegisterObj {
   sex: boolean;
   grade: string;
   type: string;
+  institucion: string;
+  especialidad: string;
 }
 

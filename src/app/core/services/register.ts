@@ -19,7 +19,9 @@ export class RegisterServices {
     country: string,
     password: string,
     grade: string,
-    type: string
+    type: string,
+    institucion: string,
+    especialidad: string
   ): Observable<any> {
     const data = {
       name,
@@ -31,7 +33,9 @@ export class RegisterServices {
       country,
       password,
       grade,
-      type
+      type,
+      institucion,
+      especialidad
     };
     console.log(data);
     return this.http.post(this.commonService.baseUrl + "/Auth", data);

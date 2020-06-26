@@ -55,10 +55,9 @@ export class LoginComponent implements OnInit, OnDestroy {
             showConfirmButton: false,
             timer: 1500
           })
-          
-          
 
           const identity = {
+            id: response.id,
             name: response.name,
             lastname: response.lastname,
             email: response.email,
@@ -68,6 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             role: response.type,
             birth: moment(response.birth).format('DD/MM/YYYY')
           }
+
           console.log("THIS IS THE DATE OF BIRTH");
           this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
           this.router.navigateByUrl("/courses");

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage-service';
 import { RegisterObj } from 'src/app/core/models/registerObj';
+import { UpdateService } from 'src/app/core/services/update';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,6 +12,7 @@ import { RegisterObj } from 'src/app/core/models/registerObj';
 })
 export class UserProfileComponent implements OnInit {
   private identity: any;
+  public id: string;
   public birth: string;
   public email: string;
   public lastname: string;
@@ -22,7 +25,8 @@ export class UserProfileComponent implements OnInit {
 
   
   constructor(
-    private storageService: StorageService
+    private storageService: StorageService,
+    private updateService: UpdateService
   ) { }
 
   ngOnInit() {
@@ -33,6 +37,7 @@ export class UserProfileComponent implements OnInit {
     this.lastname = this.identity.lastname;
     console.log("THIS IS THE IDENTITY: ", this.identity.name);
     this.nombre = this.identity.name;
+    this.id = this.identity.id;
     this.role = this.identity.role;
     this.username = this.identity.username;
     this.current_styles = {
@@ -55,13 +60,62 @@ export class UserProfileComponent implements OnInit {
   }
 
   updateUserName(){
-    console.log("USERNAME: ",this.registerObj.username);
-
+    //   console.log("The username: ", this.registerObj.username);
+    if(this.registerObj.username == this.identity.username){
+      Swal.fire({
+        allowOutsideClick: false,
+        text: 'Elige un nombre de usuario distinto al actual',
+        icon: 'error',
+      });
+    } else {
+      this.updateService.updateUsername(this.id, this.registerObj.username).subscribe(
+        response => {
+            Swal.fire({
+              allowOutsideClick: false,
+              text: 'Nombre de usuario actualizado',
+              icon: 'success',
+            });
+            console.log(response);
+        }, error => {
+            Swal.fire({
+              allowOutsideClick: false,
+              text: 'El nombre de usuario ya existe',
+              icon: 'error',
+            });
+            console.log(error);
+        }
+      )
+    }
 
   }
 
   updateEmail(){
-
+    // console.log("The email: ", this.registerObj.email);
+    if(this.registerObj.email == this.identity.email){
+      Swal.fire({
+        allowOutsideClick: false,
+        text: 'Elige un email distinto al actual',
+        icon: 'error',
+      });
+    } else {
+      this.updateService.updateEmail(this.id, this.registerObj.email).subscribe(
+        response => {
+            Swal.fire({
+              allowOutsideClick: false,
+              text: 'Correo actualizado',
+              icon: 'success',
+            });
+          console.log(response);
+        }, error => {
+            Swal.fire({
+              allowOutsideClick: false,
+              text: 'El correo ya existe',
+              icon: 'error',
+            });
+          console.log(error);
+        }
+      )
+    }
   }
 
 
