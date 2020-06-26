@@ -56,8 +56,8 @@ export class NavbarComponent implements OnInit {
 
   logOut(){
     this.storageService.removeIdentityLocalStorage();
-    this.router.navigateByUrl("/dashboard");
     location.reload();
+    this.router.navigateByUrl("/dashboard");
   }
 
 }

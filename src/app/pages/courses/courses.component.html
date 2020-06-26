@@ -10,99 +10,18 @@
         </div>
         <div class="card-body">
           <div class="row icon-examples">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-6" *ngFor = "let curso of cursos" >
               <button
                 type="button"
                 placement="top-center"
                 triggers="hover focus click"
-                ngbTooltip="{{
-                  copy === 'air-baloon' ? 'Copied' : 'Copy to clipboard'
-                }}"
                 class="btn-icon-clipboard"
                 ngxClipboard
                 [cbContent]="'air-baloon'"
                 (cbOnSuccess)="copy = 'air-baloon'"
               >
-                <div>
-                  <i class="ni ni-books"></i>
-                  <span>Matemática</span>
-                </div>
-              </button>
-            </div>
-            <div class="col-lg-3 col-md-6">
-              <button
-                type="button"
-                placement="top-center"
-                triggers="hover focus click"
-                ngbTooltip="{{
-                  copy === 'button-power' ? 'Copied' : 'Copy to clipboard'
-                }}"
-                class="btn-icon-clipboard"
-                ngxClipboard
-                [cbContent]="'button-power'"
-                (cbOnSuccess)="copy = 'button-power'"
-              >
-                <div>
-                  <i class="ni ni-books"></i>
-                  <span>Física</span>
-                </div>
-              </button>
-            </div>
-            <div class="col-lg-3 col-md-6">
-              <button
-                type="button"
-                placement="top-center"
-                triggers="hover focus click"
-                ngbTooltip="{{
-                  copy === 'calendar-grid-58' ? 'Copied' : 'Copy to clipboard'
-                }}"
-                class="btn-icon-clipboard"
-                ngxClipboard
-                [cbContent]="'calendar-grid-58'"
-                (cbOnSuccess)="copy = 'calendar-grid-58'"
-              >
-                <div>
-                  <i class="ni ni-books"></i>
-                  <span>Química</span>
-                </div>
-              </button>
-            </div>
-            <div class="col-lg-3 col-md-6">
-              <button
-                type="button"
-                placement="top-center"
-                triggers="hover focus click"
-                ngbTooltip="{{
-                  copy === 'calendar-grid-58' ? 'Copied' : 'Copy to clipboard'
-                }}"
-                class="btn-icon-clipboard"
-                ngxClipboard
-                [cbContent]="'calendar-grid-58'"
-                (cbOnSuccess)="copy = 'calendar-grid-58'"
-              >
-                <div>
-                  <i class="ni ni-books"></i>
-                  <span>Lenguaje</span>
-                </div>
-              </button>
-            </div>
-            <div class="col-lg-3 col-md-6">
-              <button
-                type="button"
-                placement="top-center"
-                triggers="hover focus click"
-                ngbTooltip="{{
-                  copy === 'calendar-grid-58' ? 'Copied' : 'Copy to clipboard'
-                }}"
-                class="btn-icon-clipboard"
-                ngxClipboard
-                [cbContent]="'calendar-grid-58'"
-                (cbOnSuccess)="copy = 'calendar-grid-58'"
-              >
-                <div>
-                  <i class="ni ni-books"></i>
-                  <span>Biología</span>
-                </div>
+                <i class={{curso.imagen}}></i>
+                <span>{{curso.name}}</span>
               </button>
             </div>
           </div>

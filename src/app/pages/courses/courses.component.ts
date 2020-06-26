@@ -11,5 +11,28 @@ export class CoursesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
+  public cursos: any[] = [
+    {
+      name: "Matematica",
+      imagen: "ni ni-ruler-pencil"
+    },
+    {
+      name: "Fisica",
+      imagen: "ni ni-atom"
+    },
+    {
+      name: "Quimica",
+      imagen: "ni ni-diamond"
+    },
+    {
+      name: "Lenguaje",
+      imagen: "ni ni-books"
+    },
+    {
+      name: "Biologia",
+      imagen: "ni ni-user-run"
+    },
+  ]
 }
