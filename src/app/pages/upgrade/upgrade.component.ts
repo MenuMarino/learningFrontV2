@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UpgradeServices } from "src/app/core/services/upgrade";
+import { FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-upgrade',
@@ -15,12 +16,15 @@ export class UpgradeComponent implements OnInit {
   }
 
   fileChange(file){
-    this.uploadFile = file.target.files;
+    this.uploadFile = file.target.files[0];
     console.log("These are the files uploaded: ",this.uploadFile);
   }
 
   sendFile(){
-    this.upgradeServices.sendUpgradeFile(this.uploadFile).subscribe(
+    const formData = new FormData();
+    formData.append("file",this.uploadFile);
+
+    this.upgradeServices.sendUpgradeFile(formData).subscribe(
       response => {
         console.log(response);
       } , error => {
