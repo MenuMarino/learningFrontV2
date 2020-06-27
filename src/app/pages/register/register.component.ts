@@ -7,8 +7,8 @@ import { RegisterServices } from "src/app/core/services/register";
 import { UserProfileComponent } from "../user-profile/user-profile.component";
 import { StorageService } from "src/app/core/services/storage-service";
 import Swal from 'sweetalert2';
+import * as moment from "moment";
 import CryptoJS from 'crypto-js';
-
 
 @Component({
   selector: "app-register",
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
     if(this.isTeacher){
       this.registerObj.type = "TEACHER";
     }
-    this.registerObj.password=CryptoJS.SHA256(this.registerObj.password ).toString(CryptoJS.enc.Hex);
+    const passAux=CryptoJS.SHA256(this.registerObj.password ).toString(CryptoJS.enc.Hex);
     this.registerServices
       .sendRegisterData(
         this.registerObj.name,
@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
         this.registerObj.username,
         this.registerObj.birth,
         this.registerObj.country,
-        this.registerObj.password,
+        passAux,
         this.registerObj.grade,
         this.registerObj.type,
         this.registerObj.institucion,
@@ -96,15 +96,15 @@ export class RegisterComponent implements OnInit {
 
           const identity = {
             id: response.id,
-            name: this.registerObj.name,
-            lastname: this.registerObj.lastname,
-            email: this.registerObj.email,
-            username: this.registerObj.username,
-            role: this.registerObj.type,
-            grade: this.registerObj.grade,
-            birth: this.registerObj.birth,
-            institucion: this.registerObj.institucion,
-            especialidad: this.registerObj.especialidad
+            name: response.name,
+            lastname: response.lastname,
+            email: response.email,
+            username: response.username,
+            role: response.type,
+            grade: response.grade,
+            birth: moment(response.birth).format('DD/MM/YYYY'),
+            institucion: response.institucion,
+            especialidad: response.especialidad
           }
 
           if(this.isTeacher){

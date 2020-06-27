@@ -27,7 +27,7 @@
             <h6 class="heading-small text-muted mb-4">Información de usuario</h6>
             <div class="pl-lg-4">
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                   <div class="form-group">
                     <label class="form-control-label" for="input-email">Correo electrónico</label>
                     <input type="text" class="form-control form-control-alternative" placeholder="{{ email }}" [(ngModel)]="registerObj.email" name="email" #name="ngModel" required>
@@ -35,7 +35,7 @@
                     <button type="button" (click)="updateEmail()" class="btn btn-primary">Actualizar</button>
                   </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">Username</label>
                     <input type="text" class="form-control form-control-alternative" placeholder="{{ username }}" [(ngModel)]="registerObj.username" name="username" #name="ngModel" required>
@@ -43,26 +43,53 @@
                     <button type="button" (click)="updateUserName()" class="btn btn-primary">Actualizar</button>
                   </div>
                 </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-username">Password</label>
+                    <input type="password" class="form-control form-control-alternative" [(ngModel)]="registerObj.password" name="password" #name="ngModel" required>
+                    <br>
+                    <button type="button" (click)="updatePassword()" class="btn btn-primary">Actualizar</button>
+                  </div>
+                </div>
               </div>
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                   <div class="form-group">
                     <label class="form-control-label">Nombre</label>
                     <p>{{ nombre }}</p>
                   </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                   <div class="form-group">
                     <label class="form-control-label">Apellido</label>
                     <p>{{lastname}}</p>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                   <div class="form-group">
                     <label class="form-control-label">Birth</label>
                     <p>{{birth}}</p>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="row">
+                <div *ngIf="isTeacher" class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Institución</label>
+                    <p>{{ institucion }}</p>
+                  </div>
+                </div>
+                <div *ngIf="isTeacher" class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Especialidad</label>
+                    <p>{{ especialidad }}</p>
+                  </div>
+                </div>
+                <div *ngIf="isStudent" class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Grado</label>
+                    <p>{{ grade }}</p>
                   </div>
                 </div>
               </div>
