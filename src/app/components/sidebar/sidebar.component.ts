@@ -58,6 +58,33 @@ export const aux: RouteInfo[] = [
   },
 ];
 
+export const ifStudent: RouteInfo[] = [
+  {
+    path: "/dashboard",
+    title: "Learning Peru",
+    icon: "ni-tv-2 text-primary",
+    class: "",
+  },
+  { path: "/courses", 
+    title: "Cursos", 
+    icon: "ni-planet text-blue", 
+    class: "" 
+  },
+  { path: "/mymaterials", 
+    title: "Mis Materiales", 
+    icon: "ni-books text-red", 
+    class: "" 
+  },
+  {
+    path: "/user-profile",
+    title: "Perfil",
+    icon: "ni-single-02 text-yellow",
+    class: "",
+  },
+  
+];
+
+
 export const ifTWaiting: RouteInfo[] = [
   {
     path: "/dashboard",
@@ -185,12 +212,20 @@ export class SidebarComponent implements OnInit {
               this.router.events.subscribe((event) => {
                 this.isCollapsed = true;
               });
-            }else{
-            this.menuItems = ROUTES.filter((menuItem) => menuItem);
-            this.router.events.subscribe((event) => {
-              this.isCollapsed = true;
-          });
+            }else{ 
+              if(this.identity.role == "STUDENT"){
+                this.menuItems = ifStudent.filter((menuItem) => menuItem);
+                this.router.events.subscribe((event) => {
+                  this.isCollapsed = true;
+                });
+              }
+              else{
+              this.menuItems = ROUTES.filter((menuItem) => menuItem);
+              this.router.events.subscribe((event) => {
+                this.isCollapsed = true;
+            });
           }
+        }
         }
         } 
       }

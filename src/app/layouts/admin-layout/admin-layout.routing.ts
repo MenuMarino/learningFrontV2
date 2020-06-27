@@ -7,6 +7,7 @@ import { UpgradeComponent } from "../../pages/upgrade/upgrade.component";
 import { UploadComponent } from "../../pages/upload/upload.component";
 import { MaterialsComponent } from "../../pages/materials/materials.component";
 import { AdminComponent } from "../../pages/admin/admin.component";
+import { MyMaterialsComponent } from "../../pages/mymaterials/mymaterials.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -15,5 +16,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: "courses", component: CoursesComponent },
   {path: "upload",component:UploadComponent},
   {path: "materials", component:MaterialsComponent},
+  {path: "mymaterials", component:MyMaterialsComponent},
   {path: "admin",component:AdminComponent}, 
 ];
