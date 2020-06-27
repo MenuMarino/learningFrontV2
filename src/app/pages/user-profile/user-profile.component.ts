@@ -3,6 +3,7 @@ import { StorageService } from 'src/app/core/services/storage-service';
 import { RegisterObj } from 'src/app/core/models/registerObj';
 import { UpdateService } from 'src/app/core/services/update';
 import Swal from 'sweetalert2';
+import CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-user-profile',
@@ -22,6 +23,12 @@ export class UserProfileComponent implements OnInit {
   public url_cover: string; 
   public current_styles: any;
   public registerObj: RegisterObj
+  public isTeacher: boolean = false;
+  public isStudent: boolean = false;
+  public institucion: string;
+  public especialidad: string;
+  public grade: string;
+
 
   
   constructor(
@@ -45,6 +52,15 @@ export class UserProfileComponent implements OnInit {
       'background-image': this.getUrl(),
       'background-size': 'cover',
       'background-position': 'center top',
+    }
+
+    if(this.role == "TEACHER" || this.role == "TWAITING"){
+      this.isTeacher = true;
+      this.especialidad = this.identity.especialidad;
+      this.institucion = this.identity.institucion;
+    } else if(this.role == "STUDENT"){
+      this.isStudent = true;
+      this.grade = this.identity.grade;
     }
   }
 
@@ -75,6 +91,9 @@ export class UserProfileComponent implements OnInit {
     } else {
       this.updateService.updateUsername(this.id, this.registerObj.username).subscribe(
         response => {
+          this.identity.username = this.registerObj.username;
+          this.storageService.setIdentityLocalStorage(JSON.stringify(this.identity));
+          console.log("NEW USERNAME: ", this.identity.username);
             Swal.fire({
               allowOutsideClick: false,
               text: 'Nombre de usuario actualizado',
@@ -105,6 +124,8 @@ export class UserProfileComponent implements OnInit {
     } else {
       this.updateService.updateEmail(this.id, this.registerObj.email).subscribe(
         response => {
+          this.identity.email = this.registerObj.email;
+          this.storageService.setIdentityLocalStorage(JSON.stringify(this.identity));
             Swal.fire({
               allowOutsideClick: false,
               text: 'Correo actualizado',
@@ -123,5 +144,25 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  updatePassword(){
+    const passAux=CryptoJS.SHA256(this.registerObj.password ).toString(CryptoJS.enc.Hex);
+    this.updateService.updatePassword(this.id, passAux).subscribe(
+      response => {
+        Swal.fire({
+          allowOutsideClick: false,
+          text: 'Contraseña actualizada',
+          icon: 'success',
+        });
+      console.log(response);
+    }, error => {
+        Swal.fire({
+          allowOutsideClick: false,
+          text: 'Hubo un error al actualizar la contraseña',
+          icon: 'error',
+        });
+      console.log(error);
+    }
+    )
+  }
 
 }

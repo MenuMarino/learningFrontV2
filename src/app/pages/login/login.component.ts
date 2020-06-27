@@ -62,11 +62,19 @@ export class LoginComponent implements OnInit, OnDestroy {
             lastname: response.lastname,
             email: response.email,
             username: response.username,
-            grade: response.grade,
-            age: response.age,
             role: response.type,
+            grade: response.grade,
             birth: moment(response.birth).format('DD/MM/YYYY'),
-            myMaterials: response.myMaterials
+            institucion: response.institucion,
+            especialidad: response.especialidad
+          }
+
+
+          if(identity.role == "TEACHER" || identity.role == "TWAITING"){
+            delete identity.grade;
+          } else if (identity.role == "STUDENT"){
+            delete identity.especialidad;
+            delete identity.institucion;
           }
 
           console.log("THIS IS THE DATE OF BIRTH");

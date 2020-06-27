@@ -24,4 +24,12 @@ export class UpdateService {
         }
         return this.http.put(this.commonService.baseUrl + "/user", data);
     }
+
+    updatePassword(id: string, password: string): Observable<any>{
+        const data = {
+            id,
+            password
+        }
+        return this.http.put(this.commonService.baseUrl + "/user", data);
+    }
 }
