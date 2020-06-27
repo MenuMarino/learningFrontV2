@@ -104,7 +104,7 @@ export class RegisterComponent implements OnInit {
             grade: this.registerObj.grade,
             birth: this.registerObj.birth,
             institucion: this.registerObj.institucion,
-            especialidad: this.registerObj.especialidad
+            especialidad: this.registerObj.especialidad,
           }
 
           if(this.isTeacher){

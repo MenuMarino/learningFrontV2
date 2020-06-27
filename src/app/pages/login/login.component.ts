@@ -65,7 +65,8 @@ export class LoginComponent implements OnInit, OnDestroy {
             grade: response.grade,
             age: response.age,
             role: response.type,
-            birth: moment(response.birth).format('DD/MM/YYYY')
+            birth: moment(response.birth).format('DD/MM/YYYY'),
+            myMaterials: response.myMaterials
           }
 
           console.log("THIS IS THE DATE OF BIRTH");

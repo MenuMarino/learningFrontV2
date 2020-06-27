@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from 'src/app/core/services/storage-service';
 
 @Component({
   selector: 'app-materials',
   templateUrl: './materials.component.html',
-  styleUrls: ['./materials.component.css']
+  styleUrls: ['./materials.component.css'],
+  providers: [StorageService]
 })
 export class MaterialsComponent implements OnInit {
-
-  constructor() { }
+  private identity: any;
+  constructor(
+    private storageService: StorageService,
+  ) { }
 
   ngOnInit(): void {
+    this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
+    console.log("estamos en materials");
+    console.log(this.identity.username);
   }
 
   public materiales: any[] = [
