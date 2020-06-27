@@ -4,6 +4,7 @@ import { LoginService } from "src/app/core/services/login";
 import { NgForm } from '@angular/forms';
 import { Router } from "@angular/router";
 import { StorageService } from "src/app/core/services/storage-service";
+import { CommonService } from "src/app/core/services/common-services";
 import * as moment from "moment";
 import Swal from 'sweetalert2';
 import CryptoJS from 'crypto-js';
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private loginService: LoginService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private commonService: CommonService
     ) {
     this.loginObj = new LoginObj();
   }
@@ -96,5 +98,38 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   goReg() {
     this.router.navigateByUrl("/register");
+  }
+
+  sendMail(){
+    var success = false;
+    Swal.fire({
+      title: 'Ingresa tu correo',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Enviar nueva contraseña',
+      showLoaderOnConfirm: true,
+      preConfirm: (email) => {
+        this.loginService.recoverPass(email).subscribe(
+          response => {
+            console.log(response);
+            success = true;
+          }, error => {
+            console.log(error);
+          }
+        )
+      },
+    }).then((result) => {
+      if(result){
+        Swal.fire({
+          icon: 'success',
+          title: '¡Éxito!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    })
   }
 }

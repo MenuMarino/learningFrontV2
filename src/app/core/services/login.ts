@@ -17,5 +17,13 @@ export class LoginService {
 
     return this.http.post(this.commonService.baseUrl + "/Auth/login", data);
   }
+
+  recoverPass(email:string): Observable<any> {
+    const data = {
+      email
+    };
+
+    return this.http.post(this.commonService.baseUrl + "/recover", data);
+  }
 }
 

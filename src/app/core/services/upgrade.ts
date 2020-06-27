@@ -10,7 +10,7 @@ export class UpgradeServices{
     constructor( private http: HttpClient, private commonService: CommonService ) {}
 
     sendUpgradeFile(file) : Observable<any> {
-        return this.http.post(this.commonService.baseUrl + "/test/test/uploads", file);
+        return this.http.post(this.commonService.baseUrl + "/upload", file);
     }
 
 }
