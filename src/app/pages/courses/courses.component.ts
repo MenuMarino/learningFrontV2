@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-courses',
@@ -7,12 +9,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesComponent implements OnInit {
 
-  public copy: string;
-  constructor() { }
+  private isChoosed_course : boolean = false;
+  private isChoosed_grade : boolean = false;
+ 
+
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     
   }
+  chooseCourse(){
+    this.isChoosed_course = true;
+    console.log("curso elegido");
+  }
+  chooseGrade(){
+    this.isChoosed_grade = true;
+    console.log("grado elegido");
+  }
+
+
+
+  themeClick(){
+    if(this.isChoosed_course == true && this.isChoosed_grade == true){
+      console.log("enviar");
+      this.router.navigateByUrl("/temas");
+    }
+    else{
+      Swal.fire({
+        allowOutsideClick: false,
+        text: 'Elija el curso y el grado',
+        icon: 'error',
+      });
+      console.log("no enviar")
+    }
+  }
+
   public cursos: any[] = [
     {
       name: "Matematica",

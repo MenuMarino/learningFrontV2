@@ -19,7 +19,7 @@
                 ngxClipboard
                 [cbContent]="'air-baloon'"
                 (cbOnSuccess)="copy = 'air-baloon'"
-                href="#/temas"
+                (click)="chooseCourse()"
               >
                 <i class={{curso.imagen}}></i>
                 <span>{{curso.name}}</span>
@@ -47,9 +47,9 @@
                   class="btn-icon-clipboard"
                   ngxClipboard
                   [cbContent]="'air-baloon'"
-                  (cbOnSuccess)="copy = 'air-baloon'"
-                  href="#/temas"
+                  (cbOnSuccess)="copy = 'air-baloon'" 
                   style = "padding-left : 30px; padding-right:30px; width:220px"
+                  (click)="chooseGrade()"
                 >
                   <i class={{grado.imagen}}></i>
                   <span>{{grado.name}}</span>
@@ -60,5 +60,11 @@
         </div>
       </div>  
     </div>
+    <div class="text-center">
+      <a type="button" (click)="themeClick()" class="btn btn-success mt-4">
+        Buscar
+      </a>
   </div>
+  </div>
+  
 </div>
