@@ -11,7 +11,8 @@ export class CoursesComponent implements OnInit {
 
   private isChoosed_course : boolean = false;
   private isChoosed_grade : boolean = false;
- 
+  private current_course : any = null;
+  private current_grade : any = null;
 
   constructor(
     private router: Router,
@@ -20,13 +21,28 @@ export class CoursesComponent implements OnInit {
   ngOnInit() {
     
   }
-  chooseCourse(){
+  chooseCourse(course){
+
+    if(this.current_course !=null){
+      this.current_course.backgroundcolor = '#f6f9fc';
+    }
+    course.backgroundcolor = '#bddbfa';
+
+    this.current_course = course;
+
     this.isChoosed_course = true;
-    console.log("curso elegido");
+    console.log(course.name + "curso elegido");
+
   }
-  chooseGrade(){
+  chooseGrade(grade){
+    if(this.current_grade != null){
+      this.current_grade.backgroundcolor = '#f6f9fc';
+    }
+    grade.backgroundcolor = '#bddbfa';
+    this.current_grade = grade;
+
     this.isChoosed_grade = true;
-    console.log("grado elegido");
+    console.log(grade.name + "grado elegido");
   }
 
 
@@ -46,44 +62,57 @@ export class CoursesComponent implements OnInit {
     }
   }
 
+
+
   public cursos: any[] = [
+
     {
       name: "Matematica",
-      imagen: "ni ni-ruler-pencil"
+      imagen: "ni ni-ruler-pencil",
+      backgroundcolor : '#f6f9fc',
     },
     {
       name: "Fisica",
-      imagen: "ni ni-atom"
+      imagen: "ni ni-atom",
+      backgroundcolor : '#f6f9fc',
     },
     {
       name: "Quimica",
-      imagen: "ni ni-diamond"
+      imagen: "ni ni-diamond",
+      backgroundcolor : '#f6f9fc',
     },
     {
       name: "Lenguaje",
-      imagen: "ni ni-books"
+      imagen: "ni ni-books",
+      backgroundcolor : '#f6f9fc',
     },
     {
       name: "Biologia",
-      imagen: "ni ni-user-run"
+      imagen: "ni ni-user-run",
+      backgroundcolor : '#f6f9fc',
     },
   ]
+
   public grados: any[] = [
     {
       name: "1er Grado",
-      imagen: "ni ni-diamond"
+      imagen: "ni ni-diamond",
+      backgroundcolor : '#f6f9fc',
     },
     {
       name: "2do Grado",
-      imagen: "ni ni-diamond"
+      imagen: "ni ni-diamond",
+      backgroundcolor : '#f6f9fc',
     },
     {
       name: "3er Grado",
-      imagen: "ni ni-diamond"
+      imagen: "ni ni-diamond",
+      backgroundcolor : '#f6f9fc',
     },
     {
       name: "5to Grado",
-      imagen: "ni ni-diamond"
+      imagen: "ni ni-diamond",
+      backgroundcolor : '#f6f9fc',
     },
   ]
 }

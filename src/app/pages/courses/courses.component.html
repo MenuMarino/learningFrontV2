@@ -16,11 +16,9 @@
                 placement="top-center"
                 triggers="hover focus click"
                 class="btn-icon-clipboard"
-                ngxClipboard
-                [cbContent]="'air-baloon'"
-                (cbOnSuccess)="copy = 'air-baloon'"
-                (click)="chooseCourse()"
-              >
+                (click)="chooseCourse(curso)"
+                [style.background-color] = "curso.backgroundcolor"
+             >
                 <i class={{curso.imagen}}></i>
                 <span>{{curso.name}}</span>
             </a>
@@ -48,8 +46,9 @@
                   ngxClipboard
                   [cbContent]="'air-baloon'"
                   (cbOnSuccess)="copy = 'air-baloon'" 
-                  style = "padding-left : 30px; padding-right:30px; width:220px"
-                  (click)="chooseGrade()"
+                  (click)="chooseGrade(grado)"
+                  [style.background-color] = "grado.backgroundcolor"
+                  style = "padding-left : 30px; padding-right:30px; width:220px;"
                 >
                   <i class={{grado.imagen}}></i>
                   <span>{{grado.name}}</span>

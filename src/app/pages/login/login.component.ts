@@ -68,7 +68,9 @@ export class LoginComponent implements OnInit, OnDestroy {
             grade: response.grade,
             birth: moment(response.birth).format('DD/MM/YYYY'),
             institucion: response.institucion,
-            especialidad: response.especialidad
+            especialidad: response.especialidad,
+            myMaterials: response.myMaterials,
+            favouriteMaterials: response.favouriteMaterials,
           }
 
 
@@ -80,6 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           }
 
           console.log("THIS IS THE DATE OF BIRTH");
+          console.log(identity);
           this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
           this.router.navigateByUrl("/courses");
         }          

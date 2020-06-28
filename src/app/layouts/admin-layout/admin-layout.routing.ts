@@ -9,6 +9,7 @@ import { MaterialsComponent } from "../../pages/materials/materials.component";
 import { AdminComponent } from "../../pages/admin/admin.component";
 import { MyMaterialsComponent } from "../../pages/mymaterials/mymaterials.component";
 import { TemasComponent } from "../../pages/temas/temas.component";
+import { FilesComponent } from "../../pages/files/files.component";
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -21,4 +22,5 @@ export const AdminLayoutRoutes: Routes = [
   {path: "mymaterials", component:MyMaterialsComponent},
   {path: "admin",component:AdminComponent}, 
   {path: "temas",component:TemasComponent},
+  {path: "files",component:FilesComponent},
 ];

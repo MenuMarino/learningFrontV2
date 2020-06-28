@@ -11,5 +11,7 @@ export class RegisterObj {
   type: string;
   institucion: string;
   especialidad: string;
+  myMaterials: any;
+  favouriteMaterials: any;
 }
 

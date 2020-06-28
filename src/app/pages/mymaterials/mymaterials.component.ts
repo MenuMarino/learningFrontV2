@@ -9,48 +9,54 @@ import { StorageService } from 'src/app/core/services/storage-service';
 })
 export class MyMaterialsComponent implements OnInit {
   private identity: any;
+  private myFavouriteMaterials : SingleMaterial[] = [];
   constructor(
     private storageService: StorageService,
   ) { }
 
   ngOnInit(): void {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
-    console.log("estamos en materials");
-    console.log(this.identity.username);
+    for (let val of this.identity.favouriteMaterials){
+      console.log(val);
+      this.myFavouriteMaterials.push(
+        new SingleMaterial(
+          val.course.theme,
+          val.who_aproved.username,
+          this.getLearningPoints(val.learning_points)
+          )
+      );
+    }
+    console.log(this.identity);
   }
 
-  public materiales: any[] = [
-    {
-      name: "Polinomios",
-      type: "youtube",
-      professor: "Bellido",
-      learning_points: "3",
-    },
-    {
-        name: "Polinomios",
-        type: "youtube",
-        professor: "Bellido",
-        learning_points: "3",
-      },
-      {
-        name: "Polinomios",
-        type: "youtube",
-        professor: "Bellido",
-        learning_points: "3",
-      },
-      {
-        name: "Polinomios",
-        type: "youtube",
-        professor: "Bellido",
-        learning_points: "3",
-      },
-      {
-        name: "Polinomios",
-        type: "youtube",
-        professor: "Bellido",
-        learning_points: "3",
-      }
-  ];
+  getLearningPoints(learning_points){
+    if(learning_points == null){
+      return "0";
+    }
+    else{
+      return learning_points;
+    }
+  }
+
 
 
 }
+
+export class SingleMaterial {
+
+  public name : string;
+  public professor : string;
+  public learning_points : string;
+  public porcentaje_LP : string;
+  public temporal : number;
+
+  constructor(name,professor,learning_points){
+    this.name = name;
+    this.professor = professor;
+    this.learning_points = learning_points;
+    this.temporal = learning_points*20;
+    this.porcentaje_LP = this.temporal.toString() + '%';
+  }
+
+
+};
