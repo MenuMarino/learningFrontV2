@@ -10,6 +10,7 @@ import { AdminLayoutRoutes } from "./admin-layout.routing";
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
 import { CoursesComponent } from "../../pages/courses/courses.component";
 import { MyMaterialsComponent } from "../../pages/mymaterials/mymaterials.component";
+import { TemasComponent } from "../../pages/temas/temas.component";
 import { UserProfileComponent } from "../../pages/user-profile/user-profile.component";
 import { UpgradeComponent } from "../../pages/upgrade/upgrade.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -33,6 +34,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     UpgradeComponent,
     CoursesComponent,
     MyMaterialsComponent,
+    TemasComponent,
     //UploadComponent,
   ],
 })

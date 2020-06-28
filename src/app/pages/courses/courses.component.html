@@ -1,17 +1,17 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
 <!-- Page content -->
-<div class="container-fluid mt--7">
+<div class="container-fluid mt--7" style=" margin: auto; display: flex; ">
   <!-- Table -->
-  <div class="row">
-    <div class="col">
-      <div class="card shadow">
+  <div class="row" style = "width :1300px; padding :20px">
+    <div class="col" style="max-width : 1200px ;padding : 10px ;">
+      <div class="card shadow" >
         <div class="card-header bg-transparent">
           <h3 class="mb-0">Cursos</h3>
         </div>
         <div class="card-body">
           <div class="row icon-examples">
             <div class="col-lg-3 col-md-6" *ngFor = "let curso of cursos" >
-              <button
+              <a
                 type="button"
                 placement="top-center"
                 triggers="hover focus click"
@@ -19,14 +19,46 @@
                 ngxClipboard
                 [cbContent]="'air-baloon'"
                 (cbOnSuccess)="copy = 'air-baloon'"
+                href="#/temas"
               >
                 <i class={{curso.imagen}}></i>
                 <span>{{curso.name}}</span>
-              </button>
+            </a>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="grado-cursos">
+    <div class="row" style="padding: 20px;">
+      <div class="col" style = "padding: 10px;" > 
+        <div class="card shadow"  id="box2">
+          <div class="card-header bg-transparent">
+            <h3 class="mb-0">Grado</h3>
+          </div>
+          <div class="card-body" id="litle_box">
+            <div class="row icon-examples">
+              <div class="col-lg-7 col-md-6" *ngFor = "let grado of grados" >
+                <a
+                  type="button"
+                  placement="top-center"
+                  triggers="hover focus click"
+                  class="btn-icon-clipboard"
+                  ngxClipboard
+                  [cbContent]="'air-baloon'"
+                  (cbOnSuccess)="copy = 'air-baloon'"
+                  href="#/temas"
+                  style = "padding-left : 30px; padding-right:30px; width:220px"
+                >
+                  <i class={{grado.imagen}}></i>
+                  <span>{{grado.name}}</span>
+              </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
     </div>
   </div>
 </div>

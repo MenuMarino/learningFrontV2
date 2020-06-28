@@ -35,4 +35,22 @@ export class CoursesComponent implements OnInit {
       imagen: "ni ni-user-run"
     },
   ]
+  public grados: any[] = [
+    {
+      name: "1er Grado",
+      imagen: "ni ni-diamond"
+    },
+    {
+      name: "2do Grado",
+      imagen: "ni ni-diamond"
+    },
+    {
+      name: "3er Grado",
+      imagen: "ni ni-diamond"
+    },
+    {
+      name: "5to Grado",
+      imagen: "ni ni-diamond"
+    },
+  ]
 }

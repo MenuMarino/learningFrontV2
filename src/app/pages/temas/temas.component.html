@@ -1,0 +1,39 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Temas</h3>
+        </div>
+        <div class="card-body">
+          <div class="row icon-examples">
+            <div class="col-lg-6 col-md-6" *ngFor = "let tema of temas" >
+                <div class="courses-container">
+                    <div class="course">
+                        <div class="course-preview">
+                            <h2>{{tema.name}}</h2>
+                            <p>Profesor: {{tema.professor}}</p>
+                        </div>
+                        <div class="course-info">
+                            <div class="progress-container">
+                                <div class="progress"></div>
+                                <span class="progress-text">
+                                    Learning Points: {{tema.learning_points}}/5
+                                </span>
+                            </div>
+                            <p>{{tema.description}}<p>
+                            <button class="btn">Ir</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
