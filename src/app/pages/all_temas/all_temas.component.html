@@ -1,0 +1,33 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Todos los temas son</h3>
+        </div>
+        <div class="card-body">
+          <div class="row icon-examples">
+            <div class="col-lg-3 col-md-6" *ngFor = "let curso of cursos" >
+              <a
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                class="btn-icon-clipboard"
+                ngxClipboard
+                [cbContent]="'air-baloon'"
+                (cbOnSuccess)="copy = 'air-baloon'"
+                (click)="chooseTheme(curso)"
+              >
+                <i class={{curso.imagen}}></i>
+                <span>{{curso.name}}</span>
+             </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

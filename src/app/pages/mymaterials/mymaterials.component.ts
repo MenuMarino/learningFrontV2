@@ -49,6 +49,7 @@ export class SingleMaterial {
   public learning_points : string;
   public porcentaje_LP : string;
   public temporal : number;
+  public color_bar : string;
 
   constructor(name,professor,learning_points){
     this.name = name;
@@ -56,6 +57,16 @@ export class SingleMaterial {
     this.learning_points = learning_points;
     this.temporal = learning_points*20;
     this.porcentaje_LP = this.temporal.toString() + '%';
+    this.color_bar = this.getColorBar(this.temporal);
+  }
+
+  getColorBar(temporal){
+    if(temporal>=0 && temporal <50){
+      return "progress-bar bg-danger";
+    }
+    else if(temporal>=50 && temporal<=100){
+      return "progress-bar bg-success";
+    }
   }
 
 

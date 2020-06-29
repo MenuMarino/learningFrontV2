@@ -51,7 +51,7 @@ export class MaterialsComponent implements OnInit {
   }
   getLearningPoints(learning_points){
     if(learning_points == null){
-      return "0";
+      return "4";
     }
     else{
       return learning_points;
@@ -69,6 +69,7 @@ export class SingleMaterial {
   public porcentaje_LP : string;
   public temporal : number;
   public color_curated : string;
+  public color_bar : string;
 
   constructor(name,status,curated_by,views,learning_points){
     this.name = name;
@@ -79,13 +80,23 @@ export class SingleMaterial {
     this.temporal = learning_points*20;
     this.porcentaje_LP = this.temporal.toString() + '%';
     this.color_curated = this.getColorCurated(status);
+    this.color_bar = this.getColorBar(this.temporal);
+    console.log(this.temporal);
+  }
+  getColorBar(temporal){
+    if(temporal>=0 && temporal <50){
+      return "progress-bar bg-danger";
+    }
+    else if(temporal>=50 && temporal<=100){
+      return "progress-bar bg-success";
+    }
   }
 
   getColorCurated(status){
     if(status == "Pendiente"){
-      return "bg-danger";
+      return "badge badge-pill badge-danger";
     }
-    return "bg-success";
+    return "badge badge-pill badge-success";
   }
 
   

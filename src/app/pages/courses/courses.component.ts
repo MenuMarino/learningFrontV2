@@ -13,10 +13,14 @@ export class CoursesComponent implements OnInit {
   private isChoosed_grade : boolean = false;
   private current_course : any = null;
   private current_grade : any = null;
+  public error_course : boolean = false;
+  private error_grade : boolean = false;
 
   constructor(
     private router: Router,
-  ) { }
+  ) {  }
+
+
 
   ngOnInit() {
     
@@ -26,6 +30,7 @@ export class CoursesComponent implements OnInit {
     if(this.current_course !=null){
       this.current_course.backgroundcolor = '#f6f9fc';
     }
+    this.error_course = false;
     course.backgroundcolor = '#bddbfa';
 
     this.current_course = course;
@@ -38,6 +43,7 @@ export class CoursesComponent implements OnInit {
     if(this.current_grade != null){
       this.current_grade.backgroundcolor = '#f6f9fc';
     }
+    this.error_grade = false;
     grade.backgroundcolor = '#bddbfa';
     this.current_grade = grade;
 
@@ -50,10 +56,20 @@ export class CoursesComponent implements OnInit {
   themeClick(){
     if(this.isChoosed_course == true && this.isChoosed_grade == true){
       console.log("enviar");
-      this.router.navigateByUrl("/temas");
+      this.router.navigateByUrl("/all_temas");
     }
+    
     else{
+      console.log('grado'+this.isChoosed_grade);
+      console.log('curso: '+this.isChoosed_course);
+      if(this.isChoosed_course == false){
+        this.error_course = true;
+      }
+      if(this.isChoosed_grade == false){
+        this.error_grade = true;
+      }
       Swal.fire({
+        
         allowOutsideClick: false,
         text: 'Elija el curso y el grado',
         icon: 'error',

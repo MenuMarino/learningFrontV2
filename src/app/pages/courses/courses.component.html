@@ -3,12 +3,12 @@
 <div class="container-fluid mt--7" style=" margin: auto; display: flex; ">
   <!-- Table -->
   <div class="row" style = "width :1300px; padding :20px">
-    <div class="col" style="max-width : 1200px ;padding : 10px ;">
-      <div class="card shadow" >
-        <div class="card-header bg-transparent">
+    <div class="col" style="max-width : 1200px ;padding : 10px ;" >
+      <div class="card shadow" style = "border-width : 5px" >
+        <div class="card-header bg-transparent" >
           <h3 class="mb-0">Cursos</h3>
         </div>
-        <div class="card-body">
+        <div class="card-body" [ngStyle]="{'border-color' : error_course === true ? '#8B0000' : '#fff' , 'box-shadow':error_course === true ? '0 0 10px red' : ' 0 0 0px gold' }" >
           <div class="row icon-examples">
             <div class="col-lg-3 col-md-6" *ngFor = "let curso of cursos" >
               <a
@@ -18,6 +18,7 @@
                 class="btn-icon-clipboard"
                 (click)="chooseCourse(curso)"
                 [style.background-color] = "curso.backgroundcolor"
+                
              >
                 <i class={{curso.imagen}}></i>
                 <span>{{curso.name}}</span>
@@ -33,9 +34,9 @@
       <div class="col" style = "padding: 10px;" > 
         <div class="card shadow"  id="box2">
           <div class="card-header bg-transparent">
-            <h3 class="mb-0">Grado</h3>
+            <h3 class="mb-0" >Grado</h3>
           </div>
-          <div class="card-body" id="litle_box">
+          <div class="card-body" id="litle_box" [ngStyle]="{'border-color' : error_grade === true ? '#8B0000' : '#fff' , 'box-shadow':error_grade === true ? '0 0 10px red' : ' 0 0 0px gold' }">
             <div class="row icon-examples">
               <div class="col-lg-7 col-md-6" *ngFor = "let grado of grados" >
                 <a

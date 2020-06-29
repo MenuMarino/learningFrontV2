@@ -15,6 +15,7 @@ import { UserProfileComponent } from "../../pages/user-profile/user-profile.comp
 import { UpgradeComponent } from "../../pages/upgrade/upgrade.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FilesComponent } from "../../pages/files/files.component";
+import { AllTemasComponent } from "../../pages/all_temas/all_temas.component";
 //import { UploadComponent} from "../../pages/upload/upload.component";
 //import {} from "../../pages/materials/materials.component";
 //import {AdminComponent} from "../../pages/admin/admin.component";
@@ -37,6 +38,7 @@ import { FilesComponent } from "../../pages/files/files.component";
     MyMaterialsComponent,
     TemasComponent,
     FilesComponent,
+    AllTemasComponent,
     //UploadComponent,
   ],
 })
