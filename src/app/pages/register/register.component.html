@@ -30,7 +30,17 @@
       <div class="card bg-secondary shadow border-0">
         <div class="card-body px-lg-5 py-lg-5">
           <form name="registerForm" #registerForm="ngForm">
-            <div class="form-group">
+            <div class="form-group" >
+
+              <div class="text-center" style = "margin-bottom: 45px;">
+                  <button *ngIf="!isTeacher" type="button" (click)="changeRole()" class="btn btn-success mt-4">
+                    Soy profesor
+                  </button>
+                  <button *ngIf="isTeacher" type="button" (click)="changeRole()" class="btn btn-success mt-4">
+                    Soy estudiante
+                  </button>
+              </div>
+
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"
@@ -219,12 +229,6 @@
               >
                 Crear una cuenta
               </button>
-                <button *ngIf="!isTeacher" type="button" (click)="changeRole()" class="btn btn-success mt-4">
-                  Soy profesor
-                </button>
-                <button *ngIf="isTeacher" type="button" (click)="changeRole()" class="btn btn-success mt-4">
-                  Soy estudiante
-                </button>
             </div>
           </form>
         </div>
