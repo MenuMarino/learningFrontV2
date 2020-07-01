@@ -51,7 +51,7 @@ export class MaterialsComponent implements OnInit {
   }
   getLearningPoints(learning_points){
     if(learning_points == null){
-      return "4";
+      return "1";
     }
     else{
       return learning_points;

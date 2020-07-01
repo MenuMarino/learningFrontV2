@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-files',
@@ -20,24 +22,33 @@ export class FilesComponent implements OnInit {
   }
 
   chooseFile(file) {
+    if(this.currentFile !=null){
+      this.currentFile.backgroundcolor = '#f6f9fc';
+    }
     this.currentFile = file;
+    file.backgroundcolor = '#bddbfa';
   }
+
+
 
   public archivos: any[] = [
     {
       name: "JSJSJ.pdf",
       peso: 123,
-      ruta: '../../../assets/pdfs/pdf1.pdf'
+      ruta: '../../../assets/pdfs/pdf1.pdf',
+      backgroundcolor : '#f6f9fc'
     },
     {
       name: "JS.pdf",
       peso: 123,
-      ruta: '../../../assets/pdfs/pdf2.pdf'
+      ruta: '../../../assets/pdfs/pdf2.pdf',
+      backgroundcolor : '#f6f9fc'
     },
     {
       name: "ll.pdf",
       peso: 123, 
-      ruta: '../../../assets/pdfs/pdf3.pdf'
+      ruta: '../../../assets/pdfs/pdf3.pdf',
+      backgroundcolor : '#f6f9fc'
     }
   ]
 }
