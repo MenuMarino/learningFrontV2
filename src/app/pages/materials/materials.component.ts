@@ -56,7 +56,7 @@ export class MaterialsComponent implements OnInit {
   }
   getLearningPoints(learning_points){
     if(learning_points == null){
-      return "1";
+      return "4";
     }
     else{
       return learning_points;
@@ -82,7 +82,7 @@ export class SingleMaterial {
     this.curated_by = curated_by;
     this.views = views;
     this.learning_points = learning_points;
-    this.temporal = learning_points*20;
+    this.temporal = learning_points*2;
     this.porcentaje_LP = this.temporal.toString() + '%';
     this.color_curated = this.getColorCurated(status);
     this.color_bar = this.getColorBar(this.temporal);
