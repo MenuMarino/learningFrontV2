@@ -97,7 +97,5 @@ export class SingleMaterial {
       return "badge badge-pill badge-danger";
     }
     return "badge badge-pill badge-success";
-  }
-
-  
+  }  
 };

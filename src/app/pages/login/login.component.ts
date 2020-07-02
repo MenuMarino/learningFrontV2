@@ -76,6 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
           if(identity.role == "TEACHER" || identity.role == "TWAITING"){
             delete identity.grade;
+            identity["waiting"] = "notWaiting"; 
           } else if (identity.role == "STUDENT"){
             delete identity.especialidad;
             delete identity.institucion;
