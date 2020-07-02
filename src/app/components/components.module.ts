@@ -14,8 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     RouterModule,
-    NgbModule,
-    //NgxExtendedPdfViewerModule
+    NgbModule
   ],
   declarations: [
     FooterComponent,
