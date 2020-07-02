@@ -22,31 +22,19 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-<<<<<<< HEAD
-            "assets": ["src/favicon.ico", "src/assets"],
-            
-=======
             "assets": [
               "src/favicon.ico", 
               "src/assets", 
               {
-                "glob": "**/*",
+                "glob": "*/",
                 "input": "node_modules/ngx-extended-pdf-viewer/assets/",
                 "output": "/assets/"
               }
             ],
->>>>>>> 381b3e7d3ca1de8b89d231890efa55ca25061206
             "styles": ["src/styles.scss", "src/assets/scss/argon.scss"],
             "scripts": [
               "node_modules/chart.js/dist/Chart.min.js",
-              "node_modules/clipboard/dist/clipboard.min.js",
-<<<<<<< HEAD
-              
-=======
-              "node_modules/ngx-extended-pdf-viewer/assets/pdf.js",
-              "node_modules/ngx-extended-pdf-viewer/assets/pdf.worker.js",
-              "node_modules/ngx-extended-pdf-viewer/assets/viewer.js"
->>>>>>> 381b3e7d3ca1de8b89d231890efa55ca25061206
+              "node_modules/clipboard/dist/clipboard.min.js"
             ]
           },
           "configurations": {
@@ -99,7 +87,7 @@
               "src/favicon.ico",
               "src/assets",
               {
-                "glob": "**/*",
+                "glob": "*/",
                 "input": "node_modules/ngx-extended-pdf-viewer/assets/",
                 "output": "/assets/"
               },
@@ -111,7 +99,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["*/node_modules/*"]
           }
         }
       }
@@ -136,7 +124,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["*/node_modules/*"]
           }
         }
       }
