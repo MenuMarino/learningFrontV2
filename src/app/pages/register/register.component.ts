@@ -18,7 +18,7 @@ import CryptoJS from 'crypto-js';
 })
 export class RegisterComponent implements OnInit {
   public registerObj: RegisterObj;
-
+  
 
   public gender: any[] = [
     {id:"true", Val: "Masculino"},
@@ -32,14 +32,9 @@ export class RegisterComponent implements OnInit {
     {year:5, val: "Quinto"}
   ]
 
-  private isTeacher: Boolean = false;
+  
 
-  get_dataUser(){
-    if(this.isTeacher){
-      return "Bienvenido nuevo PROFESORES a Learning Peru, obtendras muchos beneficios si te registras";
-    }
-    return "Bienvenido nuevo ALUMNOS a Learning Peru, obtendras muchos beneficios si te registras";
-  }
+  private isTeacher: Boolean = false;
 
   constructor(
     private router: Router,
@@ -52,6 +47,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
 
   }
+  
 
   genderChangeHandler(event: any) {
     this.registerObj.sex = event.target.value;
@@ -116,7 +112,6 @@ export class RegisterComponent implements OnInit {
 
           if(this.isTeacher){
             delete identity.grade;
-            identity["waiting"] = "notWaiting"; 
           } else {
             delete identity.especialidad;
             delete identity.institucion;
@@ -140,8 +135,12 @@ export class RegisterComponent implements OnInit {
       );
   }
 
+
   changeRole(){
     this.isTeacher = !this.isTeacher;
+    if(this.isTeacher){
+      
+    }
   }
 
 }

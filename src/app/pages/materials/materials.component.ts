@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage-service';
-import { DecimalPipe } from '@angular/common';
+import { FilterPipe } from 'ngx-filter-pipe';
 
 @Component({
   selector: 'app-materials',
@@ -14,9 +14,12 @@ export class MaterialsComponent implements OnInit {
 
   constructor(
     private storageService: StorageService,
+    private filterPipe: FilterPipe
   ) { 
     
   }
+
+  public userFilter: SingleMaterial;
 
   ngOnInit(): void {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());

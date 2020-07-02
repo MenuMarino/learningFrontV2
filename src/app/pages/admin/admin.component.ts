@@ -17,9 +17,6 @@ export class AdminComponent implements OnInit {
 
   public userFilter: any = {
     name: "",
-    fecha: "",
-    institucion: "",
-    
   };
   
   public copy: string;

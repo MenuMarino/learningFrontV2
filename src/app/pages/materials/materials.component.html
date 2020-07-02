@@ -7,6 +7,9 @@
       <div class="card shadow">
         <div class="card-header border-0">
           <h3 class="mb-0">Materiales</h3>
+          <div class="form-group">
+            <input [(ngModel)]="userFilter.name"  type="text" class="form-control" placeholder="Busca por nombre" style = "margin-top: 15px;" >
+        </div>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
@@ -21,7 +24,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr  *ngFor = "let material of myMaterials">
+              <tr  *ngFor = "let material of myMaterials | filterBy : userFilter">
                 <th scope="row">
                   <div class="media align-items-center">
                     <div class="avatar rounded-circle mr-3">
