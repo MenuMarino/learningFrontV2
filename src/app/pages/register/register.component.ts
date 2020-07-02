@@ -116,6 +116,7 @@ export class RegisterComponent implements OnInit {
 
           if(this.isTeacher){
             delete identity.grade;
+            identity["waiting"] = "notWaiting"; 
           } else {
             delete identity.especialidad;
             delete identity.institucion;
