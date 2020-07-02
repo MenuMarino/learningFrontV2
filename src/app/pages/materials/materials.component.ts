@@ -41,7 +41,7 @@ export class MaterialsComponent implements OnInit {
     if(who_aproved == null){
       return "Pendiente";
     }
-    return "Pendiente";
+    return "Curado";
   }
   whoAproved(who_aproved){
     if(who_aproved == null){
