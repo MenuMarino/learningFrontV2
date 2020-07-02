@@ -15,6 +15,10 @@ import { ComponentsModule } from './components/components.module';
 import { UploadComponent } from './pages/upload/upload.component';
 import { MaterialsComponent } from './pages/materials/materials.component';
 import { AdminComponent } from './pages/admin/admin.component';
+//import { PdfViewerModule, PdfViewerComponent } from 'ng2-pdf-viewer';
+//import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+
+
 
 
 @NgModule({
@@ -27,6 +31,8 @@ import { AdminComponent } from './pages/admin/admin.component';
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule
+    //NgxExtendedPdfViewerModule
+    //PdfViewerModule
   ],
   declarations: [
     AppComponent,

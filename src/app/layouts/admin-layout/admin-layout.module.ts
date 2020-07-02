@@ -20,7 +20,7 @@ import { AllTemasComponent } from "../../pages/all_temas/all_temas.component";
 //import {} from "../../pages/materials/materials.component";
 //import {AdminComponent} from "../../pages/admin/admin.component";
 // import { ToastrModule } from 'ngx-toastr';
-
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 @NgModule({
   imports: [
     CommonModule,
@@ -29,6 +29,7 @@ import { AllTemasComponent } from "../../pages/all_temas/all_temas.component";
     HttpClientModule,
     NgbModule,
     ClipboardModule,
+    NgxExtendedPdfViewerModule
   ],
   declarations: [
     DashboardComponent,
