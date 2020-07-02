@@ -5,6 +5,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 
 
@@ -14,7 +15,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     RouterModule,
     NgbModule,
+<<<<<<< HEAD
 
+=======
+    //NgxExtendedPdfViewerModule
+>>>>>>> 381b3e7d3ca1de8b89d231890efa55ca25061206
   ],
   declarations: [
     FooterComponent,

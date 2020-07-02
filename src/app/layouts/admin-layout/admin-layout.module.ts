@@ -23,7 +23,7 @@ import { PostulantCurator } from "../../pages/postulant_curator/postulant_curato
 //import {} from "../../pages/materials/materials.component";
 //import {AdminComponent} from "../../pages/admin/admin.component";
 // import { ToastrModule } from 'ngx-toastr';
-
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 @NgModule({
   imports: [
     CommonModule,
@@ -32,6 +32,7 @@ import { PostulantCurator } from "../../pages/postulant_curator/postulant_curato
     HttpClientModule,
     NgbModule,
     ClipboardModule,
+    NgxExtendedPdfViewerModule
   ],
   declarations: [
     DashboardComponent,

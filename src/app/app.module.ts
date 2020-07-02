@@ -15,10 +15,17 @@ import { ComponentsModule } from './components/components.module';
 import { UploadComponent } from './pages/upload/upload.component';
 import { MaterialsComponent } from './pages/materials/materials.component';
 import { AdminComponent } from './pages/admin/admin.component';
+<<<<<<< HEAD
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+=======
+//import { PdfViewerModule, PdfViewerComponent } from 'ng2-pdf-viewer';
+//import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+
+
+>>>>>>> 381b3e7d3ca1de8b89d231890efa55ca25061206
 
 
 @NgModule({
@@ -30,6 +37,7 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     NgbModule,
     RouterModule,
     AppRoutingModule,
+<<<<<<< HEAD
     ReactiveFormsModule,
     FilterPipeModule,
     BrowserModule,
@@ -37,6 +45,11 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     NgxExtendedPdfViewerModule,
     
     
+=======
+    ReactiveFormsModule
+    //NgxExtendedPdfViewerModule
+    //PdfViewerModule
+>>>>>>> 381b3e7d3ca1de8b89d231890efa55ca25061206
   ],
   declarations: [
     AppComponent,
