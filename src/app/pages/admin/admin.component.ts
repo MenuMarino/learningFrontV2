@@ -1,36 +1,86 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from 'src/app/core/services/storage-service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
+  providers: [StorageService]
+  
 })
 export class AdminComponent implements OnInit {
 
-  private currentFile : any = null;
 
-  constructor() { }
 
-  ngOnInit(): void {
-     
+  public copy: string;
+  constructor(private router: Router,) { }
+
+  ngOnInit() {
+    
   }
 
-  
-  AceptarCurator(){
+  postulantcurator(){
 
+    console.log("enviar");
+    this.router.navigateByUrl("/postulant_curator");
   }
 
-  DenegarCurator(){
-
-  }
-
-  public Postulante: any = 
+  public Postulants: any[] = [
     {
-      name: "Chicho",
-      fecha: '04/20',
-      colegio: 'UTEC',
-      especialidad: 'Fisica',
-      materiales: '420'
-    }
-  
+      name: "Lucho",
+      fecha: "4/20",
+      institucion: "Fya",
+      
+    },
+    {
+      name: "Carlos",
+      fecha: "4/20",
+      institucion: "Mareategui",
+      
+    },
+    {
+      name: "Jorge",
+      fecha: "4/20",
+      institucion: "Trilce",
+      
+    },
+    {
+      name: "Pepe",
+      fecha: "4/20",
+      institucion: "Fya",
+      
+    },
+    {
+      name: "Carlos",
+      fecha: "4/20",
+      institucion: "Mareategui",
+      
+    },
+    {
+        name: "Juan",
+        fecha: "4/20",
+        institucion: "Mareategui",
+        
+      },
+      {
+        name: "Jose",
+        fecha: "4/20",
+        institucion: "Fya",
+        
+      },
+      {
+        name: "Arturo",
+        fecha: "4/20",
+        institucion: "Trilce",
+        
+      },
+      {
+        name: "Pancho",
+        fecha: "4/20",
+        institucion: "Trilce",
+   
+      }
+      
+  ]
 }

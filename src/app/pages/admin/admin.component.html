@@ -1,59 +1,55 @@
 
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
-<div class="container-fluid mt--7" style=" margin: auto; display: flex; ">
-    <!-- Table -->
-    <div class="row" style = "width :2800px; padding :20px">
-      <div class="col" style="max-width : 1200px ;padding : 10px ;" >
-        <div class="card shadow" style = "border-width : 5px" >
-          <div class="card-header bg-transparent" >
-            <h3 class="mb-0"> Curriculum </h3>
-          </div>
-          <div class="card-body" [ngStyle]="{'border-color' : error_course === true ? '#8B0000' : '#fff' , 'box-shadow':error_course === true ? '0 0 10px red' : ' 0 0 0px gold' }" >
-            <div class="row icon-examples">
-              <!--aqui va la implementación de vista material-->
-              <p *ngIf="currentFile">
-                {{currentFile.ruta}}
-              </p>
-            </div>
-          </div>
+
+  <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<!-- Page content -->
+<div class="container-fluid mt--7 " >
+  <!-- Table -->
+  <div class="row mt-5 "  >
+    <div class="col "id="box" >
+      <div class="card shadow " >
+        <div class="card-header border-0">
+          <h3 class="mb-0">Favoritos</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Institucion</th>
+                <th scope="col">Revisar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor = "let postulant of Postulants">
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <div class="avatar rounded-circle mr-3">
+                      <img  src="../assets/img/brand/learning_logo.jpg">
+                    </div>
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">{{postulant.name}}</span>
+                    </div>
+                  </div>
+                </th>  
+                <td>
+                    {{postulant.fecha}}
+                  </td>
+                <td>
+                    {{postulant.institucion}}
+                </td>
+                <td>
+                    <div class="media align-items-center" style="text-align: center;">
+                        <a (click)="postulantcurator()" class="avatar rounded-circle mr-3" >
+                          <img src="../assets/img/theme/imagen.jpg">
+                        </a>
+                    </div>
+                </td>        
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-    <div class="grado-cursos">
-      <div class="row" style="padding: 20px;">
-        <div class="col" style = "padding: 10px;" > 
-          <div class="card shadow"  id="box2">
-            <div class="card-header bg-transparent">
-              <h3 class="mb-0" >Postulantes</h3>
-            </div>
-            <div class="card-body" [ngStyle]="{'border-color' : error_grade === true ? '#8B0000' : '#fff' , 'box-shadow':error_grade === true ? '0 0 10px red' : ' 0 0 0px gold' }">
-              <div class="row icon-examples">
-                <div class="col-lg-7 col-md-6" >
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-                    <div class="card" style="width: 250px; ">
-                        <img src="/assets/img/theme/professor_cover.jpg" style="width:100%">
-                        <h2 style="text-align: center;">{{Postulante.name}}</h2>
-                        <p class="title">Fecha: {{Postulante.fecha}}</p>
-                        <p>Colegio:      {{Postulante.colegio}}</p>
-                        <p>Especialidad:    {{Postulante.especialidad}}</p>
-                        <p>Materiales:    {{Postulante.materiales}}</p>
-                    </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>  
-      </div>
-      <div class="text-center">
-        <a type="button" (click)="AceptarCurator()" class="btn btn-success">
-          Aceptar
-        </a>
-        <a type="button" (click)="DenegarCurator()" class="btn btn-danger ">
-            Denegar
-          </a>
-      </div>
-      
-    </div>
-    
   </div>
+</div>

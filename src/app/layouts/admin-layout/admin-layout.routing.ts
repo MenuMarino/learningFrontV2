@@ -10,6 +10,8 @@ import { AdminComponent } from "../../pages/admin/admin.component";
 import { MyMaterialsComponent } from "../../pages/mymaterials/mymaterials.component";
 import { TemasComponent } from "../../pages/temas/temas.component";
 import { FilesComponent } from "../../pages/files/files.component";
+import { PostulantCurator } from "../../pages/postulant_curator/postulant_curator.component";
+
 import { AllTemasComponent } from "../../pages/all_temas/all_temas.component";
 
 
@@ -25,5 +27,5 @@ export const AdminLayoutRoutes: Routes = [
   {path: "temas",component:TemasComponent},
   {path: "files",component:FilesComponent},
   {path: "all_temas",component:AllTemasComponent},
-
+  {path: "postulant_curator", component:PostulantCurator},
 ];
