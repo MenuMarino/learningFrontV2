@@ -33,7 +33,8 @@ export class MaterialsComponent implements OnInit {
           this.ifAproved(val.who_aproved),
           this.whoAproved(val.who_aproved),
           val.visits,
-          this.getLearningPoints(val.learning_points)
+          this.getLearningPoints(val.learning_points,val.ratingPeople),
+          val.ratingPeople
           )
       );
       console.log(this.identity);
@@ -54,12 +55,12 @@ export class MaterialsComponent implements OnInit {
     }
     return who_aproved.username;
   }
-  getLearningPoints(learning_points){
+  getLearningPoints(learning_points,ratingPeople){
     if(learning_points == null){
       return "4";
     }
     else{
-      return learning_points;
+      return learning_points/ratingPeople;
     }
   }
 }
@@ -75,8 +76,9 @@ export class SingleMaterial {
   public temporal : number;
   public color_curated : string;
   public color_bar : string;
+  public ratingPeople : number;
 
-  constructor(name,status,curated_by,views,learning_points){
+  constructor(name,status,curated_by,views,learning_points,ratingPeople){
     this.name = name;
     this.status = status;
     this.curated_by = curated_by;
@@ -86,6 +88,7 @@ export class SingleMaterial {
     this.porcentaje_LP = this.temporal.toString() + '%';
     this.color_curated = this.getColorCurated(status);
     this.color_bar = this.getColorBar(this.temporal);
+    this.ratingPeople = ratingPeople;
     console.log(this.temporal);
   }
   getColorBar(temporal){

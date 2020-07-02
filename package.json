@@ -40,6 +40,7 @@
     "nouislider": "13.1.1",
     "rxjs": "6.5.4",
     "sweetalert2": "^9.15.1",
+    "viewer": "^0.10.11",
     "zone.js": "0.10.2"
   },
   "devDependencies": {
