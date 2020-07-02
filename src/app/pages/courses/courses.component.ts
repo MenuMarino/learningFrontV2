@@ -68,6 +68,7 @@ export class CoursesComponent implements OnInit {
       if(this.isChoosed_grade == false){
         this.error_grade = true;
       }
+      
       Swal.fire({
         
         allowOutsideClick: false,

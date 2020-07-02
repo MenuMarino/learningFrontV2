@@ -34,6 +34,13 @@ export class RegisterComponent implements OnInit {
 
   private isTeacher: Boolean = false;
 
+  get_dataUser(){
+    if(this.isTeacher){
+      return "Bienvenido nuevo PROFESORES a Learning Peru, obtendras muchos beneficios si te registras";
+    }
+    return "Bienvenido nuevo ALUMNOS a Learning Peru, obtendras muchos beneficios si te registras";
+  }
+
   constructor(
     private router: Router,
     private registerServices: RegisterServices,

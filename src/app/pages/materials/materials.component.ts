@@ -41,7 +41,7 @@ export class MaterialsComponent implements OnInit {
     if(who_aproved == null){
       return "Pendiente";
     }
-    return "Curado";
+    return "Pendiente";
   }
   whoAproved(who_aproved){
     if(who_aproved == null){
@@ -97,7 +97,5 @@ export class SingleMaterial {
       return "badge badge-pill badge-danger";
     }
     return "badge badge-pill badge-success";
-  }
-
-  
+  }  
 };

@@ -28,18 +28,51 @@
   <div class="row justify-content-center">
     <div class="col-lg-6 col-md-8">
       <div class="card bg-secondary shadow border-0">
+        <div class="card-body px-lg-5 py-lg-5" >
+          <div class="card" style="width:400px" style = "text-align: center;">
+            <img class="card-img-top" [src]="isTeacher ? '/assets/img/theme/professor_cover.jpg' : '/assets/img/theme/student_cover.jpg'" alt="Card image">
+            <div class="card-body" >
+              
+              
+              <div *ngIf="isTeacher">
+                <h2 class="card-title">Profesor</h2>
+              </div>
+              <div *ngIf="!isTeacher">
+                <h2 class="card-title">Alumnos</h2>
+              </div>
+
+              <div *ngIf="isTeacher">
+                <p class="card-text">Bienvenido nuevo PROFESORES a Learning Peru, obtendras muchos beneficios si te registras</p>
+              </div>
+              <div *ngIf="!isTeacher">
+                <p class="card-text">Bienvenido nuevo ALUMNOS a Learning Peru, obtendras muchos beneficios si te registras</p>
+              </div>
+
+
+
+              
+              
+            </div>
+            
+          </div>
+          <div class="text-center" >
+            <button  type="button" [ngStyle]="{'opacity' : isTeacher == true ? '1.0' : '0.2' }" (click)="changeRole()" class="btn btn-success mt-4" style="margin-right : 20px">
+              Soy profesor
+            </button>
+            <button  type="button" [ngStyle]="{'opacity' : isTeacher == false ? '1.0' : '0.2' }"  (click)="changeRole()" class="btn btn-success mt-4" style="margin-left : 20px">
+              Soy estudiante
+            </button>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-8">
+      <div class="card bg-secondary shadow border-0">
         <div class="card-body px-lg-5 py-lg-5">
-          <form name="registerForm" #registerForm="ngForm">
+          <form name="registerForm" #registerForm="ngForm" >
             <div class="form-group" >
 
-              <div class="text-center" style = "margin-bottom: 45px;">
-                  <button *ngIf="!isTeacher" type="button" (click)="changeRole()" class="btn btn-success mt-4">
-                    Soy profesor
-                  </button>
-                  <button *ngIf="isTeacher" type="button" (click)="changeRole()" class="btn btn-success mt-4">
-                    Soy estudiante
-                  </button>
-              </div>
+             
 
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
