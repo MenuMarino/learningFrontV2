@@ -37,7 +37,6 @@ export class UpgradeComponent implements OnInit {
       response => {
         if(response === true){
           Swal.fire({
-            icon: 'success',
             title: 'Subiendo archivo',
           })
 
