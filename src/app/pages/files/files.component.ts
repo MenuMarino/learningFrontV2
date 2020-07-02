@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
-=======
+
 import Swal from 'sweetalert2';
 import { Router } from "@angular/router";
-//import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
->>>>>>> 381b3e7d3ca1de8b89d231890efa55ca25061206
+
 @Component({
   selector: 'app-files',
   templateUrl: './files.component.html',
