@@ -19,7 +19,9 @@ export class MaterialsComponent implements OnInit {
     
   }
 
-  public userFilter: SingleMaterial;
+  public userFilter: any = {
+    name: "",
+  };
 
   ngOnInit(): void {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());

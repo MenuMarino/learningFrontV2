@@ -16,6 +16,9 @@ import { UploadComponent } from './pages/upload/upload.component';
 import { MaterialsComponent } from './pages/materials/materials.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 
 @NgModule({
@@ -28,7 +31,12 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FilterPipeModule
+    FilterPipeModule,
+    BrowserModule,
+    PdfViewerModule,
+    NgxExtendedPdfViewerModule,
+    
+    
   ],
   declarations: [
     AppComponent,

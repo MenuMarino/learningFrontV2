@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
-import { Router } from "@angular/router";
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 
 @Component({
   selector: 'app-files',
