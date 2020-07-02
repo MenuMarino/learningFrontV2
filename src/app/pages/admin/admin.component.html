@@ -1,5 +1,3 @@
-
-
   <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
 <!-- Page content -->
 <div class="container-fluid mt--7 " >
@@ -8,8 +6,12 @@
     <div class="col "id="box" >
       <div class="card shadow " >
         <div class="card-header border-0">
-          <h3 class="mb-0">Favoritos</h3>
+          <h3 class="mb-0">Curar usuarios</h3>
+          <div class="form-group">
+            <input [(ngModel)]="userFilter.name" type="text" class="form-control" placeholder="Search Here" >
         </div>
+        </div>
+
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
@@ -21,7 +23,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr  *ngFor = "let postulant of Postulants">
+              <tr  *ngFor = "let postulant of Postulants | filterBy : userFilter">
                 <th scope="row">
                   <div class="media align-items-center">
                     <div class="avatar rounded-circle mr-3">

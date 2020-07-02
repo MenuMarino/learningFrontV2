@@ -15,6 +15,7 @@ import { ComponentsModule } from './components/components.module';
 import { UploadComponent } from './pages/upload/upload.component';
 import { MaterialsComponent } from './pages/materials/materials.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AdminComponent } from './pages/admin/admin.component';
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FilterPipeModule
   ],
   declarations: [
     AppComponent,
