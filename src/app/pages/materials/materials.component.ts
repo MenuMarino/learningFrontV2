@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage-service';
 import { FilterPipe } from 'ngx-filter-pipe';
+import Swal from 'sweetalert2';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-materials',
@@ -11,13 +13,94 @@ import { FilterPipe } from 'ngx-filter-pipe';
 export class MaterialsComponent implements OnInit {
   private identity: any;
   private myMaterials : SingleMaterial[] = [];
-
+  //private Cursos : Curso[] = [new Curso('fisica'), new Curso('religion')];
+  private Cursos : string[] = ['fisica','matematica'];
+  private Grades : string[] = ['1er grado','2do grado','3er grado'];
+  private Temas : string[] = ['arimetica','geometria'];
+  private Temas2 : string[] = ['oraciones','teoria'];
+  private currentTema : any;
+  
   constructor(
     private storageService: StorageService,
-    private filterPipe: FilterPipe
+    private filterPipe: FilterPipe,
+    private router: Router,
+
   ) { 
     
   }
+  async mostrar_datos(results){
+    console.log(results[0],results[1],results[2]);
+    
+    if(results[1] == 0) {this.currentTema = this.Temas;}
+    if(results[1] == 1) {this.currentTema = this.Temas2;}
+    console.log(this.currentTema);
+
+    const { value: Material } = await Swal.fire({
+      title: 'Selecciona uno de los cursos',
+      input: 'select',
+      inputOptions: this.currentTema,
+      showCancelButton: true,
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (value != null) {
+            resolve()
+          } else {
+            resolve('Necesita elegir uno de los temas')
+          }
+        })
+      }
+    })
+    if (Material) {
+      Swal.fire(`Creaste un material exitosamente`);
+      this.router.navigateByUrl("/upload");
+    }
+
+  }
+
+
+
+  
+
+  CreateMaterial(){
+
+    Swal.mixin({
+      input: 'text',
+      confirmButtonText: 'Next &rarr;',
+      showCancelButton: true,
+      progressSteps: ['1', '2', '3']
+
+    }).queue([
+      {
+        title: 'Nuevo Material',
+        text: 'Escriba el titulo del material.'
+      },
+      {
+        title: 'Curso',
+        input : 'select',
+        inputOptions : this.Cursos,
+      },
+      {
+        title: 'Grado',
+        input: 'select',
+        inputOptions : this.Grades,
+      }
+    ]).then((result) => {
+      if (result.value) {
+        this.mostrar_datos(result.value);
+      }
+      else{
+        Swal.fire({
+          title: 'No creado Satisfactoriamente',
+          confirmButtonText: 'Ir al material!',
+          
+        })
+      }
+    })
+    
+    
+
+  }
+
 
   public userFilter: any = {
     name: "",
