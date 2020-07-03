@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Router } from "@angular/router";
+import { CourseService } from "src/app/core/services/courses-service";
 
 @Component({
   selector: 'app-courses',
@@ -15,14 +16,36 @@ export class CoursesComponent implements OnInit {
   private current_grade : any = null;
   public error_course : boolean = false;
   private error_grade : boolean = false;
+  public all_data : any = null;
 
   constructor(
     private router: Router,
+    private courseService: CourseService
   ) {  }
 
 
+  recorrerCursos(all_data){
+    
+  }
 
   ngOnInit() {
+    this.courseService.getCourses().subscribe(
+      response =>{
+        console.log(response);
+        this.all_data=response;
+        for(let val of this.all_data){
+          console.log(val);
+        }
+
+
+
+
+
+      }, error => {
+        console.log(error);
+      }
+    )
+    
     
   }
   chooseCourse(course){
@@ -123,6 +146,11 @@ export class CoursesComponent implements OnInit {
     },
     {
       name: "3er Grado",
+      imagen: "ni ni-diamond",
+      backgroundcolor : '#f6f9fc',
+    },
+    {
+      name: "4to Grado",
       imagen: "ni ni-diamond",
       backgroundcolor : '#f6f9fc',
     },

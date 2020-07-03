@@ -29,6 +29,7 @@ export class MaterialsComponent implements OnInit {
     
   }
   async mostrar_datos(results){
+    results = results.value;
     console.log(results[0],results[1],results[2]);
     
     if(results[1] == 0) {this.currentTema = this.Temas;}
@@ -85,8 +86,8 @@ export class MaterialsComponent implements OnInit {
         inputOptions : this.Grades,
       }
     ]).then((result) => {
-      if (result.value) {
-        this.mostrar_datos(result.value);
+      if (result) {
+        this.mostrar_datos(result);
       }
       else{
         Swal.fire({
