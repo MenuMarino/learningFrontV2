@@ -57,10 +57,7 @@ export class MaterialsComponent implements OnInit {
     }
 
   }
-
-
-
-  
+ 
 
   CreateMaterial(){
 
