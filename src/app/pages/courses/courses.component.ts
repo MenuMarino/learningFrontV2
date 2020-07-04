@@ -38,7 +38,7 @@ export class CoursesComponent implements OnInit {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
     this.courseService.getCourses().subscribe(
       response =>{
-        //console.log(response);
+        console.log(response);
         this.all_data=response;
         for(let val of this.all_data){
           this.recorrerCursos(val);
