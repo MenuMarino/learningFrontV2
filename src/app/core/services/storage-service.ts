@@ -26,6 +26,15 @@ export class StorageService {
 		localStorage.setItem("identity", identity);
 	}
 
+	setCoursesLocalStorage(courses: string) {
+		localStorage.setItem("courses", courses);
+	}
+
+	setGradesLocalStorage() {
+		let s = [1,2,3,4,5];
+		localStorage.setItem("grades", s.toString());
+	}
+
 	getIdentityLocalStorage(){
 		return localStorage.getItem("identity");
 	}
