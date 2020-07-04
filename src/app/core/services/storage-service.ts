@@ -36,11 +36,15 @@ export class StorageService {
 	}
 
 	getGradesLocalStorage() {
-		return localStorage.getItem("grades");
+		let grades = localStorage.getItem("grades");
+		let auxiliar = grades.split(',');
+		return Array.from(auxiliar);
 	}
 
 	getCoursesLocalStorage() {
-		return localStorage.getItem("courses");
+		let courses = localStorage.getItem("courses");
+		let auxiliar = courses.split(',');
+		return Array.from(auxiliar);
 	}
 
 	getIdentityLocalStorage(){
