@@ -118,6 +118,8 @@ export class MaterialsComponent implements OnInit {
           val.ratingPeople
           )
       );
+      console.log(this.storageService.getCoursesLocalStorage());
+      console.log(this.storageService.getGradesLocalStorage());
       console.log(this.identity);
     }
     
