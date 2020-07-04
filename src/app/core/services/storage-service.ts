@@ -35,6 +35,14 @@ export class StorageService {
 		localStorage.setItem("grades", s.toString());
 	}
 
+	getGradesLocalStorage() {
+		return localStorage.getItem("grades");
+	}
+
+	getCoursesLocalStorage() {
+		return localStorage.getItem("courses");
+	}
+
 	getIdentityLocalStorage(){
 		return localStorage.getItem("identity");
 	}
