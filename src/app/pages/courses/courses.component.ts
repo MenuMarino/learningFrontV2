@@ -56,6 +56,7 @@ export class CoursesComponent implements OnInit {
     if(this.current_course !=null){
       this.current_course.backgroundcolor = '#f6f9fc';
     }
+    this.storageService.setTempCourse_Courses(course.name);
     this.error_course = false;
     course.backgroundcolor = '#bddbfa';
 
@@ -69,6 +70,7 @@ export class CoursesComponent implements OnInit {
     if(this.current_grade != null){
       this.current_grade.backgroundcolor = '#f6f9fc';
     }
+    this.storageService.setTempGrade_Courses(grade.valor);
     this.error_grade = false;
     grade.backgroundcolor = '#bddbfa';
     this.current_grade = grade;

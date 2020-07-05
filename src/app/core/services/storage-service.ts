@@ -22,6 +22,21 @@ export class StorageService {
 
 	//localStorage
 
+	setTempCourse_Courses(course : string){
+		localStorage.setItem("course_course", course);
+	}
+	setTempGrade_Courses(grade : string){
+		localStorage.setItem("course_grade", grade );
+	}
+	
+	getTempoCourse_Courses(){
+		return localStorage.getItem("course_course");
+	}
+	
+	getTempoGrade_Courses(){
+		return localStorage.getItem("course_grade");
+	}
+
 	setIdentityLocalStorage(identity: string){
 		localStorage.setItem("identity", identity);
 	}
