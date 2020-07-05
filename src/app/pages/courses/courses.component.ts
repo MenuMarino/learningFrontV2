@@ -10,6 +10,7 @@ import { StorageService } from 'src/app/core/services/storage-service';
   styleUrls: ['./courses.component.scss'],
   providers: [StorageService]
 })
+
 export class CoursesComponent implements OnInit {
   private identity: any;
   private isChoosed_course : boolean = false;

@@ -36,37 +36,44 @@ export class MaterialsComponent implements OnInit {
     
     this.materialService.sendTemasdata(
       this.storageService.getCoursesLocalStorage()[results[1]],
-      results[2]
+      Number(results[2])+1
     ).subscribe(
-      response =>{
-        console.log(response);
-        
-      }, error => {
-        console.log(error);
-      }
-    )
-    
-    
-
-    const { value: Material } = await Swal.fire({
-      title: 'Selecciona uno de los cursos',
-      input: 'select',
-      inputOptions: this.Temas,
-      showCancelButton: true,
-      inputValidator: (value) => {
-        return new Promise((resolve) => {
-          if (value != null) {
-            resolve()
-          } else {
-            resolve('Necesita elegir uno de los temas')
+      async response =>{
+        this.currentTema = response; 
+        console.log();
+        const { value: Material } = await Swal.fire({
+          title: 'Selecciona uno de los cursos',
+          input: 'select',
+          inputOptions: this.currentTema,
+          showCancelButton: true,
+          inputValidator: (value) => {
+            return new Promise((resolve) => {
+              if (value != null) {
+                resolve()
+              } else {
+                resolve('Necesita elegir uno de los temas')
+              }
+            })
           }
         })
+        if (Material) {
+          Swal.fire(`Creaste un material exitosamente`);
+
+          this.router.navigateByUrl("/upload");
+        }
+     
       }
+/*<<<<<<< HEAD
     })
     if (Material) {
       Swal.fire(`Creaste un material exitosamente`);
       this.router.navigateByUrl("/upload");
     }
+=======*/
+    )
+
+    
+//>>>>>>> 7d7cd7990f4e8c872d5be13b3fc3714ecdbd3260
   }
  
 
