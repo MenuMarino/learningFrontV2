@@ -1,0 +1,11 @@
+{
+    "/gets": {
+      "target": "http://localhost:8081",
+      "secure": true,
+      "pathRewrite": {
+      "^/gets": ""
+    },
+      "changeOrigin": true
+    }
+  }
+  
