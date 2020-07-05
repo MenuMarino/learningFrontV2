@@ -125,7 +125,7 @@ export class MaterialsComponent implements OnInit {
       console.log(val);
       this.myMaterials.push(
         new SingleMaterial(
-          val.course.theme,
+          val.name,
           this.ifAproved(val.who_aproved),
           this.whoAproved(val.who_aproved),
           val.visits,

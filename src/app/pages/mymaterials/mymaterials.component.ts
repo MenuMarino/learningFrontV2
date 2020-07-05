@@ -25,7 +25,7 @@ export class MyMaterialsComponent implements OnInit {
       console.log(val);
       this.myFavouriteMaterials.push(
         new SingleMaterial(
-          val.course.theme,
+          val.course.name,
           val.who_aproved.username,
           this.getLearningPoints(val.learning_points)
           )
