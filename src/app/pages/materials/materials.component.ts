@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage-service';
+import { MaterialServices } from 'src/app/core/services/material-service';
 import { FilterPipe } from 'ngx-filter-pipe';
 import Swal from 'sweetalert2';
 import { Router } from "@angular/router";
@@ -8,14 +9,13 @@ import { Router } from "@angular/router";
   selector: 'app-materials',
   templateUrl: './materials.component.html',
   styleUrls: ['./materials.component.css'],
-  providers: [StorageService]
+  providers: [StorageService, MaterialServices ]
 })
 export class MaterialsComponent implements OnInit {
   private identity: any;
   private myMaterials : SingleMaterial[] = [];
   //private Cursos : Curso[] = [new Curso('fisica'), new Curso('religion')];
-  private Cursos : string[] = ['fisica','matematica'];
-  private Grades : string[] = ['1er grado','2do grado','3er grado'];
+  private Grades : string[] = ['1er grado','2do grado','3er grado','4to grado','5to grado'];
   private Temas : string[] = ['arimetica','geometria'];
   private Temas2 : string[] = ['oraciones','teoria'];
   private currentTema : any;
@@ -24,22 +24,33 @@ export class MaterialsComponent implements OnInit {
     private storageService: StorageService,
     private filterPipe: FilterPipe,
     private router: Router,
+    private materialService: MaterialServices,
 
   ) { 
     
   }
   async mostrar_datos(results){
     results = results.value;
-    console.log(results[0],results[1],results[2]);
+    console.log(results[1],results[2]);
     
-    if(results[1] == 0) {this.currentTema = this.Temas;}
-    if(results[1] == 1) {this.currentTema = this.Temas2;}
-    console.log(this.currentTema);
+    this.materialService.sendTemasdata(
+      this.storageService.getCoursesLocalStorage()[results[1]],
+      results[2]
+    ).subscribe(
+      response =>{
+        console.log(response);
+        
+      }, error => {
+        console.log(error);
+      }
+    )
+    
+    
 
     const { value: Material } = await Swal.fire({
       title: 'Selecciona uno de los cursos',
       input: 'select',
-      inputOptions: this.currentTema,
+      inputOptions: this.Temas,
       showCancelButton: true,
       inputValidator: (value) => {
         return new Promise((resolve) => {
@@ -75,7 +86,7 @@ export class MaterialsComponent implements OnInit {
       {
         title: 'Curso',
         input : 'select',
-        inputOptions : this.Cursos,
+        inputOptions : this.storageService.getCoursesLocalStorage(), 
       },
       {
         title: 'Grado',
@@ -118,6 +129,7 @@ export class MaterialsComponent implements OnInit {
           val.ratingPeople
           )
       );
+      
       console.log(this.storageService.getCoursesLocalStorage());
       console.log(this.storageService.getGradesLocalStorage());
       console.log(this.identity);

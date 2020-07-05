@@ -43,12 +43,12 @@ export class CoursesComponent implements OnInit {
         for(let val of this.all_data){
           this.recorrerCursos(val);
         }
-        this.storageService.setCoursesLocalStorage(this.all_data.toString());
       }, error => {
         console.log(error);
       }
     )
-    this.storageService.setGradesLocalStorage();
+    
+    
   }
   chooseCourse(course){
 
