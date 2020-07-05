@@ -21,7 +21,7 @@ export class MaterialServices {
       }
     };
 
-    return this.http.get(this.commonService.baseUrl + "/course/themes", data);
+    return this.http.get(this.commonService.baseUrl + "/courses/themes", data);
     }
 
 }
