@@ -18,6 +18,7 @@ export class FilesComponent implements OnInit {
 
   constructor() { }
 
+
   ngOnInit(): void {
      
   }
@@ -26,6 +27,20 @@ export class FilesComponent implements OnInit {
 
   }
 
+  fileType() {
+    if(this.currentFile.type == "pdf") {
+      return true;
+    }
+    return false;
+  }
+
+  typeVideo() {
+    if(this.currentFile.type == "yt") {
+      return true;
+    }
+    return false;
+  }
+  
   chooseFile(file) {
     if(this.currentFile !=null){
       this.currentFile.backgroundcolor = '#f6f9fc';
@@ -35,24 +50,25 @@ export class FilesComponent implements OnInit {
     file.backgroundcolor = '#bddbfa';
   }
 
-
-
   public archivos: any[] = [
     {
-      name: "JSJSJ.pdf",
+      name: "JSJSJ",
+      type: "pdf",
       peso: 123,
       ruta: '/assets/pdfs/pdf1.pdf',
       
       backgroundcolor : '#f6f9fc'
     },
     {
-      name: "JS.pdf",
+      name: "JS",
+      type: "yt",
       peso: 123,
       ruta: '/assets/pdfs/pdf2.pdf',
       backgroundcolor : '#f6f9fc'
     },
     {
-      name: "ll.pdf",
+      name: "ll",
+      type: "mp4",
       peso: 123, 
       ruta: '/assets/pdfs/pdf3.pdf',
       backgroundcolor : '#f6f9fc'

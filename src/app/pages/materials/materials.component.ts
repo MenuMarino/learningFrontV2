@@ -11,6 +11,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./materials.component.css'],
   providers: [StorageService, MaterialServices ]
 })
+// materiales esta en local storage
 export class MaterialsComponent implements OnInit {
   private identity: any;
   private myMaterials : SingleMaterial[] = [];
@@ -54,14 +55,22 @@ export class MaterialsComponent implements OnInit {
         })
         if (Material) {
           Swal.fire(`Creaste un material exitosamente`);
-
+          console.log("ksksksksk");
           this.router.navigateByUrl("/upload");
         }
      
       }
+/*<<<<<<< HEAD
+    })
+    if (Material) {
+      Swal.fire(`Creaste un material exitosamente`);
+      this.router.navigateByUrl("/upload");
+    }
+=======*/
     )
 
     
+//>>>>>>> 7d7cd7990f4e8c872d5be13b3fc3714ecdbd3260
   }
  
 
@@ -174,7 +183,7 @@ export class SingleMaterial {
     this.curated_by = curated_by;
     this.views = views;
     this.learning_points = learning_points;
-    this.temporal = learning_points*2;
+    this.temporal = learning_points;
     this.porcentaje_LP = this.temporal.toString() + '%';
     this.color_curated = this.getColorCurated(status);
     this.color_bar = this.getColorBar(this.temporal);

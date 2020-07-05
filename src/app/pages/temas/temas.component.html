@@ -18,11 +18,11 @@
                             <p>Profesor: {{tema.professor}}</p>
                         </div>
                         <div class="course-info">
-                            <div class="progress-container">
-                                <div class="progress"></div>
-                                <span class="progress-text">
-                                    Learning Points: {{tema.learning_points}}/5
-                                </span>
+                            <div>
+                              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 " > 
+                                <p>Learning Points</p>
+                                <ngb-rating [rate]="tema.learning_points" [max]="5" [readonly]="true"></ngb-rating>
+                              </div>
                             </div>
                             <p>{{tema.description}}<p>
                             <a class="btn" (click)="themeClick()">Ir</a>

@@ -8,11 +8,8 @@ import { Observable } from "rxjs";
   })
   export class CourseService {
     constructor(private http: HttpClient, private commonService: CommonService) {}
-
         getCourses(){
             
             return this.http.get(this.commonService.baseUrl + "/courses/name");
         }
-
-        
   }
