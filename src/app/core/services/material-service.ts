@@ -9,7 +9,6 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class MaterialServices {
   constructor(private http: HttpClient, private commonService: CommonService) {}
-
   sendTemasdata(
     name,
     grade
@@ -20,8 +19,6 @@ export class MaterialServices {
         grade : grade
       }
     };
-
     return this.http.get(this.commonService.baseUrl + "/course/themes", data);
-    }
-
+  }
 }

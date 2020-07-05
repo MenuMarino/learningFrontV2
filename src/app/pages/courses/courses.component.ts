@@ -27,7 +27,6 @@ export class CoursesComponent implements OnInit {
     private storageService: StorageService,
   ) {  }
 
-
   recorrerCursos(data){
     console.log(data);
     this.list_Courses.push(new Courses(data));
@@ -40,6 +39,7 @@ export class CoursesComponent implements OnInit {
       response =>{
         console.log(response);
         this.all_data=response;
+        this.storageService.setCoursesLocalStorage(this.all_data);
         for(let val of this.all_data){
           this.recorrerCursos(val);
         }
