@@ -15,10 +15,7 @@ import { Router } from "@angular/router";
 export class MaterialsComponent implements OnInit {
   private identity: any;
   private myMaterials : SingleMaterial[] = [];
-  //private Cursos : Curso[] = [new Curso('fisica'), new Curso('religion')];
   private Grades : string[] = ['1er grado','2do grado','3er grado','4to grado','5to grado'];
-  private Temas : string[] = ['arimetica','geometria'];
-  private Temas2 : string[] = ['oraciones','teoria'];
   private currentTema : any;
   
   constructor(
