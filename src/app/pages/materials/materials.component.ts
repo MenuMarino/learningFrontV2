@@ -55,7 +55,7 @@ export class MaterialsComponent implements OnInit {
         })
         if (Material) {
           Swal.fire(`Creaste un material exitosamente`);
-
+          console.log("ksksksksk");
           this.router.navigateByUrl("/upload");
         }
      

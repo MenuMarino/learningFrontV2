@@ -50,6 +50,16 @@ export class StorageService {
 		localStorage.setItem("grades", s.toString());
 	}
 
+	setUpload(upload: string) {
+		localStorage.setItem("upload", upload);
+	}
+
+	getUploadLocalStorage() {
+		let upload = localStorage.getItem("upload");
+		let auxiliar = upload.split(',');
+		return Array.from(auxiliar);
+	}
+
 	getGradesLocalStorage() {
 		let grades = localStorage.getItem("grades");
 		let auxiliar = grades.split(',');
