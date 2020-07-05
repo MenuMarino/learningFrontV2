@@ -12,4 +12,6 @@ import { Observable } from "rxjs";
             
             return this.http.get(this.commonService.baseUrl + "/courses/name");
         }
+       
   }
+

@@ -21,4 +21,24 @@ export class MaterialServices {
     };
     return this.http.get(this.commonService.baseUrl + "/courses/themes", data);
     }
+
+  createMaterial(
+    id : number,
+    name : string,
+    description : string,
+    course : string,
+    grade : number,
+    theme : string
+  ): Observable<any> {
+    const data = {
+      id,
+      name,
+      description,
+      course,
+      grade,
+      theme,
+    };
+    console.log(data);
+  return this.http.post(this.commonService.baseUrl + "/material/create", data);
+  }
 }

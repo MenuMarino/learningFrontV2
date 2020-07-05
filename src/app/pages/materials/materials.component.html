@@ -59,17 +59,22 @@
                   </div>
                 </td> 
                 <td>
-                  <div class="media align-items-center">
-
-                    <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
-                      <img alt="{{material.name}}" src="../assets/img/theme/imagen.jpg">
-                    </a>
-                    <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
-                      <img alt="{{material.name}}" src="../assets/img/theme/imagen.jpg">
-                    </a>
-                    <button type="button" class="btn btn-default" placement="left"
-                    ngbPopover="This is a very beautiful popover, show some love.">
-                      Popover on left
+                  <div class="media align-items-center" style="min-width: 180px;">
+                    <button type="button" class="btn btn-primary btn-circle" placement="top" triggers="mouseenter:mouseleave"
+                    ngbPopover="Mandar a curar" (click)="MandarCurar(material)" [disabled]="!curar_button ? 'disabled':null">
+                    <i class="fa fa-check"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-circle" placement="top" triggers="mouseenter:mouseleave"
+                    ngbPopover="Eliminar el material" (click)="MandarEliminar(material)" >
+                    <i class="fa fa-times"></i>
+                    </button>
+                    <button type="button" class="btn btn-info btn-circle" placement="top" triggers="mouseenter:mouseleave"
+                    ngbPopover="Actualizar el material" (click)="ActualizarMaterial(material)">
+                    <i class="fa fa-list"></i>
+                    </button>
+                    <button type="button" class="btn btn-success btn-circle" placement="top" triggers="mouseenter:mouseleave"
+                    ngbPopover="Ir al material" (click)="IrMaterial(material)">
+                    <i class="fa fa-link"></i>
                     </button>
 
                   </div>

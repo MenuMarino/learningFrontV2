@@ -4,6 +4,7 @@ import { MaterialServices } from 'src/app/core/services/material-service';
 import { FilterPipe } from 'ngx-filter-pipe';
 import Swal from 'sweetalert2';
 import { Router } from "@angular/router";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-materials',
@@ -17,6 +18,11 @@ export class MaterialsComponent implements OnInit {
   private myMaterials : SingleMaterial[] = [];
   private Grades : string[] = ['1er grado','2do grado','3er grado','4to grado','5to grado'];
   private currentTema : any;
+  public curar_button : boolean = true;
+  public temporal_resolve : any;
+  public  tempora_theme : any;
+
+
   
   constructor(
     private storageService: StorageService,
@@ -27,13 +33,14 @@ export class MaterialsComponent implements OnInit {
   ) { 
     
   }
-  async mostrar_datos(results){
+  mostrar_datos(results){
+    console.log(results);
     results = results.value;
-    console.log(results[1],results[2]);
-    
+    this.temporal_resolve = results;
+    console.log(results[0],results[1],results[2]);
     this.materialService.sendTemasdata(
-      this.storageService.getCoursesLocalStorage()[results[1]],
-      Number(results[2])+1
+      this.storageService.getCoursesLocalStorage()[results[2]],
+      Number(results[3])+1
     ).subscribe(
       async response =>{
         this.currentTema = response; 
@@ -46,46 +53,134 @@ export class MaterialsComponent implements OnInit {
           inputValidator: (value) => {
             return new Promise((resolve) => {
               if (value != null) {
+                console.log(value)
                 resolve()
               } else {
-                resolve('Necesita elegir uno de los temas')
+                resolve('Necesita elegir uno de los temas ')
               }
             })
           }
         })
         if (Material) {
-          Swal.fire(`Creaste un material exitosamente`);
-          console.log("ksksksksk");
-          this.router.navigateByUrl("/upload");
+          let valor = `${Material}`;
+          console.log(this.currentTema);
+          console.log("est es el material : ");
+          console.log(this.identity.id + " "+ this.temporal_resolve[0] + " " + this.storageService.getCoursesLocalStorage()[results[2]] + " "+ (Number(this.temporal_resolve[3])+1) + " ");
+          this.materialService.createMaterial(
+            this.identity.id,
+            this.temporal_resolve[0],
+            this.temporal_resolve[1],
+            this.storageService.getCoursesLocalStorage()[results[2]],
+            (Number(this.temporal_resolve[3])+1),
+            this.currentTema[Number(valor)],
+          ).subscribe(
+            response =>{
+              Swal.fire(`Creaste un material exitosamente`);
+              console.log(response);
+              const identity = {
+                id: response.id,
+                name: response.name,
+                lastname: response.lastname,
+                email: response.email,
+                username: response.username,
+                role: response.type,
+                grade: response.grade,
+                birth: moment(response.birth).format('DD/MM/YYYY'),
+                institucion: response.institucion,
+                especialidad: response.especialidad,
+                myMaterials: response.myMaterials,
+                favouriteMaterials: response.favouriteMaterials,
+              }
+              this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
+              this.router.navigateByUrl("/upload");
+            },
+            (error) => {
+              Swal.fire(`Error al crear el material`);
+            }
+          )
+        
         }
      
       }
-/*<<<<<<< HEAD
-    })
-    if (Material) {
-      Swal.fire(`Creaste un material exitosamente`);
-      this.router.navigateByUrl("/upload");
-    }
-=======*/
-    )
 
+    )
     
-//>>>>>>> 7d7cd7990f4e8c872d5be13b3fc3714ecdbd3260
   }
  
+  MandarCurar(currentMaterial){
+    Swal.fire({
+      title: 'Usted enviara a curar el material',
+      text: "No podra modificarlo en el proceso de curado",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Enviarlo'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'Su material esta',
+          'en cola de curacion',
+          'success'
+        )
+        this.curar_button = false;
 
-  CreateMaterial(){
+      }
+    })
+    console.log(currentMaterial);
+  }
 
-    Swal.mixin({
+  MandarEliminar(currentMaterial){
+    Swal.fire({
+      title: '¿Esta seguro de eliminar el material?',
+      text: "Esta accion es permanente",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si, estoy seguro'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'Eliminado!',
+          'Tu materia ha sido eliminado.',
+          'success'
+        )
+      }
+    })
+    console.log(currentMaterial);
+
+  }
+
+
+  ActualizarMaterial(currentMaterial){
+    this.router.navigateByUrl("/upload");
+    console.log(currentMaterial);
+
+  }
+
+  IrMaterial(currentMaterial){
+    this.router.navigateByUrl("/files");
+    console.log(currentMaterial);
+
+  }
+
+  async CreateMaterial(){
+
+     Swal.mixin({
       input: 'text',
       confirmButtonText: 'Next &rarr;',
       showCancelButton: true,
-      progressSteps: ['1', '2', '3']
+      progressSteps: ['1', '2', '3','4']
 
     }).queue([
       {
         title: 'Nuevo Material',
         text: 'Escriba el titulo del material.'
+      },
+      {
+        title: 'Descripcion Material',
+        text: 'Escriba una descripcion del material.'
       },
       {
         title: 'Curso',
@@ -99,6 +194,7 @@ export class MaterialsComponent implements OnInit {
       }
     ]).then((result) => {
       if (result) {
+        console.log(result);
         this.mostrar_datos(result);
       }
       else{
@@ -120,7 +216,9 @@ export class MaterialsComponent implements OnInit {
   };
 
   ngOnInit(): void {
+   
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
+    console.log(this.identity);
     for (let val of this.identity.myMaterials){
       console.log(val);
       this.myMaterials.push(
@@ -156,7 +254,7 @@ export class MaterialsComponent implements OnInit {
   }
   getLearningPoints(learning_points,ratingPeople){
     if(learning_points == null){
-      return "4";
+      return "0";
     }
     else{
       return learning_points/ratingPeople;
