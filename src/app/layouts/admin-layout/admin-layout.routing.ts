@@ -11,9 +11,8 @@ import { MyMaterialsComponent } from "../../pages/mymaterials/mymaterials.compon
 import { TemasComponent } from "../../pages/temas/temas.component";
 import { FilesComponent } from "../../pages/files/files.component";
 import { PostulantCurator } from "../../pages/postulant_curator/postulant_curator.component";
-
 import { AllTemasComponent } from "../../pages/all_temas/all_temas.component";
-
+import { CurarComponent } from "../../pages/curar/curar.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -28,4 +27,5 @@ export const AdminLayoutRoutes: Routes = [
   {path: "files",component:FilesComponent},
   {path: "all_temas",component:AllTemasComponent},
   {path: "postulant_curator", component:PostulantCurator},
+  {path: "curar", component:CurarComponent}
 ];

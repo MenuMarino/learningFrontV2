@@ -7,20 +7,24 @@ import { ArgumentOutOfRangeError } from 'rxjs';
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
+  // Valores para prueba
+  public contador = 0;
+  public Titulo = "Ángulos";
+  public Curso = "Matemática";
+  public Tema = "Ángulos";
+  // Valores necesarios
+  public descripcion = "";
+  private uploadedFiles : any = [];
 
   constructor() { }
 
   ngOnInit(): void {
   }
-  public contador = 0;
-
-  public Titulo = "Ángulos";
-  public Curso = "Matemática";
-  public Tema = "Ángulos";
-
   aumentar(file) {
+    let newfile = file.target.files[0];
     this.contador += 1;
-    console.log(this.contador);
+    this.uploadedFiles.push(newfile);
+    console.log(this.uploadedFiles);
   }
 
   secondDiv() {

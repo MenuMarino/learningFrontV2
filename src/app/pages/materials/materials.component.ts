@@ -13,24 +13,69 @@ import { Router } from "@angular/router";
 })
 // materiales esta en local storage
 export class MaterialsComponent implements OnInit {
+  // Valores para prueba
+  public contador = 0;
+  public Titulo = "Ángulos";
+  public Curso = "Matemática";
+  public Tema = "Ángulos";
+  // Valores necesarios
+  public descripcion = "";
+  private uploadedFiles : any = [];
+
   private identity: any;
   private myMaterials : SingleMaterial[] = [];
   private Grades : string[] = ['1er grado','2do grado','3er grado','4to grado','5to grado'];
   private currentTema : any;
+  private toUpload : boolean = false;
   
   constructor(
     private storageService: StorageService,
     private filterPipe: FilterPipe,
     private router: Router,
     private materialService: MaterialServices,
-
   ) { 
     
   }
+
+  aumentar(file) {
+    let newfile = file.target.files[0];
+    this.contador += 1;
+    this.uploadedFiles.push(newfile);
+    console.log(this.uploadedFiles);
+  }
+
+  secondDiv() {
+    if(this.contador >=1) {
+      return true;
+    } 
+    return false;
+  }
+
+  thirdDiv() {
+    if(this.contador >=2) {
+      return true;
+    } 
+    return false;
+  }
+
+  fouthDiv() {
+    if(this.contador >=3) {
+      return true;
+    } 
+    return false;
+  }
+
+  fifthDiv() {
+    if(this.contador >=4) {
+      return true;
+    } 
+    return false;
+  }
+
   async mostrar_datos(results){
     results = results.value;
     console.log(results[1],results[2]);
-    
+    console.log("jsjsjs");
     this.materialService.sendTemasdata(
       this.storageService.getCoursesLocalStorage()[results[1]],
       Number(results[2])+1
@@ -56,26 +101,20 @@ export class MaterialsComponent implements OnInit {
         if (Material) {
           Swal.fire(`Creaste un material exitosamente`);
           console.log("ksksksksk");
-          this.router.navigateByUrl("/upload");
+          this.toUpload = true;
+          //this.router.navigateByUrl("/upload");
         }
      
       }
-/*<<<<<<< HEAD
-    })
-    if (Material) {
-      Swal.fire(`Creaste un material exitosamente`);
-      this.router.navigateByUrl("/upload");
-    }
-=======*/
     )
+  }
 
-    
-//>>>>>>> 7d7cd7990f4e8c872d5be13b3fc3714ecdbd3260
+  Uploaded() {
+    return this.toUpload;
   }
  
 
-  CreateMaterial(){
-
+  CreateMaterial() {
     Swal.mixin({
       input: 'text',
       confirmButtonText: 'Next &rarr;',
@@ -109,9 +148,6 @@ export class MaterialsComponent implements OnInit {
         })
       }
     })
-    
-    
-
   }
 
 

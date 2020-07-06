@@ -56,7 +56,6 @@ export class FilesComponent implements OnInit {
       type: "pdf",
       peso: 123,
       ruta: '/assets/pdfs/pdf1.pdf',
-      
       backgroundcolor : '#f6f9fc'
     },
     {
