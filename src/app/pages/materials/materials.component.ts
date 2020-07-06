@@ -30,9 +30,9 @@ export class MaterialsComponent implements OnInit {
     private router: Router,
     private materialService: MaterialServices,
 
-  ) { 
-    
-  }
+  ) {  }
+
+
   mostrar_datos(results){
     console.log(results);
     results = results.value;
@@ -205,9 +205,6 @@ export class MaterialsComponent implements OnInit {
         })
       }
     })
-    
-    
-
   }
 
 

@@ -1,18 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { AllTemasService } from 'src/app/core/services/alltemas-services';
+import { StorageService } from 'src/app/core/services/storage-service';
+
 
 @Component({
   selector: 'app-temas',
   templateUrl: './temas.component.html',
-  styleUrls: ['./temas.component.scss']
+  styleUrls: ['./temas.component.scss'],
+  providers: [AllTemasService,StorageService]
 })
 export class TemasComponent implements OnInit {
 
   public copy: string;
-  constructor(private router: Router,) { }
+  public allTemas : SingleTheme[] = [];
+  constructor(private router: Router,private allTemasService : AllTemasService, private storageService: StorageService) { }
 
   ngOnInit() {
-    
+      this.allTemasService.sendMaterialesdata(
+      this.storageService.getTempoCourse_Courses(),
+      this.storageService.getTempoGrade_Courses(),
+      this.storageService.getTempTheme_Courses(),
+      0,
+    ).subscribe(
+      response =>{
+        console.log(response);
+     
+        for (let val in response){
+          console.log(response[val]);
+          /*this.allTemas.push(
+            new SingleTheme(
+              response[val].name,
+              response[val].
+              )
+          );*/
+        }
+      }, error => {
+        console.log(error);
+      }
+    )
+
   }
 
   themeClick(){
@@ -20,6 +47,8 @@ export class TemasComponent implements OnInit {
     console.log("enviar");
     this.router.navigateByUrl("/files");
   }
+
+  
 
 
   public temas: any[] = [
@@ -79,4 +108,19 @@ export class TemasComponent implements OnInit {
       },
       
   ]
+}
+
+export class SingleTheme{
+  public name : string;
+  public professor : string;
+  public description : string;
+  public learning_points : string;
+
+  constructor(name,professor,description,learning_points){
+    this.name = name;
+    this.professor = professor;
+    this.description = description;
+    this.learning_points = learning_points;
+  }
+
 }
