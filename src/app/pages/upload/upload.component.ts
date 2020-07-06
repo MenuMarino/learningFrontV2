@@ -39,7 +39,6 @@ export class UploadComponent implements OnInit {
     let newfile = file.target.files[0];
     this.contador += 1;
     this.uploadedFiles.push(newfile);
-    console.log(this.uploadedFiles);
   }
  
   rise() {
