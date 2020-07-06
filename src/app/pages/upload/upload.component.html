@@ -65,24 +65,79 @@
               <form action="/action_page.php">
 
                 <div class="form-group">
-                  <input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)>
+                  <div class="text-center" *ngIf="!select1()">
+                    <a type="button" (click)="change1()" class="btn btn-success">
+                      Archivo
+                    </a>
+                    <a type="button" (click)="change1_2()" class="btn btn-danger ">
+                      Link Youtube
+                    </a>
+                  </div>
+
+                  <div *ngIf="ss1()"><input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)></div>
+                  <div *ngIf="select1_2()"> <input class="form-control" [(ngModel)]="y1" (change)=rise() required></div>
                 </div>
+
                 <div class="form-group" *ngIf="secondDiv()">
-                  <input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)>
+
+                  <div class="text-center" *ngIf="!select2()">
+                    <a type="button" (click)="change2()" class="btn btn-success">
+                      Archivo
+                    </a>
+                    <a type="button" (click)="change2_2()" class="btn btn-danger ">
+                      Link Youtube
+                    </a>
+                  </div>
+
+                  <div *ngIf="ss2()"><input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)></div>
+                  <div *ngIf="select2_2()"> <input class="form-control" [(ngModel)]="y2" (change)=rise() required></div>
                   <h3>{{descripcion}}</h3>
+
                 </div>
+
                 <div class="form-group" *ngIf="thirdDiv()">
-                  <input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)>
+                  <div class="text-center" *ngIf="!select3()">
+                    <a type="button" (click)="change3()" class="btn btn-success">
+                      Archivo
+                    </a>
+                    <a type="button" (click)="change3_2()" class="btn btn-danger ">
+                      Link Youtube
+                    </a>
+                  </div>
+                
+                  <div *ngIf="ss3()"><input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)></div>
+                  <div *ngIf="select3_2()"> <input class="form-control" [(ngModel)]="y3" (change)=rise() required></div>
                   <h3>{{descripcion}}</h3>
                 </div>
+
                 <div class="form-group" *ngIf="fouthDiv()">
-                  <input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)>
+                  <div class="text-center" *ngIf="!select4()">
+                    <a type="button" (click)="change4()" class="btn btn-success">
+                      Archivo
+                    </a>
+                    <a type="button" (click)="change4_2()" class="btn btn-danger ">
+                      Link Youtube
+                    </a>
+                  </div>
+                  <div *ngIf="ss4()"><input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)></div>
+                  <div *ngIf="select4_2()"> <input class="form-control" [(ngModel)]="y4" (change)=rise() required></div>
                   <h3>{{descripcion}}</h3>
                 </div>
+
                 <div class="form-group" *ngIf="fifthDiv()">
-                  <input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)>
+                  <div class="text-center" *ngIf="!select5()">
+                    <a type="button" (click)="change5()" class="btn btn-success">
+                      Archivo
+                    </a>
+                    <a type="button" (click)="change5_2()" class="btn btn-danger ">
+                      Link Youtube
+                    </a>
+                  </div>
+                  <div *ngIf="ss5()"><input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)></div>
+                  <div *ngIf="select5_2()"> <input class="form-control" [(ngModel)]="y5" (change)=rise() required></div>
                   <h3>{{descripcion}}</h3>
                 </div>
+
                 <div class="text-center">
                     <button type="button" class="btn btn-success mt-4">
                       Siguiente

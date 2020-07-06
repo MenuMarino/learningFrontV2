@@ -135,7 +135,6 @@ export class MaterialsComponent implements OnInit {
                 favouriteMaterials: response.favouriteMaterials,
               }
               this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
-              this.router.navigateByUrl("/upload");
             },
             (error) => {
               Swal.fire(`Error al crear el material`);
