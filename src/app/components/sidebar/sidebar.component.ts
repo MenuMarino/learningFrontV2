@@ -103,7 +103,6 @@ export const ifTeacher: RouteInfo[] = [
     class: "",
   },
   { path: '/upgrade', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
-  { path: '/upload', title: 'Upload',  icon:'ni ni-cloud-upload-96 text-red', class: '' },
   { path: '/materials', title:'Material', icon:'ni ni-archive-2 text-red',class:''},
   { path: "/mymaterials", 
   title: "Favoritos", 
