@@ -1,28 +1,47 @@
 import { Component, OnInit } from '@angular/core';
+import { AllFilesService } from "src/app/core/services/files-service";
 
+import { StorageService } from 'src/app/core/services/storage-service';
 
-
-import Swal from 'sweetalert2';
-import { Router } from "@angular/router";
 
 
 @Component({
   selector: 'app-files',
   templateUrl: './files.component.html',
   styleUrls: ['./files.component.css'],
-  providers: []
+  providers: [StorageService,AllFilesService]
 })
 export class FilesComponent implements OnInit {
 
   private currentFile : any = null;
-  public 
+  public listFiles : File[] = [];
 
-
-  constructor() { }
-
+  constructor(
+    private storageService: StorageService,
+    private filesService : AllFilesService
+  ) { }
 
   ngOnInit(): void {
-    
+    this.filesService.getAllFiles(
+      Number(this.storageService.getTempFile_Courses())
+    ).subscribe(
+      response =>{
+        console.log(response);
+        for (let val in response){
+          console.log(response[val]);
+          this.listFiles.push( new File(
+            response[val].name,
+            response[val].type,
+            response[val].link,
+            response[val].material_from.who_posted.id,
+            )
+          )
+        }
+        console.log(this.listFiles);
+      }, error => {
+        console.log(error);
+      }
+    )
   }
 
   downloadMaterial() {
@@ -30,14 +49,14 @@ export class FilesComponent implements OnInit {
   }
 
   fileType() {
-    if(this.currentFile.type == "pdf") {
+    if(this.currentFile.type == "PDF") {
       return true;
     }
     return false;
   }
 
   typeVideo() {
-    if(this.currentFile.type == "yt") {
+    if(this.currentFile.type == "YOUTUBE_LINK") {
       return true;
     }
     return false;
@@ -51,6 +70,28 @@ export class FilesComponent implements OnInit {
     file.backgroundcolor = '#bddbfa';
   }
 
+}
+
+export class File{
+  public name : string;
+  public type : string;
+  public ruta : string;
+
+  constructor(name, type, ruta, id_user){
+    
+    if(type!='YOUTUBE_LINK'){
+      this.ruta = 'http://localhost:8081/'+id_user+'/materiales/'+ruta;
+    }
+    else{
+      this.ruta = ruta;
+    }
+    this.name = name;
+    this.type = type;
+  }
+};
+
+
+/*<<<<<<< HEAD
   public archivos: any[] = [
     {
       name: "JSJSJ",
@@ -74,4 +115,6 @@ export class FilesComponent implements OnInit {
       backgroundcolor : '#f6f9fc'
     }
   ]
-}
+=======
+  
+>>>>>>> 05287435f9aaca8ca0cd3a4438597d17d8d2931a*/

@@ -45,7 +45,9 @@ export class UploadComponent implements OnInit {
     this.contador += 1;
   }
 
-
+  sendFile() {
+    
+  }
   
   select1() {
     return this.box1;

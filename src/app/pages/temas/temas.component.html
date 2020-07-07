@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
           <div class="row icon-examples">
-            <div class="col-lg-6 col-md-6" *ngFor = "let tema of temas" >
+            <div class="col-lg-6 col-md-6" *ngFor = "let tema of allTemas" >
                 <div class="courses-container">
                     <div class="course">
                         <div class="course-preview">
@@ -19,13 +19,13 @@
                         </div>
                         <div class="course-info">
                             <div>
-                              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 " > 
-                                <p>Learning Points</p>
+                              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 " style="width: 130px; position: absolute; right:20px ; margin-right: 0px;" > 
+                                <p style=  "font-size: 10px;">LearningPoints</p>
                                 <ngb-rating [rate]="tema.learning_points" [max]="5" [readonly]="true"></ngb-rating>
                               </div>
                             </div>
                             <p>{{tema.description}}<p>
-                            <a class="btn" (click)="themeClick()">Ir</a>
+                            <a class="btn" style="margin-right: 30px;" (click)="themeClick(tema)">Ir</a>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ export class MaterialServices {
       }
     };
     return this.http.get(this.commonService.baseUrl + "/courses/themes", data);
-    }
+  }
 
   createMaterial(
     id : number,
@@ -39,6 +39,7 @@ export class MaterialServices {
       theme,
     };
     console.log(data);
-  return this.http.post(this.commonService.baseUrl + "/material/create", data);
+    return this.http.post(this.commonService.baseUrl + "/material/create", data);
   }
+
 }

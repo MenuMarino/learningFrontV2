@@ -27,14 +27,18 @@ export class TemasComponent implements OnInit {
         console.log(response);
      
         for (let val in response){
-          console.log(response[val]);
-          /*this.allTemas.push(
+          //console.log(response[val]);
+          this.allTemas.push(
             new SingleTheme(
               response[val].name,
-              response[val].
-              )
-          );*/
+              response[val].who_posted.username,
+              response[val].description,
+              response[val].learningPoints/response[val].ratingPeople,
+              response[val].id,
+            )     
+          );
         }
+        //console.log(this.allTemas);
       }, error => {
         console.log(error);
       }
@@ -42,85 +46,28 @@ export class TemasComponent implements OnInit {
 
   }
 
-  themeClick(){
-
-    console.log("enviar");
+  themeClick(temas){
+    this.storageService.setTempFile_Courses(temas.id_material);
+    console.log(temas);
     this.router.navigateByUrl("/files");
   }
 
-  
-
-
-  public temas: any[] = [
-    {
-      name: "Polinomios 1",
-      professor: "Bellido",
-      description: "3 videos de Polinomios",
-      learning_points: "3",
-    },
-    {
-      name: "Polinomios2",
-      professor: "Yamilet",
-      description: "2 videos de Polinomios",
-      learning_points: "5",
-    },
-    {
-      name: "Ecuaciones 2",
-      professor: "Jose Maria",
-      description: "Ejercicios y videos",
-      learning_points: "3",
-    },
-    {
-      name: "Polinomios",
-      professor: "Juan",
-      description: "Solo ejercicios",
-      learning_points: "4",
-    },
-    {
-      name: "Ecuaciones 1",
-      professor: "Carlos",
-      description: "Tutoriales que pueden servirte, puedes ver varios videos y pdfs con ejercicios",
-      learning_points: "3",
-    },
-    {
-        name: "Ecuaciones 1",
-        professor: "Carlos",
-        description: "Tutoriales que pueden servirte, puedes ver varios videos y pdfs con ejercicios",
-        learning_points: "3",
-      },
-      {
-        name: "Ecuaciones 1",
-        professor: "Carlos",
-        description: "Tutoriales que pueden servirte, puedes ver varios videos y pdfs con ejercicios",
-        learning_points: "3",
-      },
-      {
-        name: "Ecuaciones 1",
-        professor: "Carlos",
-        description: "Tutoriales que pueden servirte, puedes ver varios videos y pdfs con ejercicios",
-        learning_points: "3",
-      },
-      {
-        name: "Ecuaciones 1",
-        professor: "Carlos",
-        description: "Tutoriales que pueden servirte, puedes ver varios videos y pdfs con ejercicios",
-        learning_points: "3",
-      },
-      
-  ]
 }
 
 export class SingleTheme{
   public name : string;
   public professor : string;
   public description : string;
-  public learning_points : string;
+  public learning_points : number;
+  public id_material : number;
 
-  constructor(name,professor,description,learning_points){
+  constructor(name,professor,description,learning_points,id_material){
     this.name = name;
     this.professor = professor;
     this.description = description;
     this.learning_points = learning_points;
+    this.id_material=id_material;
+    
   }
 
 }

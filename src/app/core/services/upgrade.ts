@@ -11,7 +11,7 @@ export class UpgradeServices{
     }
 
     sendUpgradeFile(file, id) : Observable<any> {
-        return this.http.post(this.commonService.baseUrl + "/test/uploads/" + id , file);
+        return this.http.post(this.commonService.baseUrl + "/test/uploads/" + id +"/upgrade_files", file);
     }
 
 }
