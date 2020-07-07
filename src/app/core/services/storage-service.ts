@@ -31,6 +31,13 @@ export class StorageService {
 	setTempTheme_Courses(theme : string){
 		localStorage.setItem("course_theme",theme);
 	}
+	setTempFile_Courses(file : string){
+		localStorage.setItem("course_file",file);
+	}
+
+	getTempFile_Courses(){
+		return localStorage.getItem("course_file");
+	}
 	
 	getTempTheme_Courses(){
 		return localStorage.getItem("course_theme");

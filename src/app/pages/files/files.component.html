@@ -42,7 +42,7 @@
             </div>
             <div class="card-body" [ngStyle]="{'border-color' : error_grade === true ? '#8B0000' : '#fff' , 'box-shadow':error_grade === true ? '0 0 10px red' : ' 0 0 0px gold' }">
               <div class="row icon-examples">
-                <div class="col-lg-7 col-md-6" *ngFor = "let archivo of archivos" >
+                <div class="col-lg-7 col-md-6" *ngFor = "let archivo of listFiles" >
                     <a
                       type="button"
                       placement="top-center"
