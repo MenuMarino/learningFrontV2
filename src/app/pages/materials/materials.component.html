@@ -61,7 +61,7 @@
                 <td>
                   <div class="media align-items-center" style="min-width: 180px;">
                     <button type="button" class="btn btn-primary btn-circle" placement="top" triggers="mouseenter:mouseleave"
-                    ngbPopover="Mandar a curar" (click)="MandarCurar(material)" [disabled]="!curar_button ? 'disabled':null">
+                    ngbPopover="Mandar a curar" (click)="MandarCurar(material)" [disabled]="!getCurarButton(material) ? 'disabled':null">
                     <i class="fa fa-check"></i>
                     </button>
                     <button type="button" class="btn btn-danger btn-circle" placement="top" triggers="mouseenter:mouseleave"
