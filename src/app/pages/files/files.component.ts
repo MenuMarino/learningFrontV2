@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 
 
 import Swal from 'sweetalert2';
@@ -15,12 +15,14 @@ import { Router } from "@angular/router";
 export class FilesComponent implements OnInit {
 
   private currentFile : any = null;
+  public 
+
 
   constructor() { }
 
 
   ngOnInit(): void {
-     
+    
   }
 
   downloadMaterial() {
@@ -45,7 +47,6 @@ export class FilesComponent implements OnInit {
     if(this.currentFile !=null){
       this.currentFile.backgroundcolor = '#f6f9fc';
     }
-    console.log(file);
     this.currentFile = file;
     file.backgroundcolor = '#bddbfa';
   }

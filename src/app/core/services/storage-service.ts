@@ -28,7 +28,14 @@ export class StorageService {
 	setTempGrade_Courses(grade : string){
 		localStorage.setItem("course_grade", grade );
 	}
+	setTempTheme_Courses(theme : string){
+		localStorage.setItem("course_theme",theme);
+	}
 	
+	getTempTheme_Courses(){
+		return localStorage.getItem("course_theme");
+	}
+
 	getTempoCourse_Courses(){
 		return localStorage.getItem("course_course");
 	}

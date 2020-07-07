@@ -37,6 +37,7 @@ export class MaterialsComponent implements OnInit {
     private filterPipe: FilterPipe,
     private router: Router,
     private materialService: MaterialServices,
+
   ) { 
     
   }
@@ -75,6 +76,7 @@ export class MaterialsComponent implements OnInit {
     } 
     return false;
   }
+
   mostrar_datos(results){
     console.log(results);
     results = results.value;

@@ -27,7 +27,7 @@ export class MyMaterialsComponent implements OnInit {
         new SingleMaterial(
           val.course.name,
           val.who_aproved.username,
-          this.getLearningPoints(val.learning_points)
+          this.getLearningPoints(val.learning_points),
           )
       );
     }

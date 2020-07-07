@@ -4,6 +4,7 @@ import { StorageService } from 'src/app/core/services/storage-service';
 import { MaterialServices } from 'src/app/core/services/material-service';
 
 
+
 @Component({
   selector: 'app-all_temas',
   templateUrl: './all_temas.component.html',
@@ -16,12 +17,12 @@ export class AllTemasComponent implements OnInit {
 
     public copy: string;
    
-    constructor(private router: Router, private storageService: StorageService,private materialService: MaterialServices,) { }
+    constructor(private router: Router, private storageService: StorageService,private materialService: MaterialServices) { }
   
     ngOnInit() {
       this.materialService.sendTemasdata(
         this.storageService.getTempoCourse_Courses(),
-        Number(this.storageService.getTempoGrade_Courses())
+        Number(this.storageService.getTempoGrade_Courses()),
       ).subscribe(
         response =>{
           //console.log(response);
@@ -35,7 +36,8 @@ export class AllTemasComponent implements OnInit {
       )
     }
 
-    chooseTheme(curso){
+    chooseTheme(theme){
+        this.storageService.setTempTheme_Courses(theme.name);
         this.router.navigateByUrl("/temas");
     }
 
