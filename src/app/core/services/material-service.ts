@@ -42,7 +42,6 @@ export class MaterialServices {
     return this.http.post(this.commonService.baseUrl + "/material/create", data);
   }
 
-
   sendToCurar(
     id : number,
   ):Observable<any>{
@@ -50,7 +49,14 @@ export class MaterialServices {
       id
     };
     console.log(data);
-  return this.http.post(this.commonService.baseUrl + "/material/curate/" + id, data);
+    return this.http.post(this.commonService.baseUrl + "/material/curate/" + id, data);
   }
 
+  sendFile(file, id) : Observable<any> {
+    return this.http.post(this.commonService.baseUrl + "/file/uploads/" + id + "/materials", file);
+  }
+
+  createFile(materialId, fileName, link, descripcion, type) {
+
+  }
 }

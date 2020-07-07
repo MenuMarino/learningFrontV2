@@ -20,20 +20,37 @@ export class MaterialsComponent implements OnInit {
   public Curso = "Matemática";
   public Tema = "Ángulos";
   // Valores necesarios
+  public box1 = false;
+  public box2 = false;
+  public box3 = false;
+  public box4 = false;
+  public box5 = false;
+  public yt1 = false;
+  public yt2 = false;
+  public yt3 = false;
+  public yt4 = false;
+  public yt5 = false;
+  public p1 = false;
+  public p2 = false;
+  public p3 = false;
+  public p4 = false;
+  public p5 = false;
   public descripcion = "";
   private uploadedFiles : any = [];
+  private currentupload : currentUpload = new currentUpload();
 
   private identity: any;
   private myMaterials : SingleMaterial[] = [];
   private Grades : string[] = ['1er grado','2do grado','3er grado','4to grado','5to grado'];
   private currentTema : any;
-<<<<<<< HEAD
+
   private toUpload : boolean = false;
   public curar_button : boolean = true;
-=======
->>>>>>> 3607676abc23fe32f61c0c4fcd8534e47e1c432e
+
   public temporal_resolve : any;
   public  tempora_theme : any;
+
+  
   
   constructor(
     private storageService: StorageService,
@@ -45,40 +62,7 @@ export class MaterialsComponent implements OnInit {
     
   }
 
-  aumentar(file) {
-    let newfile = file.target.files[0];
-    this.contador += 1;
-    this.uploadedFiles.push(newfile);
-    console.log(this.uploadedFiles);
-  }
-
-  secondDiv() {
-    if(this.contador >=1) {
-      return true;
-    } 
-    return false;
-  }
-
-  thirdDiv() {
-    if(this.contador >=2) {
-      return true;
-    } 
-    return false;
-  }
-
-  fouthDiv() {
-    if(this.contador >=3) {
-      return true;
-    } 
-    return false;
-  }
-
-  fifthDiv() {
-    if(this.contador >=4) {
-      return true;
-    } 
-    return false;
-  }
+  
 
   mostrar_datos(results){
     console.log(results);
@@ -111,7 +95,7 @@ export class MaterialsComponent implements OnInit {
         if (Material) {
           let valor = `${Material}`;
           console.log(this.currentTema);
-          console.log("est es el material : ");
+          console.log("este es el material : ");
           console.log(this.identity.id + " "+ this.temporal_resolve[0] + " " + this.storageService.getCoursesLocalStorage()[results[2]] + " "+ (Number(this.temporal_resolve[3])+1) + " ");
           this.materialService.createMaterial(
             this.identity.id,
@@ -139,17 +123,15 @@ export class MaterialsComponent implements OnInit {
                 myMaterials: response.myMaterials,
                 favouriteMaterials: response.favouriteMaterials,
               }
+              this.currentupload.constru(this.temporal_resolve[0], 12, this.temporal_resolve[1], this.storageService.getCoursesLocalStorage()[results[2]],this.currentTema[Number(valor)]);
               this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
             },
             (error) => {
               Swal.fire(`Error al crear el material`);
             }
           )
-        
         }
-     
       }
-
     )
   }
   Uploaded() {
@@ -172,9 +154,6 @@ export class MaterialsComponent implements OnInit {
           'en cola de curacion',
           'success'
         )
-<<<<<<< HEAD
-        this.curar_button = false;
-=======
         currentMaterial.thisCurarButtom = false;
         this.materialService.sendToCurar(currentMaterial.id).subscribe(
           response=>{
@@ -182,7 +161,7 @@ export class MaterialsComponent implements OnInit {
             currentMaterial.color_curated = "badge badge-pill badge-danger";
           }
         )
->>>>>>> 3607676abc23fe32f61c0c4fcd8534e47e1c432e
+
       }
     })
     console.log(currentMaterial);
@@ -216,15 +195,14 @@ export class MaterialsComponent implements OnInit {
   }
 
   ActualizarMaterial(currentMaterial){
-    this.router.navigateByUrl("/upload");
+    this.toUpload = true;
+    this.currentupload.constru(currentMaterial.name, currentMaterial.id, currentMaterial.desc, currentMaterial.cur, currentMaterial.tem);
     console.log(currentMaterial);
-
   }
 
   IrMaterial(currentMaterial){
     this.router.navigateByUrl("/files");
     console.log(currentMaterial);
-
   }
 
   async CreateMaterial(){
@@ -275,10 +253,9 @@ export class MaterialsComponent implements OnInit {
   };
 
   ngOnInit(): void {
-   
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
     console.log(this.identity);
-    for (let val of this.identity.myMaterials){
+    for (let val of this.identity){
       console.log(val);
       this.myMaterials.push(
         new SingleMaterial(
@@ -288,7 +265,10 @@ export class MaterialsComponent implements OnInit {
           this.whoAproved(val.who_aproved),
           val.visits,
           this.getLearningPoints(val.learning_points,val.ratingPeople),
-          val.ratingPeople
+          val.ratingPeople,
+          val.description,
+          val.name,
+          val.theme
           )
       );
       
@@ -324,6 +304,163 @@ export class MaterialsComponent implements OnInit {
       return learning_points/ratingPeople;
     }
   }
+
+  upload() {
+    for (let material of this.uploadedFiles) {
+      const formData = new FormData();
+      formData.append("file",material); 
+      /*this.materialservice.createFile().subscribe(
+        response=> {
+          if(response == true) {
+
+          }
+        }
+      )*/
+    }
+  }
+
+
+  aumentar(file) {
+    let newfile = file.target.files[0];
+    this.contador += 1;
+    this.uploadedFiles.push(newfile);
+  }
+ 
+  rise() {
+    this.contador += 1;
+  }
+
+  
+  
+  select1() {
+    return this.box1;
+  }
+  change1() {
+    this.box1 = !this.box1;
+    this.p1 = !this.p1;
+  }
+  change1_2() {
+    this.box1 = !this.box1;
+    this.yt1 = !this.yt1;
+  }
+  select1_2() {
+    return this.box1 && this.yt1;
+  }
+  ss1() {
+    return this.box1 && this.p1;
+  }
+
+
+
+  select2() {
+    return this.box2;
+  }
+  select2_2() {
+    return this.box2 && this.yt2;
+  }
+  change2() {
+    this.box2 = !this.box2;
+    this.p2 = !this.p2;
+  }
+  change2_2() {
+    this.box2 = !this.box2;
+    this.yt2 = !this.yt2;
+  }
+  ss2() {
+    return this.box2 && this.p2;
+  }
+
+
+
+  select3() {
+    return this.box3;
+  }
+  select3_2() {
+    return this.box3 && this.yt3;
+  }
+  change3() {
+    this.box3 = !this.box3;
+    this.p3 = !this.p3;
+  }
+  change3_2() {
+    this.box3 = !this.box3;
+    this.yt3 = !this.yt3;
+  }
+  ss3() {
+    return this.box3 && this.p3;
+  }
+
+
+
+  select4() {
+    return this.box4;
+  }
+  select4_2() {
+    return this.box4 && this.yt4;
+  }
+  change4() {
+    this.box4 = !this.box4;
+    this.p4 = !this.p4;
+  }
+  change4_2() {
+    this.box4 = !this.box4;
+    this.yt4 = !this.yt4;
+  }
+  ss4() {
+    return this.box4 && this.p4;
+  }
+
+
+
+  select5() {
+    return this.box5;
+  }
+  select5_2() {
+    return this.box5 && this.yt5;
+  }
+  change5() {
+    this.box5 = !this.box5;
+    this.p5 = !this.p5;
+  }
+  change5_2() {
+    this.box5 = !this.box5;
+    this.yt5 = !this.yt5;
+  }
+  ss5() {
+    return this.box5 && this.p5;
+  }
+
+
+  secondDiv() {
+    if(this.contador >=1) {
+      return true;
+    } 
+    return false;
+  }
+
+  thirdDiv() {
+    if(this.contador >=2) {
+      return true;
+    } 
+    return false;
+  }
+
+  fouthDiv() {
+    if(this.contador >=3) {
+      return true;
+    } 
+    return false;
+  }
+
+  fifthDiv() {
+    if(this.contador >=4) {
+      return true;
+    } 
+    return false;
+  }
+
+
+
 }
 
 export class SingleMaterial {
@@ -339,8 +476,11 @@ export class SingleMaterial {
   public color_bar : string;
   public ratingPeople : number;
   public thisCurarButtom : boolean;
+  public desc : string;
+  public cur : string;
+  public tem : string
 
-  constructor(id,name,status,curated_by,views,learning_points,ratingPeople){
+  constructor(id,name,status,curated_by,views,learning_points,ratingPeople, description, curso, tema){
     this.id = id;
     this.name = name;
     this.status = status;
@@ -352,6 +492,9 @@ export class SingleMaterial {
     this.color_curated = this.getColorCurated(status);
     this.color_bar = this.getColorBar(this.temporal);
     this.ratingPeople = ratingPeople;
+    this.desc = description;
+    this.cur = curso;
+    this.tem = tema;
     console.log(this.temporal);
     if(this.status=="Creado"){
       this.thisCurarButtom = true;
@@ -380,4 +523,24 @@ export class SingleMaterial {
     else if(status == "Creado")
       return "badge badge-pill badge-dark";
   }  
+
+  
+};
+
+export class currentUpload {
+  public titulo : string;
+  public id : number;
+  public descripcion : string;
+  public curso : string;
+  public tema : string;
+
+  constructor() {}
+
+  constru(tit, i, desc, cur, tem) {
+    this.titulo = tit;
+    this.id = i;
+    this.descripcion = desc;
+    this.curso = cur;
+    this.tema = tem;
+  }
 };

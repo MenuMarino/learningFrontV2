@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ArgumentOutOfRangeError } from 'rxjs';
+import { MaterialServices } from '../../core/services/material-service'
 
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css']
+  styleUrls: ['./upload.component.css'],
+  providers: [MaterialServices]
 })
 export class UploadComponent implements OnInit {
   // Valores para prueba
@@ -30,11 +32,27 @@ export class UploadComponent implements OnInit {
   public p5 = false;
   public descripcion = "";
   private uploadedFiles : any = [];
-
-  constructor() { }
+  constructor(private materialservice : MaterialServices) { }
 
   ngOnInit(): void {
+
   }
+
+  upload() {
+    for (let material of this.uploadedFiles) {
+      const formData = new FormData();
+      formData.append("file",material); 
+      /*this.materialservice.createFile().subscribe(
+        response=> {
+          if(response == true) {
+
+          }
+        }
+      )*/
+    }
+  }
+
+
   aumentar(file) {
     let newfile = file.target.files[0];
     this.contador += 1;
@@ -45,9 +63,7 @@ export class UploadComponent implements OnInit {
     this.contador += 1;
   }
 
-  sendFile() {
-    
-  }
+  
   
   select1() {
     return this.box1;
