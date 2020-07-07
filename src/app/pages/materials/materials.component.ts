@@ -18,7 +18,6 @@ export class MaterialsComponent implements OnInit {
   private myMaterials : SingleMaterial[] = [];
   private Grades : string[] = ['1er grado','2do grado','3er grado','4to grado','5to grado'];
   private currentTema : any;
-  public curar_button : boolean = true;
   public temporal_resolve : any;
   public  tempora_theme : any;
 
@@ -123,8 +122,13 @@ export class MaterialsComponent implements OnInit {
           'en cola de curacion',
           'success'
         )
-        this.curar_button = false;
-
+        currentMaterial.thisCurarButtom = false;
+        this.materialService.sendToCurar(currentMaterial.id).subscribe(
+          response=>{
+            currentMaterial.status = "Pendiente";
+            currentMaterial.color_curated = "badge badge-pill badge-danger";
+          }
+        )
       }
     })
     console.log(currentMaterial);
@@ -152,6 +156,10 @@ export class MaterialsComponent implements OnInit {
 
   }
 
+  getCurarButton(material){
+    
+    return material.thisCurarButtom;
+  }
 
   ActualizarMaterial(currentMaterial){
     this.router.navigateByUrl("/upload");
@@ -220,8 +228,9 @@ export class MaterialsComponent implements OnInit {
       console.log(val);
       this.myMaterials.push(
         new SingleMaterial(
+          val.id,
           val.name,
-          this.ifAproved(val.who_aproved),
+          this.Status(val.estado),
           this.whoAproved(val.who_aproved),
           val.visits,
           this.getLearningPoints(val.learning_points,val.ratingPeople),
@@ -229,19 +238,23 @@ export class MaterialsComponent implements OnInit {
           )
       );
       
-      console.log(this.storageService.getCoursesLocalStorage());
-      console.log(this.storageService.getGradesLocalStorage());
-      console.log(this.identity);
+
     }
     
     console.log("estamos en materials");
     
   }
-  ifAproved(who_aproved){
-    if(who_aproved == null){
+  Status(status){
+    if(status == 0){
+      return "Creado";
+    }
+    else if(status == 1 ){
       return "Pendiente";
     }
-    return "Curado";
+    else if(status == 2){
+      return "Curado";
+    }
+    
   }
   whoAproved(who_aproved){
     if(who_aproved == null){
@@ -260,7 +273,7 @@ export class MaterialsComponent implements OnInit {
 }
 
 export class SingleMaterial {
-
+  public id : number;
   public name : string;
   public status : string;
   public curated_by : string;
@@ -271,8 +284,10 @@ export class SingleMaterial {
   public color_curated : string;
   public color_bar : string;
   public ratingPeople : number;
+  public thisCurarButtom : boolean;
 
-  constructor(name,status,curated_by,views,learning_points,ratingPeople){
+  constructor(id,name,status,curated_by,views,learning_points,ratingPeople){
+    this.id = id;
     this.name = name;
     this.status = status;
     this.curated_by = curated_by;
@@ -284,6 +299,13 @@ export class SingleMaterial {
     this.color_bar = this.getColorBar(this.temporal);
     this.ratingPeople = ratingPeople;
     console.log(this.temporal);
+    if(this.status=="Creado"){
+      this.thisCurarButtom = true;
+    }
+    else{
+      this.thisCurarButtom = false;
+    }
+    
   }
   getColorBar(temporal){
     if(temporal>=0 && temporal <50){
@@ -298,6 +320,10 @@ export class SingleMaterial {
     if(status == "Pendiente"){
       return "badge badge-pill badge-danger";
     }
-    return "badge badge-pill badge-success";
+    else if(status == "Curado")
+      return "badge badge-pill badge-success";
+    
+    else if(status == "Creado")
+      return "badge badge-pill badge-dark";
   }  
 };

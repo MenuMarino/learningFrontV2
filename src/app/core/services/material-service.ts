@@ -41,4 +41,14 @@ export class MaterialServices {
     console.log(data);
   return this.http.post(this.commonService.baseUrl + "/material/create", data);
   }
+
+  sendToCurar(
+    id : number,
+  ):Observable<any>{
+    const data = {
+      id
+    };
+    console.log(data);
+  return this.http.post(this.commonService.baseUrl + "/material/curate/" + id, data);
+  }
 }
