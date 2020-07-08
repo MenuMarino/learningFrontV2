@@ -346,33 +346,49 @@ export class MaterialsComponent implements OnInit {
   }
 
   upload() {
-
-/*
     for (let material of this.uploadedFiles) {
       const formData = new FormData();
       formData.append("file",material);
-      console.log(material);/*
-      this.materialService.createFile(
-        this.currentupload.id,
-
-        this.currentupload.titulo,
-        material.name,
-        material.type
-      ).subscribe(
-        response=> {
-          if(response == true) {
-
+      console.log("sadsdasd");
+      console.log(this.identity.id);
+      console.log(material.type);
+      this.materialService.sendFile(this.identity.id, formData).subscribe(
+        response=>{
+          if(response) {
+            console.log("asaas");
+              this.materialService.createFile(
+              this.currentupload.id,
+              this.currentupload.titulo,
+              material.name,
+              material.type
+            ).subscribe(
+              response=> {
+                if(response == true) {
+                  console.log("se creo correctamente :D");
+                }
+              }
+            )
+          } else {
+            Swal.fire({
+              allowOutsideClick: false,
+              text: 'Hubo un error al subir el archivo',
+              icon: 'error',
+            })
           }
         }
       )
     }
-*/
   }
 
 
   aumentar(file) {
     let newfile = file.target.files[0];
     this.contador += 1;
+    console.log(newfile.type);
+    console.log(newfile.name);
+    if(newfile.type == "application/pdf") {
+      console.log("JJJJ");
+    }
     this.uploadedFiles.push(newfile);
   }
  
