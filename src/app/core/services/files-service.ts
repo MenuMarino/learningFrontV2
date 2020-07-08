@@ -19,5 +19,13 @@ import { Observable } from "rxjs";
         console.log(data);
         return this.http.get(this.commonService.baseUrl + "/file", data);
         }
-  }
+    sendToFavorite(
+      id_user,
+      id_material
+    ): Observable<any>{
+      const data={};
+      return this.http.post(this.commonService.baseUrl + "/user/favourite/"+id_user+"/"+id_material,data);
+    }
 
+  }
+ 
