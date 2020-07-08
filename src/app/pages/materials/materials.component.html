@@ -69,7 +69,7 @@
                     <i class="fa fa-times"></i>
                     </button>
                     <button type="button" class="btn btn-info btn-circle" placement="top" triggers="mouseenter:mouseleave"
-                    ngbPopover="Actualizar el material" (click)="ActualizarMaterial(material)">
+                    ngbPopover="Actualizar el material" (click)="ActualizarMaterial(material)" [disabled]="!getCurarButton(material) ? 'disabled':null">
                     <i class="fa fa-list"></i>
                     </button>
                     <button type="button" class="btn btn-success btn-circle" placement="top" triggers="mouseenter:mouseleave"
