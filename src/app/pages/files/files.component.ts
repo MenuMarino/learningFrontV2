@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AllFilesService } from "src/app/core/services/files-service";
+import * as moment from 'moment';
 
 import { StorageService } from 'src/app/core/services/storage-service';
 
@@ -15,6 +16,7 @@ export class FilesComponent implements OnInit {
 
   private currentFile : any = null;
   public listFiles : File[] = [];
+  public identity : any;
 
   constructor(
     private storageService: StorageService,
@@ -22,6 +24,7 @@ export class FilesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
     this.filesService.getAllFiles(
       Number(this.storageService.getTempFile_Courses())
     ).subscribe(
@@ -54,7 +57,22 @@ export class FilesComponent implements OnInit {
       this.storageService.getTempFile_Courses(),
     ).subscribe(
       response=>{
-          console.log(response);  
+        const identity = {
+          id: this.identity.id,
+          name: this.identity.name,
+          lastname: this.identity.lastname,
+          email: this.identity.email,
+          username: this.identity.username,
+          role: this.identity.type,
+          grade: this.identity.grade,
+          birth: moment(this.identity.birth).format('DD/MM/YYYY'),
+          institucion: this.identity.institucion,
+          especialidad: this.identity.especialidad,
+          myMaterials: this.identity.myMaterials,
+          favouriteMaterials: response,
+        }
+        this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
+        console.log(identity.favouriteMaterials);
       }
     )
   }

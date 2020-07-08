@@ -15,7 +15,7 @@
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
-              <tr>
+              <tr style=" text-align: center;">
                 <th scope="col">Tema</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Curado por</th>
@@ -26,7 +26,7 @@
             </thead>
             <tbody>
               <tr  *ngFor = "let material of myMaterials | filterBy : userFilter">
-                <th scope="row">
+                <th scope="row" style=" text-align: center;">
                   <div class="media align-items-center">
                     <div class="avatar rounded-circle mr-3">
                       <img alt="{{material.name}}" src="../assets/img/brand/learning_logo.jpg">
@@ -37,19 +37,21 @@
                   </div>
                 </th>
                 
-                <td>
-                  <span [ngClass]="material.color_curated" style="font-size: 15px;">
+                <td style=" text-align: center;">
+                  <span [ngClass]="material.color_curated" style="font-size: 15px; " >
                     {{material.status}}
                   </span>
                 </td>
-                <td>
+                <td style=" text-align: center;">
                     {{material.curated_by}}
                   </td>
-                <td>
+                <td style=" text-align: center;">
+                 
                     {{material.views}}
+                  
                 </td>
                 <td>
-                  <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center" style="justify-content: center;">
                     <span class="mr-2">{{material.learning_points}}</span>
                     <div>
                       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 " > 
@@ -58,8 +60,9 @@
                     </div>
                   </div>
                 </td> 
-                <td>
-                  <div class="media align-items-center" style="min-width: 180px;">
+                <td >
+                  
+                  <div class="media align-items-center" style="justify-content: center; min-width: 180px;">
                     <button type="button" class="btn btn-primary btn-circle" placement="top" triggers="mouseenter:mouseleave"
                     ngbPopover="Mandar a curar" (click)="MandarCurar(material)" [disabled]="!getCurarButton(material) ? 'disabled':null">
                     <i class="fa fa-check"></i>
