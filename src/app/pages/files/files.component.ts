@@ -48,6 +48,10 @@ export class FilesComponent implements OnInit {
 
   }
 
+  addToFavorites() {
+    
+  }
+
   fileType() {
     if(this.currentFile.type == "PDF") {
       return true;
