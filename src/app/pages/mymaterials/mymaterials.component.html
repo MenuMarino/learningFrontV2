@@ -2,9 +2,9 @@
 <!-- Page content -->
 <div class="container-fluid mt--7 " >
   <!-- Table -->
-  <div class="row mt-6 "  >
+  <div class="row mt-6 " id="box" >
     <div class="col " >
-      <div class="card shadow ">
+      <div class="card shadow " >
         <div class="card-header border-0">
           <h3 class="mb-0">Favoritos</h3>
           <div class="form-group">
@@ -23,7 +23,7 @@
             </thead>
             <tbody>
               <tr  *ngFor = "let material of myFavouriteMaterials ">
-                <th scope="row">
+                <th scope="row" style=" text-align: center;">
                   <div class="media align-items-center">
                     <div class="avatar rounded-circle mr-3">
                       <img alt="{{material.name}}" src="../assets/img/brand/learning_logo.jpg">
@@ -33,25 +33,31 @@
                     </div>
                   </div>
                 </th>  
-                <td>
+                <td  style=" text-align: center;">
                     {{material.professor}}
                   </td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <span class="mr-2">{{material.learning_points}}</span>
-                        <div>
-                          <div class="progress">
-                            <div [ngClass] = "material.color_bar" role="progressbar"  aria-valuemin="0" aria-valuemax="100" [style.width] = "material.porcentaje_LP"></div>
-                          </div>
-                        </div>
+                <td  style=" text-align: center;">
+                  <div class="d-flex align-items-center" style="justify-content: center;">
+                    <span class="mr-2">{{material.learning_points}}</span>
+                    <div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 " > 
+                        <ngb-rating [rate]="material.temporal" [max]="5" [readonly]="true"></ngb-rating>
                       </div>
-                </td>
-                <td>
-                    <div class="media align-items-center">
-                        <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
-                          <img alt="{{material.name}}" src="../assets/img/theme/imagen.jpg">
-                        </a>
                     </div>
+                  </div>
+                </td>
+                <td >
+                  <div class="media align-items-center" style="justify-content: center;">
+                    <button type="button" class="btn btn-danger btn-circle" placement="top" triggers="mouseenter:mouseleave"
+                    ngbPopover="Eliminar de mis favoritos" (click)="MandarEliminar(material)" >
+                    <i class="fa fa-times"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-success btn-circle" placement="top" triggers="mouseenter:mouseleave"
+                    ngbPopover="Ir al material" (click)="IrMaterial(material)">
+                    <i class="fa fa-link"></i>
+                    </button>
+                  </div>
                 </td>        
               </tr>
             </tbody>

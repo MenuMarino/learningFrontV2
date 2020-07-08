@@ -307,6 +307,8 @@ export class MaterialsComponent implements OnInit {
           val.course.theme
           )
       );
+      console.log("ESTOS SON LOS MATERIALES");
+      console.log(this.identity.myMaterials);
       
 
     }
