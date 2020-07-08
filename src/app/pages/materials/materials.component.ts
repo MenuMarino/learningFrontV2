@@ -201,6 +201,7 @@ export class MaterialsComponent implements OnInit {
   }
 
   IrMaterial(currentMaterial){
+    this.storageService.setTempFile_Courses(currentMaterial.id);
     this.router.navigateByUrl("/files");
     console.log(currentMaterial);
   }
@@ -255,8 +256,9 @@ export class MaterialsComponent implements OnInit {
   ngOnInit(): void {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
     console.log(this.identity);
-    for (let val of this.identity){
-      console.log(val);
+    
+    for (let val of this.identity.myMaterials){
+      
       this.myMaterials.push(
         new SingleMaterial(
           val.id,
@@ -267,8 +269,8 @@ export class MaterialsComponent implements OnInit {
           this.getLearningPoints(val.learning_points,val.ratingPeople),
           val.ratingPeople,
           val.description,
-          val.name,
-          val.theme
+          val.course.name,
+          val.course.theme
           )
       );
       
@@ -306,6 +308,7 @@ export class MaterialsComponent implements OnInit {
   }
 
   upload() {
+
     for (let material of this.uploadedFiles) {
       const formData = new FormData();
       formData.append("file",material); 
