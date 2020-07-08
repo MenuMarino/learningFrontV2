@@ -57,6 +57,12 @@ export class MaterialServices {
   }
 
   createFile(materialId, fileName, link, type) {
-
+    const obj = {
+      materialid : materialId,
+      fileName : fileName,
+      link : link,
+      type : type
+    };
+    return this.http.post(this.commonService.baseUrl + "/file", obj);
   }
 }

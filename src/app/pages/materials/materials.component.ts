@@ -35,10 +35,9 @@ export class MaterialsComponent implements OnInit {
   public p3 = false;
   public p4 = false;
   public p5 = false;
-  public descripcion = "";
   private uploadedFiles : any = [];
   private currentupload : currentUpload = new currentUpload();
-
+  public ll : yt; 
   private identity: any;
   private myMaterials : SingleMaterial[] = [];
   private Grades : string[] = ['1er grado','2do grado','3er grado','4to grado','5to grado'];
@@ -48,7 +47,7 @@ export class MaterialsComponent implements OnInit {
   public curar_button : boolean = true;
 
   public temporal_resolve : any;
-  public  tempora_theme : any;
+  public tempora_theme : any;
 
   
   
@@ -59,7 +58,7 @@ export class MaterialsComponent implements OnInit {
     private materialService: MaterialServices,
 
   ) { 
-    
+    this.ll = new yt();
   }
 
   
@@ -191,7 +190,6 @@ export class MaterialsComponent implements OnInit {
   }
 
   getCurarButton(material){
-    
     return material.thisCurarButtom;
   }
 
@@ -309,21 +307,22 @@ export class MaterialsComponent implements OnInit {
   }
 
   upload() {
-
     for (let material of this.uploadedFiles) {
       const formData = new FormData();
-      formData.append("file",material); 
-      this.materialservice.createFile(
+      formData.append("file",material);
+      console.log(material);/*
+      this.materialService.createFile(
         this.currentupload.id,
-        
-
+        this.currentupload.titulo,
+        material.name,
+        material.type
       ).subscribe(
         response=> {
           if(response == true) {
 
           }
         }
-      )
+      )*/
     }
   }
 
@@ -552,3 +551,12 @@ export class currentUpload {
     this.tema = tem;
   }
 };
+
+export class yt {
+  public link1 : string;
+  public link2 : string;
+  public link3 : string;
+  public link4 : string;
+  public link5 : string;
+  constructor(){}
+}
