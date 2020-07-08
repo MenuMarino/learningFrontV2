@@ -122,6 +122,7 @@ export class MaterialsComponent implements OnInit {
                 myMaterials: response.myMaterials,
                 favouriteMaterials: response.favouriteMaterials,
               }
+              console.log("ESTO ES EL ID DEL QUE LO CREO : "+response.id);
               this.currentupload.constru(this.temporal_resolve[0], response.myMaterials[0].id, this.temporal_resolve[1], this.storageService.getCoursesLocalStorage()[results[2]],this.currentTema[Number(valor)]);
               console.log(this.currentupload);
               this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
@@ -155,10 +156,13 @@ export class MaterialsComponent implements OnInit {
           'success'
         )
         currentMaterial.thisCurarButtom = false;
-        this.materialService.sendToCurar(currentMaterial.id).subscribe(
+        this.materialService.sendToCurar(currentMaterial.id, 1).subscribe(
           response=>{
             currentMaterial.status = "Pendiente";
             currentMaterial.color_curated = "badge badge-pill badge-danger";
+            console.log("LLEGO ACAAAAAAAAAAAAAAAAA");
+
+            
           }
         )
 
@@ -182,6 +186,35 @@ export class MaterialsComponent implements OnInit {
           'Eliminado!',
           'Tu materia ha sido eliminado.',
           'success'
+        )
+        this.materialService.sendToDelete(
+          currentMaterial.id,
+          3
+        ).subscribe(
+          response=>{
+            if(response){
+              console.log("Done");
+              console.log(response);
+              const identity = {
+                id: this.identity.id,
+                name: this.identity.name,
+                lastname: this.identity.lastname,
+                email: this.identity.email,
+                username: this.identity.username,
+                role: this.identity.type,
+                grade: this.identity.grade,
+                birth: moment(this.identity.birth).format('DD/MM/YYYY'),
+                institucion: this.identity.institucion,
+                especialidad: this.identity.especialidad,
+                myMaterials: response,
+                favouriteMaterials: this.identity.favouriteMaterials,
+              }
+              this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
+              this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+                this.router.navigate(['/materials']);
+            });               
+            }
+          }
         )
       }
     })
@@ -257,12 +290,12 @@ export class MaterialsComponent implements OnInit {
     console.log(this.identity);
     
     for (let val of this.identity.myMaterials){
-      
+      if(val.status !=3){
       this.myMaterials.push(
         new SingleMaterial(
           val.id,
           val.name,
-          this.Status(val.estado),
+          this.Status(val.status),
           this.whoAproved(val.who_aproved),
           val.visits,
           this.getLearningPoints(val.learning_points,val.ratingPeople),
@@ -275,12 +308,18 @@ export class MaterialsComponent implements OnInit {
       
 
     }
+  }
     
-    console.log("estamos en materials");
+    console.log(this.identity.myMaterials);
+    console.log(this.myMaterials);
     
   }
+
+
+
   Status(status){
     if(status == 0){
+      console.log("Entro aca");
       return "Creado";
     }
     else if(status == 1 ){
@@ -307,12 +346,15 @@ export class MaterialsComponent implements OnInit {
   }
 
   upload() {
+
+/*
     for (let material of this.uploadedFiles) {
       const formData = new FormData();
       formData.append("file",material);
       console.log(material);/*
       this.materialService.createFile(
         this.currentupload.id,
+
         this.currentupload.titulo,
         material.name,
         material.type
@@ -322,8 +364,9 @@ export class MaterialsComponent implements OnInit {
 
           }
         }
-      )*/
+      )
     }
+*/
   }
 
 

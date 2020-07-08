@@ -49,7 +49,14 @@ export class FilesComponent implements OnInit {
   }
 
   addToFavorites() {
-    
+    this.filesService.sendToFavorite(
+      JSON.parse(this.storageService.getIdentityLocalStorage()).id,
+      this.storageService.getTempFile_Courses(),
+    ).subscribe(
+      response=>{
+          console.log(response);  
+      }
+    )
   }
 
   fileType() {

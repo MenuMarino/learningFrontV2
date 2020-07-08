@@ -55,6 +55,7 @@ export class StorageService {
 		localStorage.setItem("identity", identity);
 	}
 
+
 	setCoursesLocalStorage(courses: string) {
 		localStorage.setItem("courses", courses);
 	}

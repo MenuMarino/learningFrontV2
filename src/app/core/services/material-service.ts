@@ -44,12 +44,18 @@ export class MaterialServices {
 
   sendToCurar(
     id : number,
+    status : number
   ):Observable<any>{
-    const data = {
-      id
-    };
-    console.log(data);
-    return this.http.post(this.commonService.baseUrl + "/material/curate/" + id, data);
+    const data = {} 
+    return this.http.post(this.commonService.baseUrl + "/material/status/" + id + "/"+status,data);
+  }
+
+  sendToDelete(
+    id,
+    status
+  ):Observable<any>{
+    const data = {}
+    return this.http.post(this.commonService.baseUrl + "/material/status/" + id + "/"+status,data);
   }
 
   sendFile(file, id) : Observable<any> {
