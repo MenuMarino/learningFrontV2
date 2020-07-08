@@ -56,7 +56,7 @@ export class MaterialServices {
     return this.http.post(this.commonService.baseUrl + "/file/uploads/" + id + "/materials", file);
   }
 
-  createFile(materialId, fileName, link, descripcion, type) {
+  createFile(materialId, fileName, link, type) {
 
   }
 }

@@ -123,7 +123,8 @@ export class MaterialsComponent implements OnInit {
                 myMaterials: response.myMaterials,
                 favouriteMaterials: response.favouriteMaterials,
               }
-              this.currentupload.constru(this.temporal_resolve[0], 12, this.temporal_resolve[1], this.storageService.getCoursesLocalStorage()[results[2]],this.currentTema[Number(valor)]);
+              this.currentupload.constru(this.temporal_resolve[0], response.myMaterials[0].id, this.temporal_resolve[1], this.storageService.getCoursesLocalStorage()[results[2]],this.currentTema[Number(valor)]);
+              console.log(this.currentupload);
               this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
             },
             (error) => {
@@ -197,7 +198,7 @@ export class MaterialsComponent implements OnInit {
   ActualizarMaterial(currentMaterial){
     this.toUpload = true;
     this.currentupload.constru(currentMaterial.name, currentMaterial.id, currentMaterial.desc, currentMaterial.cur, currentMaterial.tem);
-    console.log(currentMaterial);
+    console.log(this.currentupload);
   }
 
   IrMaterial(currentMaterial){
@@ -312,13 +313,17 @@ export class MaterialsComponent implements OnInit {
     for (let material of this.uploadedFiles) {
       const formData = new FormData();
       formData.append("file",material); 
-      /*this.materialservice.createFile().subscribe(
+      this.materialservice.createFile(
+        this.currentupload.id,
+        
+
+      ).subscribe(
         response=> {
           if(response == true) {
 
           }
         }
-      )*/
+      )
     }
   }
 
