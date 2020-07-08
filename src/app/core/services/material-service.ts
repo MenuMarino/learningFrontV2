@@ -58,11 +58,22 @@ export class MaterialServices {
     return this.http.post(this.commonService.baseUrl + "/material/status/" + id + "/"+status,data);
   }
 
-  sendFile(file, id) : Observable<any> {
-    return this.http.post(this.commonService.baseUrl + "/file/uploads/" + id + "/materials", file);
+  sendFile(id, file) : Observable<any> {
+    return this.http.post(this.commonService.baseUrl + "/uploads/uploads/" + id + "/materiales", file);
   }
 
-  createFile(materialId, fileName, link, type) {
-
+  createFile(materialId, fileName, link, type) : Observable<any>{
+    if(type == "application/pdf") {
+      type = "PDF"
+    } else {
+      type = "VIDEO"
+    }
+    const obj = {
+      materialid : materialId,
+      name : fileName,
+      link : link,
+      type_of_file : type
+    };
+    return this.http.post(this.commonService.baseUrl + "/file", obj);
   }
 }

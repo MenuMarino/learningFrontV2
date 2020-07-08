@@ -35,10 +35,9 @@ export class MaterialsComponent implements OnInit {
   public p3 = false;
   public p4 = false;
   public p5 = false;
-  public descripcion = "";
   private uploadedFiles : any = [];
   private currentupload : currentUpload = new currentUpload();
-
+  public ll : yt; 
   private identity: any;
   private myMaterials : SingleMaterial[] = [];
   private Grades : string[] = ['1er grado','2do grado','3er grado','4to grado','5to grado'];
@@ -48,7 +47,7 @@ export class MaterialsComponent implements OnInit {
   public curar_button : boolean = true;
 
   public temporal_resolve : any;
-  public  tempora_theme : any;
+  public tempora_theme : any;
 
   
   
@@ -59,7 +58,7 @@ export class MaterialsComponent implements OnInit {
     private materialService: MaterialServices,
 
   ) { 
-    
+    this.ll = new yt();
   }
 
   
@@ -225,7 +224,6 @@ export class MaterialsComponent implements OnInit {
   }
 
   getCurarButton(material){
-    
     return material.thisCurarButtom;
   }
 
@@ -351,28 +349,49 @@ export class MaterialsComponent implements OnInit {
   }
 
   upload() {
-/*
     for (let material of this.uploadedFiles) {
       const formData = new FormData();
-      formData.append("file",material); 
-      this.materialservice.createFile(
-        this.currentupload.id,
-
-
-      ).subscribe(
-        response=> {
-          if(response == true) {
-
+      formData.append("file",material);
+      console.log("sadsdasd");
+      console.log(this.identity.id);
+      console.log(material.type);
+      this.materialService.sendFile(this.identity.id, formData).subscribe(
+        response=>{
+          if(response) {
+            console.log("asaas");
+              this.materialService.createFile(
+              this.currentupload.id,
+              this.currentupload.titulo,
+              material.name,
+              material.type
+            ).subscribe(
+              response=> {
+                if(response == true) {
+                  console.log("se creo correctamente :D");
+                }
+              }
+            )
+          } else {
+            Swal.fire({
+              allowOutsideClick: false,
+              text: 'Hubo un error al subir el archivo',
+              icon: 'error',
+            })
           }
         }
       )
-    }*/
+    }
   }
 
 
   aumentar(file) {
     let newfile = file.target.files[0];
     this.contador += 1;
+    console.log(newfile.type);
+    console.log(newfile.name);
+    if(newfile.type == "application/pdf") {
+      console.log("JJJJ");
+    }
     this.uploadedFiles.push(newfile);
   }
  
@@ -594,3 +613,12 @@ export class currentUpload {
     this.tema = tem;
   }
 };
+
+export class yt {
+  public link1 : string;
+  public link2 : string;
+  public link3 : string;
+  public link4 : string;
+  public link5 : string;
+  constructor(){}
+}
