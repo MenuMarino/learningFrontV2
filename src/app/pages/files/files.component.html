@@ -4,8 +4,12 @@
     <div class="row" style = "width :2800px; padding :20px">
       <div class="col" style="max-width : 1200px ;padding : 10px ;" >
         <div class="card shadow" style = "border-width : 5px" >
-          <div class="card-header bg-transparent" >
-            <h3 class="mb-0">Vista Previa</h3>
+          <div class="card-header bg-transparent"  style=" display: flex; ">
+            <h3 class="mb-0" >Vista Previa</h3>
+            <div style="position:absolute; right:20px;  display: flex; ">
+            <h3 class="mb-0 " >Learning Points : </h3>
+            <h3 class="mb-0 "style="color:red " >{{currentPoints}}</h3>
+          </div>
           </div>
           <div class="card-body" [ngStyle]="{'border-color' : error_course === true ? '#8B0000' : '#fff' , 'box-shadow':error_course === true ? '0 0 10px red' : ' 0 0 0px gold' }" >
             <div *ngIf="currentFile">
@@ -66,6 +70,17 @@
         </div>  
       </div>
       <div class="text-center" style = "min-width: 280px;">
+        <div class="container" > 
+          <div class="row" style="justify-content: center; ">
+          <div class="rating">
+              <input type="radio" id="star5" name="rating" value="5" (click)="clickStar(5)"/><label for="star5" title="Meh">5 stars</label>
+              <input type="radio" id="star4" name="rating" value="4" (click)="clickStar(4)"/><label for="star4" title="Kinda bad">4 stars</label>
+              <input type="radio" id="star3" name="rating" value="3" (click)="clickStar(3)"/><label for="star3" title="Kinda bad">3 stars</label>
+              <input type="radio" id="star2" name="rating" value="2" (click)="clickStar(2)"/><label for="star2" title="Sucks big tim">2 stars</label>
+              <input type="radio" id="star1" name="rating" value="1" (click)="clickStar(1)"/><label for="star1" title="Sucks big time">1 star</label>
+            </div>
+          </div>
+        </div>
         <a type="button" (click)="downloadMaterial()" class="btn btn-success mt-4">
           Descargar
         </a>

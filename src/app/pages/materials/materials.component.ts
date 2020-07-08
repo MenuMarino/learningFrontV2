@@ -123,7 +123,8 @@ export class MaterialsComponent implements OnInit {
                 myMaterials: response.myMaterials,
                 favouriteMaterials: response.favouriteMaterials,
               }
-              console.log("ESTO ES EL ID DEL QUE LO CREO : "+response.id);
+              console.log("ESTO ES EL ID DEL QUE LO CREO : ");
+              console.log(response);
               this.currentupload.constru(this.temporal_resolve[0], response.myMaterials[0].id, this.temporal_resolve[1], this.storageService.getCoursesLocalStorage()[results[2]],this.currentTema[Number(valor)]);
               console.log(this.currentupload);
               this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
@@ -207,8 +208,8 @@ export class MaterialsComponent implements OnInit {
                 birth: moment(this.identity.birth).format('DD/MM/YYYY'),
                 institucion: this.identity.institucion,
                 especialidad: this.identity.especialidad,
-                myMaterials: response,
-                favouriteMaterials: this.identity.favouriteMaterials,
+                myMaterials: response.myMaterials,
+                favouriteMaterials: response.favouriteMaterials,
               }
               this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
               this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
@@ -290,7 +291,7 @@ export class MaterialsComponent implements OnInit {
   ngOnInit(): void {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
     console.log(this.identity);
-    
+
     for (let val of this.identity.myMaterials){
       if(val.status !=3){
       this.myMaterials.push(

@@ -17,11 +17,15 @@ export class FilesComponent implements OnInit {
   private currentFile : any = null;
   public listFiles : File[] = [];
   public identity : any;
+  public currentPoints : string = "3.5/5";
+  public idFile : Number;
 
   constructor(
     private storageService: StorageService,
     private filesService : AllFilesService
   ) { }
+
+
 
   ngOnInit(): void {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
@@ -29,22 +33,29 @@ export class FilesComponent implements OnInit {
       Number(this.storageService.getTempFile_Courses())
     ).subscribe(
       response =>{
+        console.log("ACA ES:")
         console.log(response);
-        for (let val in response){
-          console.log(response[val]);
+        for (let val in response.files){
+          console.log(response.files[val]);
           this.listFiles.push( new File(
-            response[val].name,
-            response[val].type,
-            response[val].link,
-            response[val].material_from.who_posted.id,
+            response.files[val].name,
+            response.files[val].type,
+            response.files[val].link,
+            response.whoPosted.id,
             )
           )
         }
-        console.log(this.listFiles);
+        console.log("ESTE ES EL MATERIAL");
+        console.log(response);
+        this.idFile = response.id;
+        this.currentPoints = ((response.learningPoints/response.ratingPeople).toFixed(2)).toString()+"/5";
       }, error => {
         console.log(error);
       }
     )
+
+    
+
   }
 
   downloadMaterial() {
@@ -69,7 +80,7 @@ export class FilesComponent implements OnInit {
           institucion: this.identity.institucion,
           especialidad: this.identity.especialidad,
           myMaterials: this.identity.myMaterials,
-          favouriteMaterials: response,
+          favouriteMaterials: response.favouriteMaterials,
         }
         this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
         console.log(identity.favouriteMaterials);
@@ -83,6 +94,22 @@ export class FilesComponent implements OnInit {
     }
     return false;
   }
+
+  clickStar(data){
+    console.log(data);
+      this.filesService.sendRating(
+        this.idFile,
+        this.identity.id,
+        Number(data)
+    ).subscribe(
+      response=>{
+        this.currentPoints = ((response.learningPoints/response.ratingPeople).toFixed(2)).toString()+"/5";
+      }
+    )
+    
+  }
+
+/*material id, learningpoints, user_id, */
 
   typeVideo() {
     if(this.currentFile.type == "YOUTUBE_LINK") {
@@ -119,31 +146,3 @@ export class File{
   }
 };
 
-
-/*<<<<<<< HEAD
-  public archivos: any[] = [
-    {
-      name: "JSJSJ",
-      type: "pdf",
-      peso: 123,
-      ruta: '/assets/pdfs/pdf1.pdf',
-      backgroundcolor : '#f6f9fc'
-    },
-    {
-      name: "JS",
-      type: "yt",
-      peso: 123,
-      ruta: '/assets/pdfs/pdf2.pdf',
-      backgroundcolor : '#f6f9fc'
-    },
-    {
-      name: "ll",
-      type: "mp4",
-      peso: 123, 
-      ruta: '/assets/pdfs/pdf3.pdf',
-      backgroundcolor : '#f6f9fc'
-    }
-  ]
-=======
-  
->>>>>>> 05287435f9aaca8ca0cd3a4438597d17d8d2931a*/
