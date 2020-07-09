@@ -62,6 +62,14 @@ export class MaterialServices {
     return this.http.post(this.commonService.baseUrl + "/uploads/uploads/" + id + "/materiales", file);
   }
 
+  getMyMaterials(id): Observable<any>{
+    return this.http.get(this.commonService.baseUrl + "/user/mymaterials/"+id);
+  }
+
+  getMyFavouriteMaterials(id): Observable<any>{
+    return this.http.get(this.commonService.baseUrl + "/user/myfavmaterials/"+id);
+  }
+
   createFile(materialId, fileName, link, type) : Observable<any>{
     if(type == "application/pdf") {
       type = "PDF"

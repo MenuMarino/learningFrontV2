@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AllFilesService } from "src/app/core/services/files-service";
 import * as moment from 'moment';
-
+import { DOCUMENT } from '@angular/common'; 
 import { StorageService } from 'src/app/core/services/storage-service';
+import { Inject }  from '@angular/core';
 
 
 
@@ -22,7 +23,8 @@ export class FilesComponent implements OnInit {
 
   constructor(
     private storageService: StorageService,
-    private filesService : AllFilesService
+    private filesService : AllFilesService,
+    @Inject(DOCUMENT) document
   ) { }
 
 
@@ -54,6 +56,17 @@ export class FilesComponent implements OnInit {
       }
     )
 
+    this.filesService.getRateUser(
+      this.identity.id,
+      Number(this.storageService.getTempFile_Courses())
+    ).subscribe(
+      response =>{
+        if(response){
+          console.log(response);
+          document.getElementById("star"+response.toString()).click();;
+        }
+      }
+    )
     
 
   }

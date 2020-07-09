@@ -3,6 +3,8 @@ import { StorageService } from 'src/app/core/services/storage-service';
 import { FilterPipe } from 'ngx-filter-pipe';
 import { Router } from "@angular/router";
 import { AllFilesService } from "src/app/core/services/files-service";
+import { MaterialServices } from 'src/app/core/services/material-service';
+
 import * as moment from 'moment';
 
 
@@ -11,7 +13,7 @@ import * as moment from 'moment';
   selector: 'app-mymaterials',
   templateUrl: './mymaterials.component.html',
   styleUrls: ['./mymaterials.component.css'],
-  providers: [StorageService, AllFilesService]
+  providers: [StorageService, AllFilesService,MaterialServices]
 })
 export class MyMaterialsComponent implements OnInit {
   private identity: any;
@@ -20,8 +22,8 @@ export class MyMaterialsComponent implements OnInit {
     private storageService: StorageService,
     private filterPipe: FilterPipe,
     private router: Router,
-    private filesService : AllFilesService
-
+    private filesService : AllFilesService,
+    private materialService : MaterialServices
   ) { }
 
   public userFilter: any = {
@@ -30,10 +32,24 @@ export class MyMaterialsComponent implements OnInit {
 
   ngOnInit(): void {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
-    console.log(this.identity.favouriteMaterials);
-    for (let val of this.identity.favouriteMaterials){
-      console.log("este es val");
-      console.log(val);
+    this.materialService.getMyFavouriteMaterials(this.identity.id).subscribe(
+      response=>{
+        if(response){
+          for(let val of response){
+            this.myFavouriteMaterials.push(
+              new SingleMaterial(
+                val.id,
+                val.name,
+                val.whoPosted.username,
+                this.getLearningPoints(val.learningPoints,val.ratingPeople),
+
+              )
+            )
+          }
+        }
+      }
+    )
+    /*for (let val of this.identity.favouriteMaterials){
       if(val.status != 3){
       this.myFavouriteMaterials.push(
         new SingleMaterial(
@@ -45,17 +61,15 @@ export class MyMaterialsComponent implements OnInit {
         )
       );
     }
-    console.log();
-    }
-    console.log(this.identity.favouriteMaterials);
+    }*/
   }
 
-  getLearningPoints(learning_points,ratingPeople){
-    if(learning_points == null){
+  getLearningPoints(learningPoints,ratingPeople){
+    if(learningPoints == null){
       return "0";
     }
     else{
-      return learning_points/ratingPeople;
+      return ((learningPoints/ratingPeople).toFixed(2));
     }
   }
 
