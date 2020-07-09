@@ -386,6 +386,22 @@ export class MaterialsComponent implements OnInit {
         }
       )
     }
+    for(let i = 0; i < 5; i++) {
+      let a = this.ll.get_link(i+1);
+      if(a != "") {
+        this.materialService.createFile(
+        this.currentupload.id,
+        this.currentupload.titulo,
+        a,
+        ""
+      ).subscribe(
+        response=> {
+          if(response == true) {
+            console.log("se creo correctamente :D");
+          }
+        })
+      }
+    }
   }
 
 
@@ -616,4 +632,22 @@ export class yt {
   public link4 : string;
   public link5 : string;
   constructor(){}
+  /**
+   * get_link
+   */
+  public get_link(indice) {
+    if(indice == 1) {
+      return this.link1;
+    }
+    if(indice == 2) {
+      return this.link2;
+    }
+    if(indice == 3) {
+      return this.link3;
+    }
+    if(indice == 4) {
+      return this.link4;
+    }
+    return this.link5;
+  }
 }

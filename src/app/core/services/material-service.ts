@@ -73,8 +73,10 @@ export class MaterialServices {
   createFile(materialId, fileName, link, type) : Observable<any>{
     if(type == "application/pdf") {
       type = "PDF"
-    } else {
+    } else if(type == "video/mp4"){
       type = "VIDEO"
+    } else {
+      type = "YOUTUBE_LINK"
     }
     const obj = {
       materialId : materialId,
