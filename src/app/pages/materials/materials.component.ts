@@ -350,6 +350,8 @@ export class MaterialsComponent implements OnInit {
   }
 
   upload() {
+    let a = true;
+    let b = true;
     for (let material of this.uploadedFiles) {
       const formData = new FormData();
       formData.append("file",material);
@@ -377,6 +379,7 @@ export class MaterialsComponent implements OnInit {
               }
             )
           } else {
+            a = false;
             Swal.fire({
               allowOutsideClick: false,
               text: 'Hubo un error al subir el archivo',
@@ -398,14 +401,17 @@ export class MaterialsComponent implements OnInit {
         response=> {
           if(response == true) {
             console.log("se creo correctamente :D");
-            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-              this.router.navigate(['/materials']);
-            }); 
+          } else {
+            b = false;
           }
         })
       }
     }
-    
+    if(a && b) {
+      this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/materials']);
+      }); 
+    }
   }
 
 
