@@ -213,7 +213,7 @@ export class MaterialsComponent implements OnInit {
               this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
               this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
                 this.router.navigate(['/materials']);
-            });               
+              });               
             }
           }
         )
@@ -393,15 +393,19 @@ export class MaterialsComponent implements OnInit {
         this.currentupload.id,
         this.currentupload.titulo,
         a,
-        ""
+        "yt"
       ).subscribe(
         response=> {
           if(response == true) {
             console.log("se creo correctamente :D");
+            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/materials']);
+            }); 
           }
         })
       }
     }
+    
   }
 
 
@@ -626,11 +630,11 @@ export class currentUpload {
 };
 
 export class yt {
-  public link1 : string;
-  public link2 : string;
-  public link3 : string;
-  public link4 : string;
-  public link5 : string;
+  public link1 : string = "";
+  public link2 : string = "";
+  public link3 : string = "";
+  public link4 : string = "";
+  public link5 : string = "";
   constructor(){}
   /**
    * get_link

@@ -26,8 +26,9 @@
               </div>
               <div *ngIf="!fileType()">
                 <div *ngIf="typeVideo()">
-                  <iframe width="1000px" height="520" src="https://www.youtube.com/embed/t3DpuQrBivU" frameborder="0" allowfullscreen></iframe>  
+                  <iframe width="1000px" height="520" [src]="sanitizer.bypassSecurityTrustResourceUrl(currentFile.ruta)" frameborder="0" allowfullscreen></iframe>  
                 </div>
+                <!--https://www.youtube.com/embed/t3DpuQrBivU-->
                 <div class="video" *ngIf="!typeVideo()">
                     <video controls (click)="toggleVideo()" width="1000px" height="520" #videoPlayer>
                         <source [(src)]="currentFile.ruta" type="video/mp4" />

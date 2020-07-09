@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { DOCUMENT } from '@angular/common'; 
 import { StorageService } from 'src/app/core/services/storage-service';
 import { Inject }  from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 
@@ -20,8 +21,9 @@ export class FilesComponent implements OnInit {
   public identity : any;
   public currentPoints : string = "3.5/5";
   public idFile : Number;
-
+//https://www.youtube.com/embed/TNRCvG9YtYI
   constructor(
+    public sanitizer: DomSanitizer,
     private storageService: StorageService,
     private filesService : AllFilesService,
     @Inject(DOCUMENT) document
@@ -121,7 +123,7 @@ export class FilesComponent implements OnInit {
     )
     
   }
-
+//https://www.youtube.com/embed/cpbeS15sHZ0
 /*material id, learningpoints, user_id, */
 
   typeVideo() {
@@ -132,6 +134,8 @@ export class FilesComponent implements OnInit {
   }
   
   chooseFile(file) {
+    console.log("hey there");
+    console.log(file);
     if(this.currentFile !=null){
       this.currentFile.backgroundcolor = '#f6f9fc';
     }
