@@ -22,6 +22,14 @@ export class MaterialServices {
     return this.http.get(this.commonService.baseUrl + "/courses/themes", data);
   }
 
+  curarMaterial(
+    id_who_curate,
+    id_material,
+  ) : Observable<any>{
+    const data = {}
+    return this.http.post(this.commonService.baseUrl + "/curator/accept/"+id_who_curate+"/"+id_material, data);
+  }
+
   createMaterial(
     id : number,
     name : string,
@@ -87,12 +95,3 @@ export class MaterialServices {
     return this.http.post(this.commonService.baseUrl + "/file", obj);
   }
 }
-/* 
-Long materialId;
-
-    String name;
-
-    String link;
-
-    Type_of_file typeOfFile;
-*/

@@ -37,6 +37,7 @@ export class AllTcuratorsComponent implements OnInit {
         if(response){
             console.log(response); 
             for(let val of response){
+                if(val.date != null){
                 this.myFavouriteMaterials.push(
                 new SingleMaterial(
                     val.id,
@@ -45,6 +46,7 @@ export class AllTcuratorsComponent implements OnInit {
                     val.date.substring(0,10),
                     )
                 )
+            }
             }
         }
       }

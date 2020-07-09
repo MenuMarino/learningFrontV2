@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AllFilesService } from "src/app/core/services/files-service";
+import { MaterialServices } from "src/app/core/services/material-service";
+
 import * as moment from 'moment';
 import { DOCUMENT } from '@angular/common'; 
 import { StorageService } from 'src/app/core/services/storage-service';
@@ -12,7 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   selector: 'app-files',
   templateUrl: './files.component.html',
   styleUrls: ['./files.component.css'],
-  providers: [StorageService,AllFilesService]
+  providers: [StorageService,AllFilesService,MaterialServices]
 })
 export class FilesComponent implements OnInit {
 
@@ -29,46 +31,46 @@ export class FilesComponent implements OnInit {
     public sanitizer: DomSanitizer,
     private storageService: StorageService,
     private filesService : AllFilesService,
+    private materialService : MaterialServices,
     @Inject(DOCUMENT) document
   ) { }
 
 
 
   ngOnInit(): void {
-    this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
-    if(this.identity.type == "CURATOR"){
-      this.isCurator = true;
-      
-    }
-    else{
-      this.isCurator = false;
-      
-    }
-   
+    this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());  
     
     this.filesService.getAllFiles(
       Number(this.storageService.getTempFile_Courses())
     ).subscribe(
       response =>{
-        console.log("ACA ES:")
-        console.log(response);
+        console.log(this.identity);
+        if(this.identity.id == response.whoPosted.id){
+          this.isOwner = true;
+        }
+        else{this.isOwner = false;}
+        if(this.identity.role == "CURATOR"){
+          this.isCurator = true;
+        }
+        else{
+          this.isCurator = false;
+        }
         for (let val in response.files){
-          console.log(response.files[val]);
           this.listFiles.push( new File(
             response.files[val].name,
             response.files[val].type,
             response.files[val].link,
             response.whoPosted.id,
             )
-          )
+          )   
         }
+
         this.idUser = response.whoPosted.id;
-        console.log("ESTE ES EL MATERIAL");
-        console.log(response);
+
         this.idFile = response.id;
         this.currentPoints = ((response.learningPoints/response.ratingPeople).toFixed(2)).toString()+"/5";
       }, error => {
-        console.log(error);
+
       }
     )
 
@@ -78,23 +80,30 @@ export class FilesComponent implements OnInit {
     ).subscribe(
       response =>{
         if(response){
-          console.log(response);
+          
           document.getElementById("star"+response.toString()).click();;
         }
       }
     )
-    
-    if(this.identity.user == this.idUser){
-      console.log("isOwner");
-    }
-    else{
-      
 
-      this.isOwner = false;
-    }
-    console.log(this.isCurator + " - " + this.isOwner);
   }
 
+  AceptarCurar(){
+    this.materialService.curarMaterial(
+      this.identity.id,
+      this.idFile,
+    ).subscribe(
+      response=>{
+        if(response){
+          console.log(response);
+        }
+      }
+    )
+  }
+
+  NegarCurar(){
+    this.materialService.
+  }
 
 
   downloadMaterial() {
@@ -122,7 +131,7 @@ export class FilesComponent implements OnInit {
           favouriteMaterials: response.favouriteMaterials,
         }
         this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
-        console.log(identity.favouriteMaterials);
+       
       }
     )
   }
@@ -135,7 +144,7 @@ export class FilesComponent implements OnInit {
   }
 
   clickStar(data){
-    console.log(data);
+
       this.filesService.sendRating(
         this.idFile,
         this.identity.id,
@@ -158,8 +167,7 @@ export class FilesComponent implements OnInit {
   }
   
   chooseFile(file) {
-    console.log("hey there");
-    console.log(file);
+
     if(this.currentFile !=null){
       this.currentFile.backgroundcolor = '#f6f9fc';
     }
@@ -178,7 +186,7 @@ export class File{
     
     if(type!='YOUTUBE_LINK'){
       this.ruta = 'http://localhost:8081/uploads/download/'+id_user+'/materiales/'+ruta;
-      console.log(this.ruta);
+
     }
     else{
       this.ruta = ruta;

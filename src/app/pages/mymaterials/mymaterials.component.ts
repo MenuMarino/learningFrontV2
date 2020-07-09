@@ -25,7 +25,7 @@ export class MyMaterialsComponent implements OnInit {
     private filesService : AllFilesService,
     private materialService : MaterialServices
   ) { }
-  
+
   public newuserFilter: any = {
     name: "",
   };
@@ -50,7 +50,6 @@ export class MyMaterialsComponent implements OnInit {
         }
       }
     )
-
   }
 
   getLearningPoints(learningPoints,ratingPeople){
