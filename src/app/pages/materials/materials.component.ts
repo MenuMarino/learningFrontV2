@@ -359,6 +359,10 @@ export class MaterialsComponent implements OnInit {
         response=>{
           if(response) {
             console.log("asaas");
+            console.log(this.currentupload.id,
+              this.currentupload.titulo,
+              material.name,
+              material.type);
               this.materialService.createFile(
               this.currentupload.id,
               this.currentupload.titulo,

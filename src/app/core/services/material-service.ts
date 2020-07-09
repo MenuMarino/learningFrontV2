@@ -69,11 +69,20 @@ export class MaterialServices {
       type = "VIDEO"
     }
     const obj = {
-      materialid : materialId,
+      materialId : materialId,
       name : fileName,
       link : link,
-      type_of_file : type
+      typeOfFile : type
     };
     return this.http.post(this.commonService.baseUrl + "/file", obj);
   }
 }
+/* 
+Long materialId;
+
+    String name;
+
+    String link;
+
+    Type_of_file typeOfFile;
+*/
