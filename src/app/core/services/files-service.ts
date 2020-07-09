@@ -14,6 +14,7 @@ import { MaterialServices } from "./material-service";
     getAllFiles(
         id
       ): Observable<any> {
+        
         return this.http.get(this.commonService.baseUrl + "/material/id/"+id);
         }
 
@@ -36,7 +37,7 @@ import { MaterialServices } from "./material-service";
       userId,
       materialId
     ): Observable<any>{
-      return this.http.get(this.commonService.baseUrl + "/ratings/search/"+userId+"/"+materialId);
+      return this.http.get(this.commonService.baseUrl + "/ratings/searchrate/"+userId+"/"+materialId);
     }
 
     sendRating(

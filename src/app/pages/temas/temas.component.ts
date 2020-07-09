@@ -31,7 +31,7 @@ export class TemasComponent implements OnInit {
           this.allTemas.push(
             new SingleTheme(
               response[val].name,
-              response[val].who_posted.username,
+              response[val].whoPosted.username,
               response[val].description,
               response[val].learningPoints/response[val].ratingPeople,
               response[val].id,

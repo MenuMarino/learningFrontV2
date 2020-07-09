@@ -287,34 +287,35 @@ export class MaterialsComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
     console.log(this.identity);
-
-    for (let val of this.identity.myMaterials){
-      if(val.status !=3){
-      this.myMaterials.push(
-        new SingleMaterial(
-          val.id,
-          val.name,
-          this.Status(val.status),
-          this.whoAproved(val.who_aproved),
-          val.visits,
-          this.getLearningPoints(val.learning_points,val.ratingPeople),
-          val.ratingPeople,
-          val.description,
-          val.course.name,
-          val.course.theme
-          )
-      );
-      console.log("ESTOS SON LOS MATERIALES");
-      console.log(this.identity.myMaterials);
-      
-
-    }
-  }
-    
-    console.log(this.identity.myMaterials);
-    console.log(this.myMaterials);
+    this.materialService.getMyMaterials(this.identity.id).subscribe(
+      response=>{
+        if(response){
+          console.log("ESTO ES LO DE ACA");
+          for(let val of response){
+            this.myMaterials.push(
+              new SingleMaterial(
+                val.id,
+                val.name,
+                this.Status(val.status),
+                this.whoAproved(val.whoAproved),
+                val.visits,
+                this.getLearningPoints(val.learningPoints,val.ratingPeople),
+                val.ratingPeople,
+                val.description,
+                val.course.name,
+                val.course.theme,
+              
+              )
+            )
+           
+          }
+          console.log(this.myMaterials);
+        }
+      }
+    )  
     
   }
 
@@ -339,12 +340,12 @@ export class MaterialsComponent implements OnInit {
     }
     return who_aproved.username;
   }
-  getLearningPoints(learning_points,ratingPeople){
-    if(learning_points == null){
+  getLearningPoints(learningPoints,ratingPeople){
+    if(learningPoints == null){
       return "0";
     }
     else{
-      return learning_points/ratingPeople;
+      return ((learningPoints/ratingPeople).toFixed(2));
     }
   }
 
@@ -557,14 +558,12 @@ export class SingleMaterial {
     this.views = views;
     this.learning_points = learning_points;
     this.temporal = learning_points;
-    this.porcentaje_LP = this.temporal.toString() + '%';
     this.color_curated = this.getColorCurated(status);
-    this.color_bar = this.getColorBar(this.temporal);
     this.ratingPeople = ratingPeople;
     this.desc = description;
     this.cur = curso;
     this.tem = tema;
-    console.log(this.temporal);
+
     if(this.status=="Creado"){
       this.thisCurarButtom = true;
     }
@@ -572,14 +571,6 @@ export class SingleMaterial {
       this.thisCurarButtom = false;
     }
     
-  }
-  getColorBar(temporal){
-    if(temporal>=0 && temporal <50){
-      return "progress-bar bg-danger";
-    }
-    else if(temporal>=50 && temporal<=100){
-      return "progress-bar bg-success";
-    }
   }
 
   getColorCurated(status){
