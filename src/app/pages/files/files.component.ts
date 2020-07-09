@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AllFilesService } from "src/app/core/services/files-service";
 import { MaterialServices } from "src/app/core/services/material-service";
+import { Router } from "@angular/router";
+import Swal from 'sweetalert2';
 
 import * as moment from 'moment';
 import { DOCUMENT } from '@angular/common'; 
@@ -26,12 +28,15 @@ export class FilesComponent implements OnInit {
   public idUser : Number;
   public isCurator : boolean;
   public isOwner : boolean;
+  public materialName : string;
 
   constructor(
     public sanitizer: DomSanitizer,
     private storageService: StorageService,
     private filesService : AllFilesService,
     private materialService : MaterialServices,
+    private router: Router,
+    
     @Inject(DOCUMENT) document
   ) { }
 
@@ -44,31 +49,37 @@ export class FilesComponent implements OnInit {
       Number(this.storageService.getTempFile_Courses())
     ).subscribe(
       response =>{
-        console.log(this.identity);
-        if(this.identity.id == response.whoPosted.id){
+        //console.log(this.identity);
+        if(this.identity.id == response.whoPosted.id || response.status == 1){
           this.isOwner = true;
         }
         else{this.isOwner = false;}
-        if(this.identity.role == "CURATOR"){
-          this.isCurator = true;
-        }
-        else{
-          this.isCurator = false;
-        }
+        console.log("esto voy a ver");
+        console.log(response);
         for (let val in response.files){
           this.listFiles.push( new File(
-            response.files[val].name,
+            "Archivo "+(Number(val)+1),
             response.files[val].type,
             response.files[val].link,
             response.whoPosted.id,
             )
           )   
         }
-
+        this.materialName = response.name + " - " + response.course.name + " - " +  response.course.theme;
         this.idUser = response.whoPosted.id;
-
+        if(this.identity.role == "CURATOR" && response.status == 1){
+          this.isCurator = true;
+        }
+        else{
+          this.isCurator = false;
+        }
         this.idFile = response.id;
-        this.currentPoints = ((response.learningPoints/response.ratingPeople).toFixed(2)).toString()+"/5";
+        if(response.learningPoints != 0){
+          this.currentPoints = ((response.learningPoints/response.ratingPeople).toFixed(2)).toString()+"/5";
+        }
+        else{
+          this.currentPoints = "0.0/5";
+        }
       }, error => {
 
       }
@@ -89,20 +100,76 @@ export class FilesComponent implements OnInit {
   }
 
   AceptarCurar(){
-    this.materialService.curarMaterial(
-      this.identity.id,
-      this.idFile,
-    ).subscribe(
-      response=>{
-        if(response){
-          console.log(response);
-        }
-      }
-    )
-  }
+    Swal.fire({
+      title: 'Usted aceptara el material',
+      text: "El material sera visible para todos los usuarios",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'El material se',
+          'acaba de validar',
+          'success'
+        )
 
+        this.materialService.curarMaterial(
+          this.identity.id,
+          this.idFile,
+        ).subscribe(
+          response=>{
+            if(response){
+              console.log(response);
+              
+              this.router.navigateByUrl("/all_tcurators");
+            }
+          }
+        )
+      }
+    })
+
+  }
+  
   NegarCurar(){
-    this.materialService.
+    Swal.fire({
+      title: 'Usted no aceptara el material',
+      text: "El siguiente material no sera curado",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'No curar'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'El material se',
+          'se acaba de borrar',
+          'success'
+
+        )
+          
+        this.materialService.negarMaterial(
+          this.identity.id,
+          this.idFile,
+        ).subscribe(
+          response=>{
+            if(response){
+              console.log(response);
+              
+              this.router.navigateByUrl("/all_tcurators");
+            }
+          }
+        )
+        
+
+      this.router.navigateByUrl("/all_tcurators");
+
+      }
+    })
+
   }
 
 

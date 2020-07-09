@@ -30,6 +30,15 @@ export class MaterialServices {
     return this.http.post(this.commonService.baseUrl + "/curator/accept/"+id_who_curate+"/"+id_material, data);
   }
 
+  negarMaterial(
+    id_who_curate,
+    id_material,
+  ) : Observable<any>{
+    const data = {}
+    return this.http.post(this.commonService.baseUrl + "/curator/negate/"+id_who_curate+"/"+id_material, data);
+  }
+  
+
   createMaterial(
     id : number,
     name : string,

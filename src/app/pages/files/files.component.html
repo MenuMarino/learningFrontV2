@@ -5,7 +5,7 @@
       <div class="col" style="max-width : 1200px ;padding : 10px ;" >
         <div class="card shadow" style = "border-width : 5px" >
           <div class="card-header bg-transparent"  style=" display: flex; ">
-            <h3 class="mb-0" >Vista Previa</h3>
+            <h3 class="mb-0" >{{materialName}}</h3>
             <div style="position:absolute; right:20px;  display: flex; ">
             <h3 class="mb-0 " >Learning Points : </h3>
             <h3 class="mb-0 "style="color:red " >{{currentPoints}}</h3>
@@ -70,8 +70,8 @@
           </div>
         </div>  
       </div>
-    <div *ngIf="isOwner">
-      <div *ngIf ="!isCurator">
+    <div *ngIf="!isOwner">
+     
       <div class="text-center" style = "min-width: 280px;">
         <div class="container" > 
           <div class="row" style="justify-content: center; ">
@@ -91,14 +91,14 @@
           Favoritos
         </a>
         </div>
-      </div>
+      
     </div>
     <div *ngIf= "isCurator">
       <div class="text-center" style = "min-width: 280px;">
         <a type="button" (click)="AceptarCurar()" class="btn btn-success mt-4">
           Aceptar
         </a>
-        <a type="button" (click)="addToFavorites()" class="btn btn-danger mt-4">
+        <a type="button" (click)="NegarCurar()" class="btn btn-danger mt-4">
           Rechazar
         </a>
       </div>

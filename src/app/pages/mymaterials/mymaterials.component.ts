@@ -36,7 +36,9 @@ export class MyMaterialsComponent implements OnInit {
     this.materialService.getMyFavouriteMaterials(this.identity.id).subscribe(
       response=>{
         if(response){
+          console.log(response);
           for(let val of response){
+            if(val.status != 3){
             this.myFavouriteMaterials.push(
               new SingleMaterial(
                 val.id,
@@ -48,6 +50,7 @@ export class MyMaterialsComponent implements OnInit {
             )
           }
         }
+      }
       }
     )
   }

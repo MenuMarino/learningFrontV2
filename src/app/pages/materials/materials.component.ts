@@ -293,8 +293,9 @@ export class MaterialsComponent implements OnInit {
     this.materialService.getMyMaterials(this.identity.id).subscribe(
       response=>{
         if(response){
-          console.log("ESTO ES LO DE ACA");
+          console.log(response);
           for(let val of response){
+            if(val.status!=3 && val.status !=4){
             this.myMaterials.push(
               new SingleMaterial(
                 val.id,
@@ -310,9 +311,9 @@ export class MaterialsComponent implements OnInit {
               
               )
             )
-           
           }
-          console.log(this.myMaterials);
+          }
+          
         }
       }
     )  
@@ -341,7 +342,8 @@ export class MaterialsComponent implements OnInit {
     return who_aproved.username;
   }
   getLearningPoints(learningPoints,ratingPeople){
-    if(learningPoints == null){
+    console.log(learningPoints + "-------"+ratingPeople);
+    if(learningPoints == 0){
       return "0";
     }
     else{
