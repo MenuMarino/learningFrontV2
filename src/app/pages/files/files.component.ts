@@ -18,8 +18,9 @@ export class FilesComponent implements OnInit {
   private currentFile : any = null;
   public listFiles : File[] = [];
   public identity : any;
-  public currentPoints : string = "3.5/5";
+  public currentPoints : string;
   public idFile : Number;
+  public idUser : Number;
 
   constructor(
     private storageService: StorageService,
@@ -47,6 +48,7 @@ export class FilesComponent implements OnInit {
             )
           )
         }
+        this.idUser = response.whoPosted.id;
         console.log("ESTE ES EL MATERIAL");
         console.log(response);
         this.idFile = response.id;
@@ -69,6 +71,13 @@ export class FilesComponent implements OnInit {
     )
     
 
+  }
+
+  IsOwner(){
+    if(this.identity.id == this.idUser){
+      return true;
+    }
+    return false;
   }
 
   downloadMaterial() {
