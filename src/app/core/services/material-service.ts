@@ -73,15 +73,26 @@ export class MaterialServices {
   createFile(materialId, fileName, link, type) : Observable<any>{
     if(type == "application/pdf") {
       type = "PDF"
-    } else {
+    } else if(type == "video/mp4"){
       type = "VIDEO"
+    } else {
+      type = "YOUTUBE_LINK"
     }
     const obj = {
-      materialid : materialId,
+      materialId : materialId,
       name : fileName,
       link : link,
-      type_of_file : type
+      typeOfFile : type
     };
     return this.http.post(this.commonService.baseUrl + "/file", obj);
   }
 }
+/* 
+Long materialId;
+
+    String name;
+
+    String link;
+
+    Type_of_file typeOfFile;
+*/

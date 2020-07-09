@@ -158,7 +158,8 @@ export class File{
   constructor(name, type, ruta, id_user){
     
     if(type!='YOUTUBE_LINK'){
-      this.ruta = 'http://localhost:8081/'+id_user+'/materiales/'+ruta;
+      this.ruta = 'http://localhost:8081/uploads/download/'+id_user+'/materiales/'+ruta;
+      console.log(this.ruta);
     }
     else{
       this.ruta = ruta;
