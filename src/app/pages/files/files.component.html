@@ -70,10 +70,12 @@
           </div>
         </div>  
       </div>
+    <div *ngIf="isOwner">
+      <div *ngIf ="!isCurator">
       <div class="text-center" style = "min-width: 280px;">
         <div class="container" > 
           <div class="row" style="justify-content: center; ">
-          <div class="rating">
+            <div class="rating">
               <input type="radio" id="star5" name="rating" value="5" (click)="clickStar(5)"/><label for="star5" title="Meh">5 stars</label>
               <input type="radio" id="star4" name="rating" value="4" (click)="clickStar(4)"/><label for="star4" title="Kinda bad">4 stars</label>
               <input type="radio" id="star3" name="rating" value="3" (click)="clickStar(3)"/><label for="star3" title="Kinda bad">3 stars</label>
@@ -88,6 +90,18 @@
         <a type="button" (click)="addToFavorites()" class="btn btn-danger mt-4">
           Favoritos
         </a>
+        </div>
       </div>
     </div>
+    <div *ngIf= "isCurator">
+      <div class="text-center" style = "min-width: 280px;">
+        <a type="button" (click)="downloadMaterial()" class="btn btn-success mt-4">
+          Aceptar
+        </a>
+        <a type="button" (click)="addToFavorites()" class="btn btn-danger mt-4">
+          Rechazar
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

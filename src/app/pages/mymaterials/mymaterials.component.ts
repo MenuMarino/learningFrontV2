@@ -25,10 +25,11 @@ export class MyMaterialsComponent implements OnInit {
     private filesService : AllFilesService,
     private materialService : MaterialServices
   ) { }
-
-  public userFilter: any = {
+  
+  public newuserFilter: any = {
     name: "",
   };
+
 
   ngOnInit(): void {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
@@ -49,19 +50,7 @@ export class MyMaterialsComponent implements OnInit {
         }
       }
     )
-    /*for (let val of this.identity.favouriteMaterials){
-      if(val.status != 3){
-      this.myFavouriteMaterials.push(
-        new SingleMaterial(
-          val.id,
-          val.name,
-          val.whoPosted.username,
-          this.getLearningPoints(val.learning_points,val.ratingPeople),
 
-        )
-      );
-    }
-    }*/
   }
 
   getLearningPoints(learningPoints,ratingPeople){

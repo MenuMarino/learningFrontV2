@@ -19,9 +19,12 @@ export class FilesComponent implements OnInit {
   private currentFile : any = null;
   public listFiles : File[] = [];
   public identity : any;
-  public currentPoints : string = "3.5/5";
+  public currentPoints : string;
   public idFile : Number;
-//https://www.youtube.com/embed/TNRCvG9YtYI
+  public idUser : Number;
+  public isCurator : boolean;
+  public isOwner : boolean;
+
   constructor(
     public sanitizer: DomSanitizer,
     private storageService: StorageService,
@@ -33,6 +36,16 @@ export class FilesComponent implements OnInit {
 
   ngOnInit(): void {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
+    if(this.identity.type == "CURATOR"){
+      this.isCurator = true;
+      
+    }
+    else{
+      this.isCurator = false;
+      
+    }
+   
+    
     this.filesService.getAllFiles(
       Number(this.storageService.getTempFile_Courses())
     ).subscribe(
@@ -49,6 +62,7 @@ export class FilesComponent implements OnInit {
             )
           )
         }
+        this.idUser = response.whoPosted.id;
         console.log("ESTE ES EL MATERIAL");
         console.log(response);
         this.idFile = response.id;
@@ -70,8 +84,18 @@ export class FilesComponent implements OnInit {
       }
     )
     
+    if(this.identity.user == this.idUser){
+      console.log("isOwner");
+    }
+    else{
+      
 
+      this.isOwner = false;
+    }
+    console.log(this.isCurator + " - " + this.isOwner);
   }
+
+
 
   downloadMaterial() {
 

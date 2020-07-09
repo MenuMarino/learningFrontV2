@@ -6,7 +6,7 @@
     <div class="col " >
       <div class="card shadow " >
         <div class="card-header border-0">
-          <h3 class="mb-0">Favoritos</h3>
+          <h3 class="mb-0">Materiales para curar</h3>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
@@ -14,7 +14,7 @@
               <tr>
                 <th scope="col">Nombre</th>
                 <th scope="col">Profesor</th>
-                <th scope="col">Learning Points</th>
+                <th scope="col">Fecha</th>
                 <th scope="col">Ir al material</th>
               </tr>
             </thead>
@@ -34,21 +34,12 @@
                     {{material.professor}}
                   </td>
                 <td  style=" text-align: center;">
-                  <div class="d-flex align-items-center" style="justify-content: center;">
-                    <span class="mr-2">{{material.learning_points}}</span>
-                    <div>
-                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 " > 
-                        <ngb-rating [rate]="material.learning_points" [max]="5" [readonly]="true"></ngb-rating>
-                      </div>
-                    </div>
-                  </div>
+
+                    {{material.date}}
+
                 </td>
                 <td >
                   <div class="media align-items-center" style="justify-content: center;">
-                    <button type="button" class="btn btn-danger btn-circle" placement="top" triggers="mouseenter:mouseleave"
-                    ngbPopover="Eliminar de mis favoritos" (click)="MandarEliminar(material)" >
-                    <i class="fa fa-times"></i>
-                    </button>
 
                     <button type="button" class="btn btn-success btn-circle" placement="top" triggers="mouseenter:mouseleave"
                     ngbPopover="Ir al material" (click)="IrMaterial(material)">

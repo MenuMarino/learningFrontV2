@@ -18,6 +18,7 @@ import { FilesComponent } from "../../pages/files/files.component";
 import { AllTemasComponent } from "../../pages/all_temas/all_temas.component";
 import { PostulantCurator } from "../../pages/postulant_curator/postulant_curator.component";
 import { CurarComponent } from "../../pages/curar/curar.component";
+import { AllTcuratorsComponent} from "../../pages/all_tcurators/all_tcurators.component";
 
 
 //import { UploadComponent} from "../../pages/upload/upload.component";
@@ -45,7 +46,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     FilesComponent,
     AllTemasComponent,
     PostulantCurator,
-    CurarComponent
+    CurarComponent,
+    AllTcuratorsComponent,
     //UploadComponent,
   ],
 })
