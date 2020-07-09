@@ -1,0 +1,57 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<!-- Page content -->
+<div class="container-fluid mt--7 " >
+  <!-- Table -->
+  <div class="row mt-6 " id="box" >
+    <div class="col " >
+      <div class="card shadow " >
+        <div class="card-header border-0">
+          <h3 class="mb-0">Materiales para curar</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Profesor</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Ir al material</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor = "let material of myFavouriteMaterials ">
+                <th scope="row" style=" text-align: center;">
+                  <div class="media align-items-center">
+                    <div class="avatar rounded-circle mr-3">
+                      <img alt="{{material.name}}" src="../assets/img/brand/learning_logo.jpg">
+                    </div>
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">{{material.name}}</span>
+                    </div>
+                  </div>
+                </th>  
+                <td  style=" text-align: center;">
+                    {{material.professor}}
+                  </td>
+                <td  style=" text-align: center;">
+
+                    {{material.date}}
+
+                </td>
+                <td >
+                  <div class="media align-items-center" style="justify-content: center;">
+
+                    <button type="button" class="btn btn-success btn-circle" placement="top" triggers="mouseenter:mouseleave"
+                    ngbPopover="Ir al material" (click)="IrMaterial(material)">
+                    <i class="fa fa-link"></i>
+                    </button>
+                  </div>
+                </td>        
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

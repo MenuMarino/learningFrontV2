@@ -13,6 +13,8 @@ import { FilesComponent } from "../../pages/files/files.component";
 import { PostulantCurator } from "../../pages/postulant_curator/postulant_curator.component";
 import { AllTemasComponent } from "../../pages/all_temas/all_temas.component";
 import { CurarComponent } from "../../pages/curar/curar.component";
+import { AllTcuratorsComponent} from "../../pages/all_tcurators/all_tcurators.component";
+
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -27,5 +29,6 @@ export const AdminLayoutRoutes: Routes = [
   {path: "files",component:FilesComponent},
   {path: "all_temas",component:AllTemasComponent},
   {path: "postulant_curator", component:PostulantCurator},
+  {path: "all_tcurators", component:AllTcuratorsComponent},
   {path: "curar", component:CurarComponent}
 ];

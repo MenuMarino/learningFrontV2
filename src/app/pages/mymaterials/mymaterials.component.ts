@@ -25,6 +25,10 @@ export class MyMaterialsComponent implements OnInit {
     private filesService : AllFilesService,
     private materialService : MaterialServices
   ) { }
+  
+  public newuserFilter: any = {
+    name: "",
+  };
 
 
   ngOnInit(): void {
@@ -48,9 +52,6 @@ export class MyMaterialsComponent implements OnInit {
     )
 
   }
-  public newuserFilter: any = {
-    name: "",
-  };
 
   getLearningPoints(learningPoints,ratingPeople){
     if(learningPoints == null){

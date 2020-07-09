@@ -21,6 +21,8 @@ export class FilesComponent implements OnInit {
   public currentPoints : string;
   public idFile : Number;
   public idUser : Number;
+  public isCurator : boolean;
+  public isOwner : boolean;
 
   constructor(
     private storageService: StorageService,
@@ -32,6 +34,16 @@ export class FilesComponent implements OnInit {
 
   ngOnInit(): void {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
+    if(this.identity.type == "CURATOR"){
+      this.isCurator = true;
+      
+    }
+    else{
+      this.isCurator = false;
+      
+    }
+   
+    
     this.filesService.getAllFiles(
       Number(this.storageService.getTempFile_Courses())
     ).subscribe(
@@ -70,15 +82,18 @@ export class FilesComponent implements OnInit {
       }
     )
     
-
-  }
-
-  IsOwner(){
-    if(this.identity.id == this.idUser){
-      return true;
+    if(this.identity.user == this.idUser){
+      console.log("isOwner");
     }
-    return false;
+    else{
+      
+
+      this.isOwner = false;
+    }
+    console.log(this.isCurator + " - " + this.isOwner);
   }
+
+
 
   downloadMaterial() {
 
