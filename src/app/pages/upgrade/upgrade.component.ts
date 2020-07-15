@@ -29,10 +29,14 @@ export class UpgradeComponent implements OnInit {
     console.log("These are the files uploaded: ",this.uploadFile);
   }
 
+
+  //id_user - description - 
+
+
   sendFile(){
     const formData = new FormData();
     formData.append("file",this.uploadFile);
-
+    console.log(formData);
     this.upgradeServices.sendUpgradeFile(formData, this.identity.id).subscribe(
       response => {
         if(response === true){
@@ -43,12 +47,6 @@ export class UpgradeComponent implements OnInit {
           this.identity.waiting = "isWaiting";
           this.storageService.setIdentityLocalStorage(JSON.stringify(this.identity));
 
-          Swal.showLoading();
-
-          setTimeout(() => {
-            location.reload();
-          },2000);
-          
         } else {
           Swal.fire({
             allowOutsideClick: false,

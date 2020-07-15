@@ -29,16 +29,14 @@ export class CoursesComponent implements OnInit {
   ) {  }
 
   recorrerCursos(data){
-    console.log(data);
+
     this.list_Courses.push(new Courses(data));
-    console.log(this.list_Courses);
   }
 
   ngOnInit() {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
     this.courseService.getCourses().subscribe(
       response =>{
-        console.log(response);
         this.all_data=response;
         this.storageService.setCoursesLocalStorage(this.all_data);
         for(let val of this.all_data){
@@ -63,7 +61,6 @@ export class CoursesComponent implements OnInit {
     this.current_course = course;
 
     this.isChoosed_course = true;
-    console.log(course.name);
 
   }
   chooseGrade(grade){
@@ -76,21 +73,18 @@ export class CoursesComponent implements OnInit {
     this.current_grade = grade;
 
     this.isChoosed_grade = true;
-    console.log(grade.valor)
   }
 
 
 
   themeClick(){
     if(this.isChoosed_course == true && this.isChoosed_grade == true){
-      console.log("enviar");
       this.router.navigateByUrl("/all_temas");
 
     }
     
     else{
-      console.log('grado'+this.isChoosed_grade);
-      console.log('curso: '+this.isChoosed_course);
+
       if(this.isChoosed_course == false){
         this.error_course = true;
       }

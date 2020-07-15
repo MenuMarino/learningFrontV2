@@ -38,8 +38,17 @@
           </label>
           <form action="/action_page.php">
             <div class="form-group">
-            <input class="form-control" type="file" id="myFile" name="filename" (change)=fileChange($event)>
+            
+            <input class="form-control" type="file" id="myFile" name="filename" (change)=fileChange($event) style="margin-bottom: 20px;">
+            
+            <label>
+              Descripción del material:
+            </label>
+            <input class="form-control"  name="link" placeholder="¿Por que quieres ser un curator?" required >
             </div>
+
+
+
             <div class="text-center">
                 <button type="button" (click)="sendFile()" class="btn btn-success mt-4">
                   Enviar

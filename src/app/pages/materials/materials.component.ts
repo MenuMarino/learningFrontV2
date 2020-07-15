@@ -103,6 +103,7 @@ export class MaterialsComponent implements OnInit {
           ).subscribe(
             response =>{
               Swal.fire(`Creaste un material exitosamente`);
+              console.log("ESTO ES EL RESPONSE");
               console.log(response);
               this.toUpload = true;
               const identity = {

@@ -85,12 +85,21 @@
             </div>
           </div>
         </div>
-        <a type="button" (click)="downloadMaterial()" class="btn btn-success mt-4">
-          Descargar
-        </a>
-        <a type="button" (click)="addToFavorites()" class="btn btn-danger mt-4">
-          Favoritos
-        </a>
+        <div class="text-center" style = "min-width: 280px;">
+          <a type="button" (click)="downloadMaterial()" class="btn btn-success mt-4">
+            Descargar
+          </a>
+          <div *ngIf = "!onMyFavourites">
+            <a type="button" (click)="addToFavorites()" class="btn btn-primary mt-4">
+              Agregar Favoritos
+            </a>
+          </div>
+          <div *ngIf = "onMyFavourites">
+            <a type="button" (click)="deletFromFavorites()" class="btn btn-danger mt-4">
+              Quitar Favoritos
+            </a>
+          </div>
+      </div>
         </div>
       
     </div>
@@ -99,6 +108,8 @@
         <a type="button" (click)="AceptarCurar()" class="btn btn-success mt-4">
           Aceptar
         </a>
+        
+        
         <a type="button" (click)="NegarCurar()" class="btn btn-danger mt-4">
           Rechazar
         </a>
