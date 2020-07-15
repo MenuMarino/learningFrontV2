@@ -125,7 +125,7 @@ export const ifCurator : RouteInfo[] = [
     icon: "ni-single-02 text-yellow",
     class: "",
   },
-  { path: '/all_tcurators', title: 'AllCurators',  icon:'ni-bold-up text-red', class: '' },
+  { path: '/all_tcurators', title: 'Materiales Curar',  icon:'ni-bold-up text-red', class: '' },
   { path: '/upload', title: 'Upload',  icon:'ni ni-cloud-upload-96 text-red', class: '' },
   { path: '/materials', title:'Material', icon:'ni ni-archive-2 text-red',class:''},
   { path: "/mymaterials", 

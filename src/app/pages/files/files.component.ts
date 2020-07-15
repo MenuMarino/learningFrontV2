@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AllFilesService } from "src/app/core/services/files-service";
+import { MaterialServices } from "src/app/core/services/material-service";
+import { Router } from "@angular/router";
+import Swal from 'sweetalert2';
+
 import * as moment from 'moment';
 import { DOCUMENT } from '@angular/common'; 
 import { StorageService } from 'src/app/core/services/storage-service';
@@ -12,7 +16,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   selector: 'app-files',
   templateUrl: './files.component.html',
   styleUrls: ['./files.component.css'],
-  providers: [StorageService,AllFilesService]
+  providers: [StorageService,AllFilesService,MaterialServices]
 })
 export class FilesComponent implements OnInit {
 
@@ -24,51 +28,61 @@ export class FilesComponent implements OnInit {
   public idUser : Number;
   public isCurator : boolean;
   public isOwner : boolean;
+  public materialName : string;
 
   constructor(
     public sanitizer: DomSanitizer,
     private storageService: StorageService,
     private filesService : AllFilesService,
+    private materialService : MaterialServices,
+    private router: Router,
+    
     @Inject(DOCUMENT) document
   ) { }
 
 
 
   ngOnInit(): void {
-    this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
-    if(this.identity.type == "CURATOR"){
-      this.isCurator = true;
-      
-    }
-    else{
-      this.isCurator = false;
-      
-    }
-   
+    this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());  
     
     this.filesService.getAllFiles(
       Number(this.storageService.getTempFile_Courses())
     ).subscribe(
       response =>{
-        console.log("ACA ES:")
-        console.log(response);
+        //console.log(this.identity);
+        if(this.identity.id == response.whoPosted.id || response.status == 1){
+          this.isOwner = true;
+        }
+        else{this.isOwner = false;}
+
         for (let val in response.files){
-          console.log(response.files[val]);
           this.listFiles.push( new File(
-            response.files[val].name,
+
             response.files[val].type,
             response.files[val].link,
             response.whoPosted.id,
+            response.files[val].link
             )
-          )
+          )   
+          
         }
+        this.materialName = response.name + " - " + response.course.name + " - " +  response.course.theme;
         this.idUser = response.whoPosted.id;
-        console.log("ESTE ES EL MATERIAL");
-        console.log(response);
+        if(this.identity.role == "CURATOR" && response.status == 1){
+          this.isCurator = true;
+        }
+        else{
+          this.isCurator = false;
+        }
         this.idFile = response.id;
-        this.currentPoints = ((response.learningPoints/response.ratingPeople).toFixed(2)).toString()+"/5";
+        if(response.learningPoints != 0){
+          this.currentPoints = ((response.learningPoints/response.ratingPeople).toFixed(2)).toString()+"/5";
+        }
+        else{
+          this.currentPoints = "0.0/5";
+        }
       }, error => {
-        console.log(error);
+
       }
     )
 
@@ -78,27 +92,105 @@ export class FilesComponent implements OnInit {
     ).subscribe(
       response =>{
         if(response){
-          console.log(response);
+          
           document.getElementById("star"+response.toString()).click();;
         }
       }
     )
-    
-    if(this.identity.user == this.idUser){
-      console.log("isOwner");
-    }
-    else{
-      
 
-      this.isOwner = false;
-    }
-    console.log(this.isCurator + " - " + this.isOwner);
+  }
+
+  AceptarCurar(){
+    Swal.fire({
+      title: 'Usted aceptara el material',
+      text: "El material sera visible para todos los usuarios",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'El material se',
+          'acaba de validar',
+          'success'
+        )
+
+        this.materialService.curarMaterial(
+          this.identity.id,
+          this.idFile,
+        ).subscribe(
+          response=>{
+            if(response){
+       
+              
+              this.router.navigateByUrl("/all_tcurators");
+            }
+          }
+        )
+      }
+    })
+
+  }
+  
+  NegarCurar(){
+    Swal.fire({
+      title: 'Usted no aceptara el material',
+      text: "El siguiente material no sera curado",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'No curar'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'El material se',
+          'se acaba de borrar',
+          'success'
+
+        )
+          
+        this.materialService.negarMaterial(
+          this.identity.id,
+          this.idFile,
+        ).subscribe(
+          response=>{
+            if(response){
+
+              
+              this.router.navigateByUrl("/all_tcurators");
+            }
+          }
+        )
+        
+
+      this.router.navigateByUrl("/all_tcurators");
+
+      }
+    })
+
   }
 
 
-
   downloadMaterial() {
+    let valores:Array<String>=[];
+    for(let val of this.listFiles){
+      if(val.type != "YOUTUBE_LINK"){
+        valores.push(val.realname);
+      }
+    }
+    this.materialService.downloadMaterial(this.idUser,valores).subscribe(
+     data=>{
+      console.log("error");
+    },error=>{
 
+      window.open(error.url);
+    }
+
+
+    )
   }
 
   addToFavorites() {
@@ -122,7 +214,7 @@ export class FilesComponent implements OnInit {
           favouriteMaterials: response.favouriteMaterials,
         }
         this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
-        console.log(identity.favouriteMaterials);
+       
       }
     )
   }
@@ -135,7 +227,7 @@ export class FilesComponent implements OnInit {
   }
 
   clickStar(data){
-    console.log(data);
+
       this.filesService.sendRating(
         this.idFile,
         this.identity.id,
@@ -148,10 +240,6 @@ export class FilesComponent implements OnInit {
     
   }
 
-//https://www.youtube.com/embed/cpbeS15sHZ0
-//https://www.youtube.com/embed/fMLyA0zscjY
-/*material id, learningpoints, user_id, */
-
   typeVideo() {
     if(this.currentFile.type == "YOUTUBE_LINK") {
       return true;
@@ -160,8 +248,7 @@ export class FilesComponent implements OnInit {
   }
   
   chooseFile(file) {
-    console.log("hey there");
-    console.log(file);
+
     if(this.currentFile !=null){
       this.currentFile.backgroundcolor = '#f6f9fc';
     }
@@ -169,24 +256,51 @@ export class FilesComponent implements OnInit {
     file.backgroundcolor = '#bddbfa';
   }
 
+
+
+
 }
+
+
 
 export class File{
   public name : string;
   public type : string;
   public ruta : string;
+  public imagen: string;
+  public realname : string;
 
-  constructor(name, type, ruta, id_user){
-    
+  buscarImagen(type){
+    console.log(type);
+    if(type == "PDF"){
+      return "ni ni-single-copy-04"
+    }
+    return "ni ni-button-play"
+  }
+
+  getName(link,type){
+    if(type!="YOUTUBE_LINK"){
+      return link.substring(0,link.length-4);
+    }
+    return "Video de youtube";
+  }
+
+
+  constructor(type, ruta, id_user,realname){
+
     if(type!='YOUTUBE_LINK'){
       this.ruta = 'http://localhost:8081/uploads/download/'+id_user+'/materiales/'+ruta;
-      console.log(this.ruta);
+
     }
     else{
-      this.ruta ="https://www.youtube.com/embed/"+ ruta.substr(32, ruta.length-1);
+      this.ruta = "https://www.youtube.com/embed/"+ ruta.substr(32, ruta.length-1);;
     }
-    this.name = name;
+    this.name = this.getName(ruta,type)
     this.type = type;
+    this.realname = realname;
+    this.imagen = this.buscarImagen(type);
+
   }
+
 };
 

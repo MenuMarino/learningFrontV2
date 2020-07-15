@@ -1,4 +1,4 @@
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8" *ngIf="!Uploaded()"></div>
 <!-- Page content -->
 <div class="container-fluid mt--7"  *ngIf="!Uploaded()">
   <!-- Table -->
@@ -72,7 +72,7 @@
                     <i class="fa fa-times"></i>
                     </button>
                     <button type="button" class="btn btn-info btn-circle" placement="top" triggers="mouseenter:mouseleave"
-                    ngbPopover="Actualizar el material" (click)="ActualizarMaterial(material)" [disabled]="!getCurarButton(material) ? 'disabled':null">
+                    ngbPopover="Detalles del material" (click)="ActualizarMaterial(material)" >
                     <i class="fa fa-list"></i>
                     </button>
                     <button type="button" class="btn btn-success btn-circle" placement="top" triggers="mouseenter:mouseleave"
@@ -96,8 +96,17 @@
       <div class="header-body text-center mb-7">
         <div class="row justify-content-center">
           <div class="col-lg-5 col-md-6">
+            <div *ngIf="actualizar">
+
             <h1 class="text-white">¿Quieres crear un nuevo material?</h1>
             <h2 class="text-white">Llena este formulario</h2>
+            </div>
+            <div *ngIf="!actualizar">
+
+              <h1 class="text-white">Detalles</h1>
+              <h2 class="text-white">Observa los detalles de su material</h2>
+              </div>
+
           </div>
         </div>
       </div>
@@ -121,40 +130,41 @@
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-8">
         <div class="card bg-secondary shadow border-0">
+          <div *ngIf="actualizar">
           <div class="card-body px-lg-5 py-lg-5">
-
-              <div class="form-group">
+            
                 <label>
                   Título del material:
                 </label>
                 <h3>{{currentupload.titulo}}</h3>
-              </div>
+            
 
-              <div class="form-group">
                 <label>
                   Curso:
                 </label>
                 <h3>{{currentupload.curso}}</h3>
-              </div>
-
-              <div class="form-group">
+              
                 <label>
                   Tema:
                 </label>
                 <h3>{{currentupload.tema}}</h3>
-              </div>
 
-              <div class="form-group">
+                <label>
+                  Grado:
+                </label>
+                <h3>{{currentupload.grade}}</h3>
+
                 <label>
                   Descripción del material:
                 </label>
                 <h3>{{currentupload.descripcion}}</h3>
-              </div>
 
+            
+             
               <label>
                 Sube un material:
               </label>
-
+              
               <form action="/action_page.php">
 
                 <div class="form-group">
@@ -168,7 +178,9 @@
                   </div>
 
                   <div *ngIf="ss1()"><input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)></div>
-                  <div *ngIf="select1_2()"> <input class="form-control" [(ngModel)]="ll.link1" name="link" #name="ngModel" (change)=rise() required></div>
+                  <div *ngIf="select1_2()"> 
+                    <input class="form-control" [(ngModel)]="ll.link1" name="link" #name="ngModel" placeholder="Link de Youtube" (change)=rise() required >
+                  </div>
                 </div>
 
                 <div class="form-group" *ngIf="secondDiv()">
@@ -236,9 +248,57 @@
                     </button>
                 </div>
               </form>
+
+            </div>
+            
           </div>
+          <div *ngIf="!actualizar">
+            <div class="card-body px-lg-5 py-lg-5">
+              
+                  <label>
+                    Título del material:
+                  </label>
+                  <h3>{{currentupload.titulo}}</h3>
+              
+  
+                  <label>
+                    Curso:
+                  </label>
+                  <h3>{{currentupload.curso}}</h3>
+                
+                  <label>
+                    Tema:
+                  </label>
+                  <h3>{{currentupload.tema}}</h3>
+  
+                  <label>
+                    Grado:
+                  </label>
+                  <h3>{{currentupload.grade}}</h3>
+  
+                  <label>
+                    Descripción del material:
+                  </label>
+                  <h3>{{currentupload.descripcion}}</h3>
+  
+              
+               
+                <label>
+                  Sube un material:
+                </label>
+                
+                
+  
+              </div>
+              
+            </div>
+          
         </div>
+        
       </div>
+      
     </div>
+
   </div>
+  
 </div>

@@ -40,6 +40,8 @@ import { MaterialServices } from "./material-service";
       return this.http.get(this.commonService.baseUrl + "/ratings/searchrate/"+userId+"/"+materialId);
     }
 
+    
+
     sendRating(
       materialId,
       userId ,

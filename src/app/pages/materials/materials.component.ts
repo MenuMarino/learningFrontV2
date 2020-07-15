@@ -14,12 +14,9 @@ import * as moment from 'moment';
 })
 // materiales esta en local storage
 export class MaterialsComponent implements OnInit {
-  // Valores para prueba
+
   public contador = 0;
-  public Titulo = "Ángulos";
-  public Curso = "Matemática";
-  public Tema = "Ángulos";
-  // Valores necesarios
+
   public box1 = false;
   public box2 = false;
   public box3 = false;
@@ -45,7 +42,7 @@ export class MaterialsComponent implements OnInit {
 
   private toUpload : boolean = false;
   public curar_button : boolean = true;
-
+  public actualizar : boolean;
   public temporal_resolve : any;
   public tempora_theme : any;
 
@@ -124,7 +121,8 @@ export class MaterialsComponent implements OnInit {
               }
               console.log("ESTO ES EL ID DEL QUE LO CREO : ");
               console.log(response);
-              this.currentupload.constru(this.temporal_resolve[0], response.myMaterials[0].id, this.temporal_resolve[1], this.storageService.getCoursesLocalStorage()[results[2]],this.currentTema[Number(valor)]);
+              console.log(response.myMaterials[0].course);
+              this.currentupload.constru(this.temporal_resolve[0], response.myMaterials[0].course.grade,response.myMaterials[0].id, this.temporal_resolve[1], this.storageService.getCoursesLocalStorage()[results[2]],this.currentTema[Number(valor)]);
               console.log(this.currentupload);
               this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
             },
@@ -228,8 +226,9 @@ export class MaterialsComponent implements OnInit {
   }
 
   ActualizarMaterial(currentMaterial){
+    this.actualizar = false;
     this.toUpload = true;
-    this.currentupload.constru(currentMaterial.name, currentMaterial.id, currentMaterial.desc, currentMaterial.cur, currentMaterial.tem);
+    this.currentupload.constru(currentMaterial.name, currentMaterial.grade, currentMaterial.id, currentMaterial.desc, currentMaterial.cur, currentMaterial.tem);
     console.log(this.currentupload);
   }
 
@@ -240,7 +239,7 @@ export class MaterialsComponent implements OnInit {
   }
 
   async CreateMaterial(){
-
+    this.actualizar = true;
      Swal.mixin({
       input: 'text',
       confirmButtonText: 'Next &rarr;',
@@ -287,18 +286,20 @@ export class MaterialsComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
     console.log(this.identity);
     this.materialService.getMyMaterials(this.identity.id).subscribe(
       response=>{
         if(response){
-          console.log("ESTO ES LO DE ACA");
+          console.log("ESTAAAAAAAMOS ACAAAAAAAAAAAAAAA");
+          console.log(response);
           for(let val of response){
+            if(val.status!=3 && val.status !=4){
             this.myMaterials.push(
               new SingleMaterial(
                 val.id,
                 val.name,
+                val.course.grade,
                 this.Status(val.status),
                 this.whoAproved(val.whoAproved),
                 val.visits,
@@ -310,9 +311,9 @@ export class MaterialsComponent implements OnInit {
               
               )
             )
-           
           }
-          console.log(this.myMaterials);
+          }
+          
         }
       }
     )  
@@ -341,7 +342,8 @@ export class MaterialsComponent implements OnInit {
     return who_aproved.username;
   }
   getLearningPoints(learningPoints,ratingPeople){
-    if(learningPoints == null){
+    console.log(learningPoints + "-------"+ratingPeople);
+    if(learningPoints == 0){
       return "0";
     }
     else{
@@ -356,16 +358,10 @@ export class MaterialsComponent implements OnInit {
       const formData = new FormData();
       formData.append("file",material);
       console.log("sadsdasd");
-      console.log(this.identity.id);
-      console.log(material.type);
+      console.log(formData);
       this.materialService.sendFile(this.identity.id, formData).subscribe(
         response=>{
           if(response) {
-            console.log("asaas");
-            console.log(this.currentupload.id,
-              this.currentupload.titulo,
-              material.name,
-              material.type);
               this.materialService.createFile(
               this.currentupload.id,
               this.currentupload.titulo,
@@ -579,10 +575,12 @@ export class SingleMaterial {
   public desc : string;
   public cur : string;
   public tem : string
+  public grade : string;
 
-  constructor(id,name,status,curated_by,views,learning_points,ratingPeople, description, curso, tema){
+  constructor(id,name,grade,status,curated_by,views,learning_points,ratingPeople, description, curso, tema){
     this.id = id;
     this.name = name;
+    this.grade = grade;
     this.status = status;
     this.curated_by = curated_by;
     this.views = views;
@@ -620,15 +618,17 @@ export class SingleMaterial {
 export class currentUpload {
   public titulo : string;
   public id : number;
+  public grade : string;
   public descripcion : string;
   public curso : string;
   public tema : string;
 
   constructor() {}
 
-  constru(tit, i, desc, cur, tem) {
+  constru(tit, grade, i, desc, cur, tem) {
     this.titulo = tit;
     this.id = i;
+    this.grade = grade+" ª grado";
     this.descripcion = desc;
     this.curso = cur;
     this.tema = tem;
