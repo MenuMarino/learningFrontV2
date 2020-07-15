@@ -147,7 +147,9 @@ export class FilesComponent implements OnInit {
     )
     
   }
+
 //https://www.youtube.com/embed/cpbeS15sHZ0
+//https://www.youtube.com/embed/fMLyA0zscjY
 /*material id, learningpoints, user_id, */
 
   typeVideo() {
@@ -181,7 +183,7 @@ export class File{
       console.log(this.ruta);
     }
     else{
-      this.ruta = ruta;
+      this.ruta ="https://www.youtube.com/embed/"+ ruta.substr(32, ruta.length-1);
     }
     this.name = name;
     this.type = type;
