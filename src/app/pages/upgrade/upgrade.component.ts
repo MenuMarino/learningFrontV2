@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UpgradeServices } from "src/app/core/services/upgrade";
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { StorageService } from "src/app/core/services/storage-service";
+import { MaterialServices } from 'src/app/core/services/material-service';
+import { Router } from "@angular/router";
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,8 +16,14 @@ export class UpgradeComponent implements OnInit {
   private uploadFile;
   private identity: any;
   public isWaiting: boolean = false;
+  public ll : yt;
 
-  constructor(private upgradeServices: UpgradeServices, private storageService: StorageService) { }
+  constructor(private upgradeServices: UpgradeServices, 
+              private storageService: StorageService, 
+              private router: Router,
+              private materialService: MaterialServices) { 
+                this.ll = new yt();
+              }
 
   ngOnInit() {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
@@ -35,15 +43,25 @@ export class UpgradeComponent implements OnInit {
 
   sendFile(){
     const formData = new FormData();
+    let des = true;
     formData.append("file",this.uploadFile);
     console.log(formData);
+    this.upgradeServices.createFile(this.identity.id, this.ll.link,this.uploadFile.name).subscribe(
+      response => {
+        if(response == true) {
+          console.log("se subio bien :D");
+        } else {
+          console.log("no se subio bien D:");
+        }
+      }
+    );
     this.upgradeServices.sendUpgradeFile(formData, this.identity.id).subscribe(
       response => {
         if(response === true){
-          Swal.fire({
+          /*Swal.fire({
             title: 'Subiendo archivo',
-          })
-
+          })*/
+          des = true;
           this.identity.waiting = "isWaiting";
           this.storageService.setIdentityLocalStorage(JSON.stringify(this.identity));
 
@@ -59,5 +77,19 @@ export class UpgradeComponent implements OnInit {
         console.log(error);
       }
     )
+    if(des) {
+      console.log("sjdoihnasdnakjsdnasjnd");
+      Swal.fire({
+        title: 'Subida correcta',
+      })
+      this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/courses']);
+      });
+    }
   }
+}
+
+export class yt {
+  public link : string = "";
+  constructor(){}
 }

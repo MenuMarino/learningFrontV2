@@ -14,5 +14,13 @@ export class UpgradeServices{
         return this.http.post(this.commonService.baseUrl + "/uploads/uploads/" + id +"/upgrade_files", file);
     }
 
-
+    createFile(id, description, link) {
+        const obj = {
+            userId : id,
+            description: description,
+            contentLink: link
+        };
+        console.log(obj);
+        return this.http.post(this.commonService.baseUrl + "/upgrade", obj);
+    }
 }
