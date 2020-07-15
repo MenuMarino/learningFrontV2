@@ -26,6 +26,28 @@ import { MaterialServices } from "./material-service";
       return this.http.post(this.commonService.baseUrl + "/user/favourite/"+id_user+"/"+id_material,data);
     }
 
+    onMyFavorite(
+      id_user,
+      id_material,
+    ):Observable<any>{
+
+      return this.http.get(this.commonService.baseUrl + "/user/isfavourite/"+id_user+"/"+id_material ); 
+    }
+
+
+    sendTemasdata(
+      name,
+      grade
+    ): Observable<any> {
+      const data = {
+        params:{
+          name : name,
+          grade : grade
+        }
+      };
+      return this.http.get(this.commonService.baseUrl + "/courses/themes", data);
+    }
+
     deleteFromFavourite(
       id_user,
       id_material,

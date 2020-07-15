@@ -23,7 +23,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr  *ngFor = "let postulant of Postulants | filterBy : userFilter">
+              <tr  *ngFor = "let postulant of AllPostulants | filterBy : userFilter">
                 <th scope="row">
                   <div class="media align-items-center">
                     <div class="avatar rounded-circle mr-3">
@@ -41,11 +41,13 @@
                     {{postulant.institucion}}
                 </td>
                 <td>
-                    <div class="media align-items-center" style="text-align: center;">
-                        <a (click)="postulantcurator()" class="avatar rounded-circle mr-3" >
-                          <img src="../assets/img/theme/imagen.jpg">
-                        </a>
-                    </div>
+                  <div class="media align-items-center" style="justify-content: center;">
+
+                    <button type="button" class="btn btn-success btn-circle" placement="top" triggers="mouseenter:mouseleave"
+                    ngbPopover="Ir al material" (click)="IrPostulante(postulant)">
+                    <i class="fa fa-link"></i>
+                    </button>
+                  </div>
                 </td>        
               </tr>
             </tbody>

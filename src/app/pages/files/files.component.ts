@@ -29,6 +29,7 @@ export class FilesComponent implements OnInit {
   public isCurator : boolean;
   public isOwner : boolean;
   public materialName : string;
+  public onMyFavourites : boolean = false;
 
   constructor(
     public sanitizer: DomSanitizer,
@@ -81,6 +82,29 @@ export class FilesComponent implements OnInit {
         else{
           this.currentPoints = "0.0/5";
         }
+
+        console.log(this.identity.id + "   0   "+this.idFile);
+        this.filesService.onMyFavorite(
+          this.identity.id,
+          this.idFile,
+        ).subscribe(
+          response=>{
+            if(response == true){
+              this.onMyFavourites = true;
+            }
+            else{
+              this.onMyFavourites = false;
+            }
+          },error=>{
+            console.log(error);
+          }
+        )
+    
+
+
+
+
+
       }, error => {
 
       }
@@ -97,6 +121,8 @@ export class FilesComponent implements OnInit {
         }
       }
     )
+
+    
 
   }
 
@@ -199,6 +225,7 @@ export class FilesComponent implements OnInit {
       this.storageService.getTempFile_Courses(),
     ).subscribe(
       response=>{
+        Swal.fire('Acabas de agregar a favoritos');
         const identity = {
           id: this.identity.id,
           name: this.identity.name,
@@ -213,11 +240,63 @@ export class FilesComponent implements OnInit {
           myMaterials: this.identity.myMaterials,
           favouriteMaterials: response.favouriteMaterials,
         }
+
         this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
-       
+
+        this.filesService.onMyFavorite(
+          this.identity.id,
+          this.idFile,
+        ).subscribe(
+          response=>{
+            if(response == true){
+              
+              this.onMyFavourites = true;
+
+            }
+            else{
+              this.onMyFavourites = false;
+            }
+          }
+        )
       }
     )
+
+
   }
+
+
+  deletFromFavorites(){
+    this.filesService.deleteFromFavourite(
+      this.identity.id,
+      this.idFile
+    ).subscribe(
+      response=>{
+        if(response){
+          Swal.fire('Acabas de eliminar este material de tus favoritos');
+
+          const identity = {
+            id: this.identity.id,
+            name: this.identity.name,
+            lastname: this.identity.lastname,
+            email: this.identity.email,
+            username: this.identity.username,
+            role: this.identity.type,
+            grade: this.identity.grade,
+            birth: moment(this.identity.birth).format('DD/MM/YYYY'),
+            institucion: this.identity.institucion,
+            especialidad: this.identity.especialidad,
+            myMaterials: this.identity.myMaterials,
+            favouriteMaterials: response.favouriteMaterials,
+          }
+          this.onMyFavourites = false;
+          this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
+    
+        }
+      }
+    )
+
+  }
+
 
   fileType() {
     if(this.currentFile.type == "PDF") {

@@ -9,7 +9,10 @@ import { Observable } from "rxjs";
 export class UpgradeServices{
     constructor( private http: HttpClient, private commonService: CommonService) {
     }
+    
     sendUpgradeFile(file, id) : Observable<any> {
         return this.http.post(this.commonService.baseUrl + "/uploads/uploads/" + id +"/upgrade_files", file);
     }
+
+
 }
