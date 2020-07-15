@@ -54,16 +54,17 @@ export class FilesComponent implements OnInit {
           this.isOwner = true;
         }
         else{this.isOwner = false;}
-        console.log("esto voy a ver");
-        console.log(response);
+
         for (let val in response.files){
           this.listFiles.push( new File(
-            "Archivo "+(Number(val)+1),
+
             response.files[val].type,
             response.files[val].link,
             response.whoPosted.id,
+            response.files[val].link
             )
           )   
+          
         }
         this.materialName = response.name + " - " + response.course.name + " - " +  response.course.theme;
         this.idUser = response.whoPosted.id;
@@ -122,7 +123,7 @@ export class FilesComponent implements OnInit {
         ).subscribe(
           response=>{
             if(response){
-              console.log(response);
+       
               
               this.router.navigateByUrl("/all_tcurators");
             }
@@ -157,7 +158,7 @@ export class FilesComponent implements OnInit {
         ).subscribe(
           response=>{
             if(response){
-              console.log(response);
+
               
               this.router.navigateByUrl("/all_tcurators");
             }
@@ -174,7 +175,22 @@ export class FilesComponent implements OnInit {
 
 
   downloadMaterial() {
+    let valores:Array<String>=[];
+    for(let val of this.listFiles){
+      if(val.type != "YOUTUBE_LINK"){
+        valores.push(val.realname);
+      }
+    }
+    this.materialService.downloadMaterial(this.idUser,valores).subscribe(
+     data=>{
+      console.log("error");
+    },error=>{
 
+      window.open(error.url);
+    }
+
+
+    )
   }
 
   addToFavorites() {
@@ -223,8 +239,6 @@ export class FilesComponent implements OnInit {
     )
     
   }
-//https://www.youtube.com/embed/cpbeS15sHZ0
-/*material id, learningpoints, user_id, */
 
   typeVideo() {
     if(this.currentFile.type == "YOUTUBE_LINK") {
@@ -242,24 +256,51 @@ export class FilesComponent implements OnInit {
     file.backgroundcolor = '#bddbfa';
   }
 
+
+
+
 }
+
+
 
 export class File{
   public name : string;
   public type : string;
   public ruta : string;
+  public imagen: string;
+  public realname : string;
 
-  constructor(name, type, ruta, id_user){
-    
+  buscarImagen(type){
+    console.log(type);
+    if(type == "PDF"){
+      return "ni ni-single-copy-04"
+    }
+    return "ni ni-button-play"
+  }
+
+  getName(link,type){
+    if(type!="YOUTUBE_LINK"){
+      return link.substring(0,link.length-4);
+    }
+    return "Video de youtube";
+  }
+
+
+  constructor(type, ruta, id_user,realname){
+
     if(type!='YOUTUBE_LINK'){
       this.ruta = 'http://localhost:8081/uploads/download/'+id_user+'/materiales/'+ruta;
 
     }
     else{
-      this.ruta = ruta;
+      this.ruta = "https://www.youtube.com/embed/"+ ruta.substr(32, ruta.length-1);;
     }
-    this.name = name;
+    this.name = this.getName(ruta,type)
     this.type = type;
+    this.realname = realname;
+    this.imagen = this.buscarImagen(type);
+
   }
+
 };
 

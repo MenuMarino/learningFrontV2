@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { CommonService } from "./common-services";
 import { Observable } from "rxjs";    
 import { HttpHeaders } from '@angular/common/http';
+import {  } from '@angular/common/http';
 
 @Injectable({
   providedIn: "root",
@@ -78,6 +79,32 @@ export class MaterialServices {
   sendFile(id, file) : Observable<any> {
     return this.http.post(this.commonService.baseUrl + "/uploads/uploads/" + id + "/materiales", file);
   }
+/*
+  downloadMaterial(
+    id : Number,
+    list_of_files : any):
+  Observable<any> {
+    const data  = {
+      list_of_files : list_of_files,
+    };
+    console.log(data);
+    return this.http.post(this.commonService.baseUrl + "/uploads/download/" + id ,data);
+  }
+*/
+  downloadMaterial(
+    id : Number,
+    list_of_files : any):
+    Observable<any>{
+      const data = {
+        params:{
+          list_of_files : list_of_files,
+        }
+      };
+
+      return this.http.get(this.commonService.baseUrl + "/uploads/download/"+ id +"/",data);
+
+    }
+  
 
   getMyMaterials(id): Observable<any>{
     return this.http.get(this.commonService.baseUrl + "/user/mymaterials/"+id);
