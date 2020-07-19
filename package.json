@@ -1,5 +1,5 @@
 {
-  "name": "argon-dashboard-angular",
+  "name": "angular-heroku",
   "version": "1.1.0",
   "scripts": {
     "postinstall": "ng build --aot --prod",
