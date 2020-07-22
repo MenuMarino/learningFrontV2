@@ -29,5 +29,4 @@ export const AdminLayoutRoutes: Routes = [
   {path: "all_temas",component:AllTemasComponent},
   {path: "postulant_curator", component:PostulantCurator},
   {path: "all_tcurators", component:AllTcuratorsComponent},
-  {path: "curar", component:CurarComponent}
 ];

@@ -45,7 +45,6 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     FilesComponent,
     AllTemasComponent,
     PostulantCurator,
-    CurarComponent,
     AllTcuratorsComponent,
     //UploadComponent,
   ],
