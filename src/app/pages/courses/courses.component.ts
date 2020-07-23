@@ -19,7 +19,7 @@ export class CoursesComponent implements OnInit {
   private current_grade : any = null;
   public error_course : boolean = false;
   public list_Courses : Courses[] = [];
-  private error_grade : boolean = false;
+  public error_grade : boolean = false;
   public all_data : any = null;
 
   constructor(
@@ -46,8 +46,8 @@ export class CoursesComponent implements OnInit {
         console.log(error);
       }
     )
-    
-    
+
+
   }
   chooseCourse(course){
 
@@ -82,7 +82,7 @@ export class CoursesComponent implements OnInit {
       this.router.navigateByUrl("/all_temas");
 
     }
-    
+
     else{
 
       if(this.isChoosed_course == false){
@@ -91,9 +91,9 @@ export class CoursesComponent implements OnInit {
       if(this.isChoosed_grade == false){
         this.error_grade = true;
       }
-      
+
       Swal.fire({
-        
+
         allowOutsideClick: false,
         text: 'Elija el curso y el grado',
         icon: 'error',

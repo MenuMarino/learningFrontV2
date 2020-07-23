@@ -5,30 +5,30 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-postulant_curator',
   templateUrl: './postulant_curator.component.html',
   styleUrls: ['./postulant_curator.component.css'],
- 
+
 })
 export class PostulantCurator implements OnInit {
 
 
 
-    private currentFile : any = null;
+    public currentFile : any = null;
 
     constructor() { }
-  
+
     ngOnInit(): void {
-       
+
     }
-  
-    
+
+
     AceptarCurator(){
-  
+
     }
-  
+
     DenegarCurator(){
-  
+
     }
-  
-    public Postulante: any = 
+
+    public Postulante: any =
       {
         name: "Chicho",
         fecha: '04/20',
@@ -36,12 +36,5 @@ export class PostulantCurator implements OnInit {
         especialidad: 'Fisica',
         materiales: '420'
       }
-    
+
   }
-
-
-
-
-
-
-

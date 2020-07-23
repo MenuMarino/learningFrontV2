@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import Swal from 'sweetalert2';
 
 import * as moment from 'moment';
-import { DOCUMENT } from '@angular/common'; 
+import { DOCUMENT } from '@angular/common';
 import { StorageService } from 'src/app/core/services/storage-service';
 import { Inject }  from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -20,7 +20,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class FilesComponent implements OnInit {
 
-  private currentFile : any = null;
+  public currentFile : any = null;
   public listFiles : File[] = [];
   public identity : any;
   public currentPoints : string;
@@ -37,15 +37,15 @@ export class FilesComponent implements OnInit {
     private filesService : AllFilesService,
     private materialService : MaterialServices,
     private router: Router,
-    
+
     @Inject(DOCUMENT) document
   ) { }
 
 
 
   ngOnInit(): void {
-    this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());  
-    
+    this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
+
     this.filesService.getAllFiles(
       Number(this.storageService.getTempFile_Courses())
     ).subscribe(
@@ -64,8 +64,8 @@ export class FilesComponent implements OnInit {
             response.whoPosted.id,
             response.files[val].link
             )
-          )   
-          
+          )
+
         }
         this.materialName = response.name + " - " + response.course.name + " - " +  response.course.theme;
         this.idUser = response.whoPosted.id;
@@ -99,7 +99,7 @@ export class FilesComponent implements OnInit {
             console.log(error);
           }
         )
-    
+
 
 
 
@@ -116,13 +116,13 @@ export class FilesComponent implements OnInit {
     ).subscribe(
       response =>{
         if(response){
-          
+
           document.getElementById("star"+response.toString()).click();;
         }
       }
     )
 
-    
+
 
   }
 
@@ -149,8 +149,8 @@ export class FilesComponent implements OnInit {
         ).subscribe(
           response=>{
             if(response){
-       
-              
+
+
               this.router.navigateByUrl("/all_tcurators");
             }
           }
@@ -159,7 +159,7 @@ export class FilesComponent implements OnInit {
     })
 
   }
-  
+
   NegarCurar(){
     Swal.fire({
       title: 'Usted no aceptara el material',
@@ -177,7 +177,7 @@ export class FilesComponent implements OnInit {
           'success'
 
         )
-          
+
         this.materialService.negarMaterial(
           this.identity.id,
           this.idFile,
@@ -185,12 +185,12 @@ export class FilesComponent implements OnInit {
           response=>{
             if(response){
 
-              
+
               this.router.navigateByUrl("/all_tcurators");
             }
           }
         )
-        
+
 
       this.router.navigateByUrl("/all_tcurators");
 
@@ -249,7 +249,7 @@ export class FilesComponent implements OnInit {
         ).subscribe(
           response=>{
             if(response == true){
-              
+
               this.onMyFavourites = true;
 
             }
@@ -290,7 +290,7 @@ export class FilesComponent implements OnInit {
           }
           this.onMyFavourites = false;
           this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
-    
+
         }
       }
     )
@@ -316,7 +316,7 @@ export class FilesComponent implements OnInit {
         this.currentPoints = ((response.learningPoints/response.ratingPeople).toFixed(2)).toString()+"/5";
       }
     )
-    
+
   }
 
   typeVideo() {
@@ -325,7 +325,7 @@ export class FilesComponent implements OnInit {
     }
     return false;
   }
-  
+
   chooseFile(file) {
 
     if(this.currentFile !=null){
@@ -382,4 +382,3 @@ export class File{
   }
 
 };
-

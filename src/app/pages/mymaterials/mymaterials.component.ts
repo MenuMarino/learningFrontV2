@@ -17,7 +17,7 @@ import * as moment from 'moment';
 })
 export class MyMaterialsComponent implements OnInit {
   private identity: any;
-  private myFavouriteMaterials : SingleMaterial[] = [];
+  public myFavouriteMaterials : SingleMaterial[] = [];
   constructor(
     private storageService: StorageService,
     private filterPipe: FilterPipe,
@@ -88,7 +88,7 @@ export class MyMaterialsComponent implements OnInit {
           this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
           this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
             this.router.navigate(['/mymaterials']);
-        });     
+        });
         }
       }
     )

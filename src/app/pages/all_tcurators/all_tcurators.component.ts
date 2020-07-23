@@ -16,7 +16,7 @@ import * as moment from 'moment';
 })
 export class AllTcuratorsComponent implements OnInit {
   private identity: any;
-  private myFavouriteMaterials : SingleMaterial[] = [];
+  public myFavouriteMaterials : SingleMaterial[] = [];
   constructor(
 
     private storageService: StorageService,
@@ -24,7 +24,7 @@ export class AllTcuratorsComponent implements OnInit {
     private curatorService : CuratorsService,
 
   ) { }
-  
+
   public newuserFilter: any = {
     name: "",
   };
@@ -35,7 +35,7 @@ export class AllTcuratorsComponent implements OnInit {
     this.curatorService.getAllCurators().subscribe(
       response=>{
         if(response){
-            console.log(response); 
+            console.log(response);
             for(let val of response){
                 if(val.date != null && val.whoPosted.id != this.identity.id){
                 this.myFavouriteMaterials.push(

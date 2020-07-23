@@ -11,7 +11,7 @@ import { AdminService } from 'src/app/core/services/admin-service';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
   providers: [StorageService],
-  
+
 })
 export class AdminComponent implements OnInit {
 
@@ -19,15 +19,15 @@ export class AdminComponent implements OnInit {
   public userFilter: any = {
     name: "",
   };
-  
+
   public copy: string;
-  private AllPostulants : SinglePostulant[] = [];
+  public AllPostulants : SinglePostulant[] = [];
 
   constructor(private router: Router, private filterPipe: FilterPipe) { }
 
   ngOnInit() {
-  
-    
+
+
 
   }
 
@@ -35,7 +35,7 @@ export class AdminComponent implements OnInit {
 
     console.log("enviar");
     this.router.navigateByUrl("/postulant_curator");
-  } 
+  }
 
   IrPostulante(postulant){
 

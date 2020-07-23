@@ -1,6 +1,6 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
 <div class="container-fluid mt--7" style=" margin: auto; display: flex; ">
-    
+
     <div class="row" style = "width :2800px; padding :20px">
       <div class="col" style="max-width : 1200px ;padding : 10px ;" >
         <div class="card shadow" style = "border-width : 5px" >
@@ -11,14 +11,14 @@
             <h3 class="mb-0 "style="color:red " >{{currentPoints}}</h3>
           </div>
           </div>
-          <div class="card-body" [ngStyle]="{'border-color' : error_course === true ? '#8B0000' : '#fff' , 'box-shadow':error_course === true ? '0 0 10px red' : ' 0 0 0px gold' }" >
+          <div class="card-body">
             <div *ngIf="currentFile">
               <div *ngIf="fileType()">
                 <ngx-extended-pdf-viewer
                 [(src)]="currentFile.ruta"
-                [useBrowserLocale]="true" 
-                [textLayer]="true" 
-                [showHandToolButton]="true" 
+                [useBrowserLocale]="true"
+                [textLayer]="true"
+                [showHandToolButton]="true"
                 [height]="'90vh'"
                 [width]="'1000px'"
                 >
@@ -26,7 +26,7 @@
               </div>
               <div *ngIf="!fileType()">
                 <div *ngIf="typeVideo()">
-                  <iframe width="1000px" height="520" [src]="sanitizer.bypassSecurityTrustResourceUrl(currentFile.ruta)" frameborder="0" allowfullscreen></iframe>  
+                  <iframe width="1000px" height="520" [src]="sanitizer.bypassSecurityTrustResourceUrl(currentFile.ruta)" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <!--https://www.youtube.com/embed/t3DpuQrBivU-->
                 <div class="video" *ngIf="!typeVideo()">
@@ -42,12 +42,12 @@
     </div>
     <div class="grado-cursos">
       <div class="row" style="padding: 20px;">
-        <div class="col" style = "padding: 10px;" > 
+        <div class="col" style = "padding: 10px;" >
           <div class="card shadow"  id="box2">
             <div class="card-header bg-transparent">
               <h3 class="mb-0" >Materiales</h3>
             </div>
-            <div class="card-body" [ngStyle]="{'border-color' : error_grade === true ? '#8B0000' : '#fff' , 'box-shadow':error_grade === true ? '0 0 10px red' : ' 0 0 0px gold' }">
+            <div class="card-body">
               <div class="row icon-examples">
                 <div class="col-lg-7 col-md-6" *ngFor = "let archivo of listFiles" >
                     <a
@@ -58,7 +58,7 @@
                       ngxClipboard
                       [cbContent]="'air-baloon'"
                       (click)="chooseFile(archivo)"
-                      (cbOnSuccess)="copy = 'air-baloon'" 
+                      (cbOnSuccess)="copy = 'air-baloon'"
                       [style.background-color] = "archivo.backgroundcolor"
                       style = "padding-left : 30px; padding-right:30px; width:180px;"
                     >
@@ -69,12 +69,12 @@
               </div>
             </div>
           </div>
-        </div>  
+        </div>
       </div>
     <div *ngIf="!isOwner">
-     
+
       <div class="text-center" style = "min-width: 280px;">
-        <div class="container" > 
+        <div class="container" >
           <div class="row" style="justify-content: center; ">
             <div class="rating">
               <input type="radio" id="star5" name="rating" value="5" (click)="clickStar(5)"/><label for="star5" title="Meh">5 stars</label>
@@ -101,15 +101,15 @@
           </div>
       </div>
         </div>
-      
+
     </div>
     <div *ngIf= "isCurator">
       <div class="text-center" style = "min-width: 280px;">
         <a type="button" (click)="AceptarCurar()" class="btn btn-success mt-4">
           Aceptar
         </a>
-        
-        
+
+
         <a type="button" (click)="NegarCurar()" class="btn btn-danger mt-4">
           Rechazar
         </a>

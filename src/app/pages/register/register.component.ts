@@ -18,7 +18,7 @@ import CryptoJS from 'crypto-js';
 })
 export class RegisterComponent implements OnInit {
   public registerObj: RegisterObj;
-  
+
 
   public gender: any[] = [
     {id:"true", Val: "Masculino"},
@@ -32,9 +32,9 @@ export class RegisterComponent implements OnInit {
     {year:5, val: "Quinto"}
   ]
 
-  
 
-  private isTeacher: Boolean = false;
+
+  public isTeacher: Boolean = false;
 
   constructor(
     private router: Router,
@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
 
   }
-  
+
 
   genderChangeHandler(event: any) {
     this.registerObj.sex = event.target.value;
@@ -118,7 +118,7 @@ export class RegisterComponent implements OnInit {
           }
 
           console.log(identity);
-         
+
           this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
           this.router.navigateByUrl("/courses");
         },
@@ -130,7 +130,7 @@ export class RegisterComponent implements OnInit {
             icon: 'error',
           });
           registerForm.resetForm();
-          return;          
+          return;
         }
       );
   }
@@ -139,7 +139,7 @@ export class RegisterComponent implements OnInit {
   changeRole(){
     this.isTeacher = !this.isTeacher;
     if(this.isTeacher){
-      
+
     }
   }
 
