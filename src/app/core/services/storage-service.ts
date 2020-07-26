@@ -38,7 +38,7 @@ export class StorageService {
 	getTempFile_Courses(){
 		return localStorage.getItem("course_file");
 	}
-	
+
 	getTempTheme_Courses(){
 		return localStorage.getItem("course_theme");
 	}
@@ -46,9 +46,17 @@ export class StorageService {
 	getTempoCourse_Courses(){
 		return localStorage.getItem("course_course");
 	}
-	
+
 	getTempoGrade_Courses(){
 		return localStorage.getItem("course_grade");
+	}
+
+	setPostulantLocalStorage(postulant : string){
+		localStorage.setItem("postulant",postulant);
+	}
+
+	getPostulantLocalStorage(){
+		return localStorage.getItem("postulant");
 	}
 
 	setIdentityLocalStorage(identity: string){

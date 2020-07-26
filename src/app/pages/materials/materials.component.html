@@ -36,7 +36,7 @@
                     </div>
                   </div>
                 </th>
-                
+
                 <td style=" text-align: center;">
                   <span [ngClass]="material.color_curated" style="font-size: 15px; " >
                     {{material.status}}
@@ -46,22 +46,22 @@
                     {{material.curated_by}}
                   </td>
                 <td style=" text-align: center;">
-                 
+
                     {{material.views}}
-                  
+
                 </td>
                 <td>
                   <div class="d-flex align-items-center" style="justify-content: center;">
                     <span class="mr-2">{{material.learning_points}}</span>
                     <div>
-                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 " > 
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 " >
                         <ngb-rating [rate]="material.temporal" [max]="5" [readonly]="true"></ngb-rating>
                       </div>
                     </div>
                   </div>
-                </td> 
+                </td>
                 <td >
-                  
+
                   <div class="media align-items-center" style="justify-content: center; min-width: 180px;">
                     <button type="button" class="btn btn-primary btn-circle" placement="top" triggers="mouseenter:mouseleave"
                     ngbPopover="Mandar a curar" (click)="MandarCurar(material)" [disabled]="!getCurarButton(material) ? 'disabled':null">
@@ -81,7 +81,7 @@
                     </button>
 
                   </div>
-                </td>  
+                </td>
               </tr>
             </tbody>
           </table>
@@ -132,18 +132,18 @@
         <div class="card bg-secondary shadow border-0">
           <div *ngIf="actualizar">
           <div class="card-body px-lg-5 py-lg-5">
-            
+
                 <label>
                   Título del material:
                 </label>
                 <h3>{{currentupload.titulo}}</h3>
-            
+
 
                 <label>
                   Curso:
                 </label>
                 <h3>{{currentupload.curso}}</h3>
-              
+
                 <label>
                   Tema:
                 </label>
@@ -159,18 +159,18 @@
                 </label>
                 <h3>{{currentupload.descripcion}}</h3>
 
-            
-             
+
+
               <label>
                 Sube un material:
               </label>
-              
+
               <form action="/action_page.php">
 
                 <div class="form-group">
                   <div class="text-center" *ngIf="!select1()">
                     <a type="button" (click)="change1()" class="btn btn-success">
-                      Archivo
+                      Agregar Archivo
                     </a>
                     <a type="button" (click)="change1_2()" class="btn btn-danger ">
                       Link Youtube
@@ -178,7 +178,7 @@
                   </div>
 
                   <div *ngIf="ss1()"><input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)></div>
-                  <div *ngIf="select1_2()"> 
+                  <div *ngIf="select1_2()">
                     <input class="form-control" [(ngModel)]="ll.link1" name="link" #name="ngModel" placeholder="Link de Youtube" (change)=rise() required >
                   </div>
                 </div>
@@ -187,7 +187,7 @@
 
                   <div class="text-center" *ngIf="!select2()">
                     <a type="button" (click)="change2()" class="btn btn-success">
-                      Archivo
+                      Agregar Archivo
                     </a>
                     <a type="button" (click)="change2_2()" class="btn btn-danger ">
                       Link Youtube
@@ -196,29 +196,29 @@
 
                   <div *ngIf="ss2()"><input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)></div>
                   <div *ngIf="select2_2()"> <input class="form-control" [(ngModel)]="ll.link2" name="link" #name="ngModel" (change)=rise() required></div>
-                  
+
 
                 </div>
 
                 <div class="form-group" *ngIf="thirdDiv()">
                   <div class="text-center" *ngIf="!select3()">
                     <a type="button" (click)="change3()" class="btn btn-success">
-                      Archivo
+                      Agregar Archivo
                     </a>
                     <a type="button" (click)="change3_2()" class="btn btn-danger ">
                       Link Youtube
                     </a>
                   </div>
-                
+
                   <div *ngIf="ss3()"><input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)></div>
                   <div *ngIf="select3_2()"> <input class="form-control" [(ngModel)]="ll.link3" name="link" #name="ngModel" (change)=rise() required></div>
-                  
+
                 </div>
 
                 <div class="form-group" *ngIf="fouthDiv()">
                   <div class="text-center" *ngIf="!select4()">
                     <a type="button" (click)="change4()" class="btn btn-success">
-                      Archivo
+                      Agregar Archivo
                     </a>
                     <a type="button" (click)="change4_2()" class="btn btn-danger ">
                       Link Youtube
@@ -226,13 +226,13 @@
                   </div>
                   <div *ngIf="ss4()"><input class="form-control" type="file" id="myFile" name="filename" (change)=aumentar($event)></div>
                   <div *ngIf="select4_2()"> <input class="form-control" [(ngModel)]="ll.link4" name="link" #name="ngModel" (change)=rise() required></div>
-                  
+
                 </div>
 
                 <div class="form-group" *ngIf="fifthDiv()">
                   <div class="text-center" *ngIf="!select5()">
                     <a type="button" (click)="change5()" class="btn btn-success">
-                      Archivo
+                      Agregar Archivo
                     </a>
                     <a type="button" (click)="change5_2()" class="btn btn-danger ">
                       Link Youtube
@@ -250,55 +250,48 @@
               </form>
 
             </div>
-            
+
           </div>
           <div *ngIf="!actualizar">
             <div class="card-body px-lg-5 py-lg-5">
-              
+
                   <label>
                     Título del material:
                   </label>
                   <h3>{{currentupload.titulo}}</h3>
-              
-  
+
+
                   <label>
                     Curso:
                   </label>
                   <h3>{{currentupload.curso}}</h3>
-                
+
                   <label>
                     Tema:
                   </label>
                   <h3>{{currentupload.tema}}</h3>
-  
+
                   <label>
                     Grado:
                   </label>
                   <h3>{{currentupload.grade}}</h3>
-  
+
                   <label>
                     Descripción del material:
                   </label>
                   <h3>{{currentupload.descripcion}}</h3>
-  
-              
-               
-                <label>
-                  Sube un material:
-                </label>
-                
-                
-  
+
+
               </div>
-              
+
             </div>
-          
+
         </div>
-        
+
       </div>
-      
+
     </div>
 
   </div>
-  
+
 </div>

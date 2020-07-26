@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { CommonService } from "./common-services";
-import { Observable } from "rxjs";    
+import { Observable } from "rxjs";
 import { HttpHeaders } from '@angular/common/http';
 import {  } from '@angular/common/http';
 
@@ -38,7 +38,7 @@ export class MaterialServices {
     const data = {}
     return this.http.post(this.commonService.baseUrl + "/curator/negate/"+id_who_curate+"/"+id_material, data);
   }
-  
+
 
   createMaterial(
     id : number,
@@ -64,7 +64,7 @@ export class MaterialServices {
     id : number,
     status : number
   ):Observable<any>{
-    const data = {} 
+    const data = {}
     return this.http.post(this.commonService.baseUrl + "/material/status/" + id + "/"+status,data);
   }
 
@@ -77,7 +77,7 @@ export class MaterialServices {
   }
 
   sendFile(id, file) : Observable<any> {
-    return this.http.post(this.commonService.baseUrl + "/uploads/uploads/" + id + "/materiales", file);
+    return this.http.post(this.commonService.baseUrl + "/storage/uploadFile/" + id + "/materiales", file);
   }
 /*
   downloadMaterial(
@@ -104,7 +104,7 @@ export class MaterialServices {
       return this.http.get(this.commonService.baseUrl + "/uploads/download/"+ id +"/",data);
 
     }
-  
+
 
   getMyMaterials(id): Observable<any>{
     return this.http.get(this.commonService.baseUrl + "/user/mymaterials/"+id);

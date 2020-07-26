@@ -8,13 +8,13 @@ import { MaterialServices } from "./material-service";
     providedIn: "root",
   })
 
-  // ratings/searchrate/userId/materialId 
+  // ratings/searchrate/userId/materialId
   export class AllFilesService {
     constructor(private http: HttpClient, private commonService: CommonService) {}
     getAllFiles(
         id
       ): Observable<any> {
-        
+
         return this.http.get(this.commonService.baseUrl + "/material/id/"+id);
         }
 
@@ -31,9 +31,24 @@ import { MaterialServices } from "./material-service";
       id_material,
     ):Observable<any>{
 
-      return this.http.get(this.commonService.baseUrl + "/user/isfavourite/"+id_user+"/"+id_material ); 
+      return this.http.get(this.commonService.baseUrl + "/user/isfavourite/"+id_user+"/"+id_material );
     }
 
+    addedView(
+      id_user,
+      id_material,
+    ):Observable<any>{
+      const data={}
+      return this.http.post(this.commonService.baseUrl + "/material/view/" + id_user + "/"+id_material,data);
+    }
+
+
+    adddownload(
+      id_material,
+    ): Observable<any>{
+      const data ={}
+      return this.http.post(this.commonService.baseUrl + "/material/download/"+id_material,data);
+    }
 
     sendTemasdata(
       name,
@@ -62,7 +77,7 @@ import { MaterialServices } from "./material-service";
       return this.http.get(this.commonService.baseUrl + "/ratings/searchrate/"+userId+"/"+materialId);
     }
 
-    
+
 
     sendRating(
       materialId,
@@ -79,4 +94,3 @@ import { MaterialServices } from "./material-service";
       return this.http.post(this.commonService.baseUrl + "/ratings",data);
     }
   }
- 

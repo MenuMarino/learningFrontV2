@@ -31,11 +31,11 @@ export const ROUTES: RouteInfo[] = [
     icon: "ni-circle-08 text-pink",
     class: "",
   },*/
-  
-  { path: "/mymaterials", 
-  title: "Favoritos", 
-  icon: "ni-books text-red", 
-  class: "" 
+
+  { path: "/mymaterials",
+  title: "Favoritos",
+  icon: "ni-books text-red",
+  class: ""
 },
 ];
 
@@ -81,10 +81,10 @@ export const ifTWaiting: RouteInfo[] = [
     class: "",
   },
   { path: '/upgrade', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
-  { path: "/mymaterials", 
-  title: "Favoritos", 
-  icon: "ni-books text-red", 
-  class: "" 
+  { path: "/mymaterials",
+  title: "Favoritos",
+  icon: "ni-books text-red",
+  class: ""
 },
 ];
 
@@ -104,10 +104,10 @@ export const ifTeacher: RouteInfo[] = [
   },
   { path: '/upgrade', title: 'Upgrade',  icon:'ni-bold-up text-red', class: '' },
   { path: '/materials', title:'Material', icon:'ni ni-archive-2 text-red',class:''},
-  { path: "/mymaterials", 
-  title: "Favoritos", 
-  icon: "ni-books text-red", 
-  class: "" 
+  { path: "/mymaterials",
+  title: "Favoritos",
+  icon: "ni-books text-red",
+  class: ""
 },
 ];
 
@@ -126,12 +126,33 @@ export const ifCurator : RouteInfo[] = [
     class: "",
   },
   { path: '/all_tcurators', title: 'Materiales Curar',  icon:'ni-bold-up text-red', class: '' },
-  { path: '/upload', title: 'Upload',  icon:'ni ni-cloud-upload-96 text-red', class: '' },
   { path: '/materials', title:'Material', icon:'ni ni-archive-2 text-red',class:''},
-  { path: "/mymaterials", 
-  title: "Favoritos", 
-  icon: "ni-books text-red", 
-  class: "" 
+  { path: "/mymaterials",
+  title: "Favoritos",
+  icon: "ni-books text-red",
+  class: ""
+},
+];
+
+export const ifCwaiting : RouteInfo[] = [
+  {
+    path: "/dashboard",
+    title: "Learning Peru",
+    icon: "ni-tv-2 text-primary",
+    class: "",
+  },
+  { path: "/courses", title: "Cursos", icon: "ni-planet text-blue", class: "" },
+  {
+    path: "/user-profile",
+    title: "Perfil",
+    icon: "ni-single-02 text-yellow",
+    class: "",
+  },
+  { path: '/materials', title:'Material', icon:'ni ni-archive-2 text-red',class:''},
+  { path: "/mymaterials",
+  title: "Favoritos",
+  icon: "ni-books text-red",
+  class: ""
 },
 ];
 
@@ -149,7 +170,6 @@ export const ifAdmin : RouteInfo[] = [
     icon: "ni-single-02 text-yellow",
     class: "",
   },
-  { path: '/upload', title: 'Upload',  icon:'ni ni-cloud-upload-96 text-red', class: '' },
   { path: '/materials', title:'My material', icon:'ni ni-archive-2 text-red',class:''},
   { path: '/admin', title:'Admin', icon:'ni ni-settings', class:''},
 ];
@@ -200,22 +220,27 @@ export class SidebarComponent implements OnInit {
             this.router.events.subscribe((event) => {
               this.isCollapsed = true;
             });
-          }else{ 
+          }else{
             if(this.identity.role == "ADMIN"){
               this.menuItems = ifAdmin.filter((menuItem) => menuItem);
               this.router.events.subscribe((event) => {
                 this.isCollapsed = true;
               });
-            }else{ 
-            
+            }else{
+                if(this.identity.role == "CWAITING"){
+                this.menuItems = ifCwaiting.filter((menuItem) => menuItem);
+                this.router.events.subscribe((event) => {
+                  this.isCollapsed = true;
+                });
+              } else {
               this.menuItems = ROUTES.filter((menuItem) => menuItem);
               this.router.events.subscribe((event) => {
                 this.isCollapsed = true;
             });
           }
-        
         }
-        } 
+        }
+        }
       }
     }
   }

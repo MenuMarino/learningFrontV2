@@ -34,11 +34,12 @@ export class MaterialsComponent implements OnInit {
   public p5 = false;
   private uploadedFiles : any = [];
   private currentupload : currentUpload = new currentUpload();
-  public ll : yt; 
+  public ll : yt;
   private identity: any;
   private myMaterials : SingleMaterial[] = [];
   private Grades : string[] = ['1er grado','2do grado','3er grado','4to grado','5to grado'];
   private currentTema : any;
+  private url : string;
 
   private toUpload : boolean = false;
   public curar_button : boolean = true;
@@ -46,19 +47,19 @@ export class MaterialsComponent implements OnInit {
   public temporal_resolve : any;
   public tempora_theme : any;
 
-  
-  
+
+
   constructor(
     private storageService: StorageService,
     private filterPipe: FilterPipe,
     private router: Router,
     private materialService: MaterialServices,
 
-  ) { 
+  ) {
     this.ll = new yt();
   }
 
-  
+
 
   mostrar_datos(results){
     console.log(results);
@@ -70,7 +71,7 @@ export class MaterialsComponent implements OnInit {
       Number(results[3])+1
     ).subscribe(
       async response =>{
-        this.currentTema = response; 
+        this.currentTema = response;
         console.log();
         const { value: Material } = await Swal.fire({
           title: 'Selecciona uno de los cursos',
@@ -90,9 +91,6 @@ export class MaterialsComponent implements OnInit {
         })
         if (Material) {
           let valor = `${Material}`;
-          console.log(this.currentTema);
-          console.log("este es el material : ");
-          console.log(this.identity.id + " "+ this.temporal_resolve[0] + " " + this.storageService.getCoursesLocalStorage()[results[2]] + " "+ (Number(this.temporal_resolve[3])+1) + " ");
           this.materialService.createMaterial(
             this.identity.id,
             this.temporal_resolve[0],
@@ -120,11 +118,8 @@ export class MaterialsComponent implements OnInit {
                 myMaterials: response.myMaterials,
                 favouriteMaterials: response.favouriteMaterials,
               }
-              console.log("ESTO ES EL ID DEL QUE LO CREO : ");
               console.log(response);
-              console.log(response.myMaterials[0].course);
               this.currentupload.constru(this.temporal_resolve[0], response.myMaterials[0].course.grade,response.myMaterials[0].id, this.temporal_resolve[1], this.storageService.getCoursesLocalStorage()[results[2]],this.currentTema[Number(valor)]);
-              console.log(this.currentupload);
               this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
             },
             (error) => {
@@ -138,7 +133,7 @@ export class MaterialsComponent implements OnInit {
   Uploaded() {
     return this.toUpload;
   }
- 
+
   MandarCurar(currentMaterial){
     Swal.fire({
       title: 'Usted enviara a curar el material',
@@ -160,15 +155,11 @@ export class MaterialsComponent implements OnInit {
           response=>{
             currentMaterial.status = "Pendiente";
             currentMaterial.color_curated = "badge badge-pill badge-danger";
-            console.log("LLEGO ACAAAAAAAAAAAAAAAAA");
-
-            
           }
         )
 
       }
     })
-    console.log(currentMaterial);
   }
 
   MandarEliminar(currentMaterial){
@@ -193,15 +184,13 @@ export class MaterialsComponent implements OnInit {
         ).subscribe(
           response=>{
             if(response){
-              console.log("Done");
-              console.log(response);
               const identity = {
                 id: this.identity.id,
                 name: this.identity.name,
                 lastname: this.identity.lastname,
                 email: this.identity.email,
                 username: this.identity.username,
-                role: this.identity.type,
+                role: this.identity.role,
                 grade: this.identity.grade,
                 birth: moment(this.identity.birth).format('DD/MM/YYYY'),
                 institucion: this.identity.institucion,
@@ -212,13 +201,12 @@ export class MaterialsComponent implements OnInit {
               this.storageService.setIdentityLocalStorage(JSON.stringify(identity));
               this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
                 this.router.navigate(['/materials']);
-              });               
+              });
             }
           }
         )
       }
     })
-    console.log(currentMaterial);
 
   }
 
@@ -230,13 +218,11 @@ export class MaterialsComponent implements OnInit {
     this.actualizar = false;
     this.toUpload = true;
     this.currentupload.constru(currentMaterial.name, currentMaterial.grade, currentMaterial.id, currentMaterial.desc, currentMaterial.cur, currentMaterial.tem);
-    console.log(this.currentupload);
   }
 
   IrMaterial(currentMaterial){
     this.storageService.setTempFile_Courses(currentMaterial.id);
     this.router.navigateByUrl("/files");
-    console.log(currentMaterial);
   }
 
   async CreateMaterial(){
@@ -259,7 +245,7 @@ export class MaterialsComponent implements OnInit {
       {
         title: 'Curso',
         input : 'select',
-        inputOptions : this.storageService.getCoursesLocalStorage(), 
+        inputOptions : this.storageService.getCoursesLocalStorage(),
       },
       {
         title: 'Grado',
@@ -268,14 +254,13 @@ export class MaterialsComponent implements OnInit {
       }
     ]).then((result) => {
       if (result) {
-        console.log(result);
         this.mostrar_datos(result);
       }
       else{
         Swal.fire({
           title: 'No creado Satisfactoriamente',
           confirmButtonText: 'Ir al material!',
-          
+
         })
       }
     })
@@ -288,13 +273,11 @@ export class MaterialsComponent implements OnInit {
 
   ngOnInit(): void {
     this.identity = JSON.parse(this.storageService.getIdentityLocalStorage());
-    console.log(this.identity);
     this.materialService.getMyMaterials(this.identity.id).subscribe(
       response=>{
         if(response){
-          console.log("ESTAAAAAAAMOS ACAAAAAAAAAAAAAAA");
-          console.log(response);
           for(let val of response){
+              console.log(val);
             if(val.status!=3 && val.status !=4){
             this.myMaterials.push(
               new SingleMaterial(
@@ -302,30 +285,29 @@ export class MaterialsComponent implements OnInit {
                 val.name,
                 val.course.grade,
                 this.Status(val.status),
-                this.whoAproved(val.whoAproved),
+                this.whoAproved(val.whoApproved),
                 val.visits,
                 this.getLearningPoints(val.learningPoints,val.ratingPeople),
                 val.ratingPeople,
                 val.description,
                 val.course.name,
                 val.course.theme,
-              
+
               )
             )
           }
           }
-          
+
         }
       }
-    )  
-    
+    )
+
   }
 
 
 
   Status(status){
     if(status == 0){
-      console.log("Entro aca");
       return "Creado";
     }
     else if(status == 1 ){
@@ -334,16 +316,18 @@ export class MaterialsComponent implements OnInit {
     else if(status == 2){
       return "Curado";
     }
-    
+
   }
   whoAproved(who_aproved){
+    console.log("Aca estamos ");
+    console.log(who_aproved);
     if(who_aproved == null){
       return "------";
     }
+
     return who_aproved.username;
   }
   getLearningPoints(learningPoints,ratingPeople){
-    console.log(learningPoints + "-------"+ratingPeople);
     if(learningPoints == 0){
       return "0";
     }
@@ -366,7 +350,7 @@ export class MaterialsComponent implements OnInit {
               this.materialService.createFile(
               this.currentupload.id,
               this.currentupload.titulo,
-              material.name,
+              responde.url.slice(69, (responde.url.length));
               material.type
             ).subscribe(
               response=> {
@@ -383,6 +367,8 @@ export class MaterialsComponent implements OnInit {
               icon: 'error',
             })
           }
+        }, error => {
+          console.log(error);
         }
       )
     }
@@ -407,7 +393,7 @@ export class MaterialsComponent implements OnInit {
     if(a && b) {
       this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
         this.router.navigate(['/materials']);
-      }); 
+      });
     }
   }
 
@@ -422,13 +408,13 @@ export class MaterialsComponent implements OnInit {
     }
     this.uploadedFiles.push(newfile);
   }
- 
+
   rise() {
     this.contador += 1;
   }
 
-  
-  
+
+
   select1() {
     return this.box1;
   }
@@ -531,28 +517,28 @@ export class MaterialsComponent implements OnInit {
   secondDiv() {
     if(this.contador >=1) {
       return true;
-    } 
+    }
     return false;
   }
 
   thirdDiv() {
     if(this.contador >=2) {
       return true;
-    } 
+    }
     return false;
   }
 
   fouthDiv() {
     if(this.contador >=3) {
       return true;
-    } 
+    }
     return false;
   }
 
   fifthDiv() {
     if(this.contador >=4) {
       return true;
-    } 
+    }
     return false;
   }
 
@@ -599,7 +585,7 @@ export class SingleMaterial {
     else{
       this.thisCurarButtom = false;
     }
-    
+
   }
 
   getColorCurated(status){
@@ -608,12 +594,12 @@ export class SingleMaterial {
     }
     else if(status == "Curado")
       return "badge badge-pill badge-success";
-    
+
     else if(status == "Creado")
       return "badge badge-pill badge-dark";
-  }  
+  }
 
-  
+
 };
 
 export class currentUpload {

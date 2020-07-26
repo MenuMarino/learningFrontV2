@@ -18,10 +18,10 @@ export class UpgradeComponent implements OnInit {
   public isWaiting: boolean = false;
   public ll : yt;
 
-  constructor(private upgradeServices: UpgradeServices, 
-              private storageService: StorageService, 
+  constructor(private upgradeServices: UpgradeServices,
+              private storageService: StorageService,
               private router: Router,
-              private materialService: MaterialServices) { 
+              private materialService: MaterialServices) {
                 this.ll = new yt();
               }
 
@@ -38,7 +38,7 @@ export class UpgradeComponent implements OnInit {
   }
 
 
-  //id_user - description - 
+  //id_user - description -
 
 
   sendFile(){
@@ -46,24 +46,32 @@ export class UpgradeComponent implements OnInit {
     let des = true;
     formData.append("file",this.uploadFile);
     console.log(formData);
-    this.upgradeServices.createFile(this.identity.id, this.ll.link,this.uploadFile.name).subscribe(
-      response => {
-        if(response == true) {
-          console.log("se subio bien :D");
-        } else {
-          console.log("no se subio bien D:");
-        }
-      }
-    );
     this.upgradeServices.sendUpgradeFile(formData, this.identity.id).subscribe(
       response => {
-        if(response === true){
+          console.log("Esta es la respuesta: ", responde);
+        if(response){
           /*Swal.fire({
             title: 'Subiendo archivo',
           })*/
           des = true;
           this.identity.waiting = "isWaiting";
           this.storageService.setIdentityLocalStorage(JSON.stringify(this.identity));
+
+          console.log("SIZE: ", response.url.length);
+          this.upgradeServices.createFile(this.identity.id, this.ll.link,response.url.slice(71,(response.url.length))).subscribe(
+            response => {
+              if(response == true) {
+                console.log("se subio bien :D");
+                this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+                  this.router.navigate(['/courses']);
+                });
+              } else {
+                console.log("no se subio bien D:");
+              }
+            }, error => {
+              console.log(error);
+            }
+          );
 
         } else {
           Swal.fire({

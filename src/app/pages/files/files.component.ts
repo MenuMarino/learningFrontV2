@@ -100,10 +100,19 @@ export class FilesComponent implements OnInit {
           }
         )
 
-
-
-
-
+        this.filesService.addedView(
+          this.identity.id,
+          this.idFile,
+        ).subscribe(
+          response=>{
+            if(response){
+              console.log("Aumento en 1 el view");
+            }
+            else{
+              console.log("Error");
+            }
+          }
+        )
 
       }, error => {
 
@@ -213,6 +222,14 @@ export class FilesComponent implements OnInit {
     },error=>{
 
       window.open(error.url);
+      this.filesService.adddownload(this.idFile).subscribe(
+        response=>{
+          console.log("Se descargo uno men");
+        },
+        error=>{
+          console.log("no se descargo nada ");
+        }
+      )
     }
 
 
@@ -359,7 +376,7 @@ export class File{
 
   getName(link,type){
     if(type!="YOUTUBE_LINK"){
-      return link.substring(0,link.length-4);
+      return link.substring(14,link.length-4);
     }
     return "Video de youtube";
   }
@@ -368,7 +385,7 @@ export class File{
   constructor(type, ruta, id_user,realname){
 
     if(type!='YOUTUBE_LINK'){
-      this.ruta = 'http://localhost:8081/uploads/download/'+id_user+'/materiales/'+ruta;
+      this.ruta = 'https://s3.us-east-2.amazonaws.com/learning-peru-bucket/'+id_user+'/materiales/'+ruta;
 
     }
     else{
