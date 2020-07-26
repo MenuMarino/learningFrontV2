@@ -48,7 +48,7 @@ export class UpgradeComponent implements OnInit {
     console.log(formData);
     this.upgradeServices.sendUpgradeFile(formData, this.identity.id).subscribe(
       response => {
-          console.log("Esta es la respuesta: ", responde);
+          console.log("Esta es la respuesta: ", response);
         if(response){
           /*Swal.fire({
             title: 'Subiendo archivo',

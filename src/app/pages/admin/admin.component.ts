@@ -70,11 +70,6 @@ export class AdminComponent implements OnInit {
     this.router.navigateByUrl("/postulant_curator");
   }
 
-  IrPostulante(postulant){
-
-  }
-
-
 }
 
 export class SinglePostulant {

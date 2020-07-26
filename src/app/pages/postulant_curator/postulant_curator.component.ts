@@ -4,7 +4,7 @@ import { AdminService } from 'src/app/core/services/admin-service';
 import { currentUpload } from '../materials/materials.component';
 import { Router } from "@angular/router";
 import Swal from 'sweetalert2';
-import { CommonService } from 'src/app/core/servicees/common-services';
+import { CommonService } from 'src/app/core/services/common-services';
 
 @Component({
   selector: 'app-postulant_curator',
@@ -119,6 +119,7 @@ export class PostulantCurator implements OnInit {
              }
         })
     }
+}
 
     export class InformationPostulant {
     public id : number;
@@ -144,5 +145,3 @@ export class PostulantCurator implements OnInit {
       this.linkMaterial = 'https://s3.us-east-2.amazonaws.com/learning-peru-bucket/' +this.id+"/upgradeFiles/"+linkMaterial;
     }
   };
-
-  }

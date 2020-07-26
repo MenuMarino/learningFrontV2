@@ -350,7 +350,7 @@ export class MaterialsComponent implements OnInit {
               this.materialService.createFile(
               this.currentupload.id,
               this.currentupload.titulo,
-              responde.url.slice(69, (responde.url.length));
+              response.url.slice(69, (response.url.length)),
               material.type
             ).subscribe(
               response=> {
